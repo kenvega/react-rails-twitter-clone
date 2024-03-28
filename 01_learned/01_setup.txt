@@ -1,0 +1,57 @@
+rails new rails-react-twitter-clone --api --database=postgresql -T
+
+  -T -> do not created default tests created by rails (later we can add rspec)
+
+  --api -> you can check for this in config/application.rb -> config.api_only = true
+
+in Gemfile make sure you have this line
+  gem "rack-cors"
+
+  then run 
+
+    bundle install
+
+
+config/initializers/cors.rb
+
+  leave it like this
+
+    Rails.application.config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        # where your requests come from
+        origins "http://127.0.0.1:5173"
+
+        resource "*",
+          headers: :any,
+          expose: ["Authorization"],
+          methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      end
+    end
+
+  when testing in local with a client that runs on port 5173, this will work
+
+    origins "http://127.0.0.1:5173"
+
+  if you do this
+
+    origins "*"
+
+    means everyone can access your api
+
+  when you are finally in prod
+
+    origins 'https://super-cool-domain.com'
+
+  expose: ["Authorization"]
+
+    going to be used by devise-jwt
+
+
+add this gems
+
+  devise
+  devise-jwt
+  jsonapi-serializer # this one i'm not sure exactly why yet
+
+
+
