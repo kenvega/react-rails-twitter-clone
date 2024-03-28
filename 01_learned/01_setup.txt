@@ -80,3 +80,111 @@ setup devise
   create database and run migrations
 
     rails db:create; rails db:migrate
+
+
+  create devise controllers
+
+    rails g devise:controllers users -c sessions registrations
+
+    make sure that those controllers are like this (maybe don't remove the extra comments they have)
+      class Users::SessionsController < Devise::SessionsController
+        respond_to :json
+      end
+
+      class Users::RegistrationsController < Devise::RegistrationsController
+        respond_to :json
+      end
+
+  change your routes.rb
+    Rails.application.routes.draw do
+      devise_for :users, path: '', path_names: {
+        sign_in: 'login',
+        sign_out: 'logout',
+        registration: 'signup'
+      },
+      controllers: {
+        sessions: 'users/sessions',
+        registrations: 'users/registrations'
+      }
+    end
+
+  add this to configure devise with jwt to this file config/initializers/devise.rb 
+
+    config.jwt do |jwt|
+      jwt.secret = Rails.application.credentials.fetch(:secret_key_base)
+      jwt.dispatch_requests = [
+        ['POST', %r{^/login$}]
+      ]
+      jwt.revocation_requests = [
+        ['DELETE', %r{^/logout$}]
+      ]
+      jwt.expiration_time = 30.minutes.to_i
+    end
+
+  add column to revocate tokens
+
+    rails g migration addJtiToUsers jti:string:index:unique
+
+      it will bug you if you do not have your master.key setup (for example if you just cloned this repo you will have to recover that master.key)
+
+        you have to insert it in this file config/credentials.yml.enc but it's encrypted
+
+          you can edit the unencrypted version with
+
+            EDITOR="code --wait" rails credentials:edit
+
+              once you have the secret_key_base already set up and encrypted then you can just close the editor open
+
+
+        * master.key files are created when the rails projects are created -> https://stackoverflow.com/a/63360465
+
+    the jti will be also used to identify the user
+
+  leave the user model like this (remove rememberable and recoverable because they are for sessions)
+
+    class User < ApplicationRecord
+      include Devise::JWT::RevocationStrategies::JTIMatcher
+
+      # Include default devise modules. Others available are:
+      # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+      devise :database_authenticatable, :registerable,
+            :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
+    end
+
+  create a serializer to return selected data you want in your api
+
+    rails g serializer user id email created_at
+
+  change your port
+
+    config/puma.rb
+
+      port ENV.fetch("PORT") { 3000 }
+
+      change 3000 to 4000 for example
+
+  when you try with postman
+
+    POST /signup 
+
+      you will see an error they didn't know how to solve but they created app/controllers/concerns/rack_session_fix.rb
+
+        module RackSessionFix
+          extend ActiveSupport::Concern
+          class FakeRackSession < Hash
+            def enabled?
+              false
+            end
+          end
+          included do
+            before_action :set_fake_rack_session_for_devise
+            private
+            def set_fake_rack_session_for_devise
+              request.env['rack.session'] ||= FakeRackSession.new
+            end
+          end
+        end
+
+    then include in your registration and session controllers
+
+      include RackSessionFix
