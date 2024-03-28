@@ -1,3 +1,7 @@
+tutorial:
+  https://www.youtube.com/watch?v=wVNQwrALp1A
+  https://dakotaleemartinez.com/tutorials/devise-jwt-api-only-mode-for-authentication/
+
 rails new rails-react-twitter-clone --api --database=postgresql -T
 
   -T -> do not created default tests created by rails (later we can add rspec)
