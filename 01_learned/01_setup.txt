@@ -54,4 +54,25 @@ add this gems
   jsonapi-serializer # this one i'm not sure exactly why yet
 
 
+setup devise
 
+  run this
+    rails generate devise:install
+
+  in config/environments/development.rb
+    config.action_mailer.default_url_options = { host: 'localhost', port: 5173 }
+      why (?) not sure yet i won't be using mails
+
+  in config/initializers/devise.rb
+    make sure you leave this
+      config.navigational_formats = []
+
+        supposedly this avoids redirecting
+
+  create the user model
+
+    rails generate devise User
+
+  create database and run migrations
+
+    rails db:create; rails db:migrate
