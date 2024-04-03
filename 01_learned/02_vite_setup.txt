@@ -1,0 +1,22 @@
+in root project just put this command
+
+  npm create vite@latest
+
+then select options
+  i named my project: 'client'
+
+once the scaffold is created
+
+  cd client
+  npm install
+  npm run dev
+
+install some dependencies in client folder
+
+  npm install dotenv
+
+create client/.env.development
+
+  put something like this
+
+    VITE_API_URL=http://localhost:4000/api/v1/tweets
