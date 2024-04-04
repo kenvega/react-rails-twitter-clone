@@ -1,38 +1,46 @@
 import { useState, useEffect } from "react";
-import { API_URL } from "../constants";
+import { getTweets } from "../services/tweetsService";
+
+interface Tweet {
+  id: number;
+  body: string;
+}
 
 const TweetsList = () => {
-  const [tweets, setTweets] = useState([]);
-  const [, setLoading] = useState(true);
-  const [, setError] = useState(null);
+  const [tweets, setTweets] = useState<Tweet[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    async function loadTweets() {
-      try {
-        const response = await fetch(API_URL)
-        if (response.ok) {
-          const json = await response.json()
-          setTweets(json)
-        } else {
-          throw response
-        }
-      } catch(e) {
-        setError('error ocurred')
-        console.error(e)
-      } finally {
-        setLoading(false)
-      }
-    }
-    loadTweets()
-  }, [])
+    getTweets()
+      .then((tweets) => {
+        console.log("response tweets: ", tweets);
+        setTweets(tweets);
+      })
+      .catch((error) => {
+        setError(`Error ocurred: ${error}`);
+        console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (error) {
+    return <div>Error</div>
+  }
 
   return (
     <div>
-      {tweets.map((tweet) => {
-        return <div key={tweet.id}>
-          <p>{tweet.body}</p>
-        </div>;
-      })}
+      {loading
+        ? "loading"
+        : tweets.map((tweet) => {
+            return (
+              <div key={tweet.id}>
+                <p>{tweet.body}</p>
+              </div>
+            );
+          })}
     </div>
   );
 };
