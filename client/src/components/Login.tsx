@@ -1,7 +1,10 @@
 import { useState, FormEvent } from "react";
 import { requestLogin } from "../services/loginService";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -22,6 +25,7 @@ const Login = () => {
       .then((response) => {
         // TODO: should redirect or something
         console.log('response login: ', response);
+        navigate('/dashboard')
       })
       .catch((error) => {
         setError(error.message || "An error occurred. Please try again.");

@@ -20,3 +20,4 @@ for frontend
 
     npm run dev
 
+    * if you need to install a new npm package you should do it in client (same level as package.json is)
