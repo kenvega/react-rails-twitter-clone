@@ -16,28 +16,13 @@ const requestLogin = async (credentials: LoginCredentials) => {
     body: JSON.stringify(credentials),
   });
 
-  // if (response.ok) {
-  //   const authHeader = response.headers.get('Authorization');
+  console.log('response de login: ', response);
 
-  //   if (authHeader) {
-  //     const jwt = authHeader.split(' ')[1];
-
-  //     if (jwt) {
-  //       setToken(jwt)
-  //     } else {
-  //       // Handle cases where the Authorization header doesn't follow the expected format
-  //       console.error('Authorization header is not in the expected format.');
-  //     }
-  //   } else {
-  //     // Handle cases where the Authorization header is missing
-  //     console.error('Authorization header is missing from the response.');
-  //   }
-  // } else {
-  //   // Handle non-ok responses
-  //   console.error('Login request failed with status:', response.status);
-  // }
+  // TODO: should show a notification or flash message that credentials are not correct?
+  // or maybe just show what the backend responds (?) or maybe just show a template message based on the error code like 401
 
   if (!response.ok) {
+    // errors thrown have to be handled by catch() where this method is called
     throw new Error(`Login request failed with status: ${response.status}`);
   }
 

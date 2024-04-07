@@ -1,5 +1,5 @@
 class Api::V1::TweetsController < ApplicationController
-  # before_action :authenticate_user! # TODO: uncomment
+  before_action :authenticate_user! # TODO: uncomment
 
   def show
    

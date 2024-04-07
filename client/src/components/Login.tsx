@@ -4,9 +4,12 @@ import { requestLogin } from "../services/loginService";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError("");
+
     console.log("username: ", username);
     console.log("password: ", password);
 
@@ -16,11 +19,12 @@ const Login = () => {
         password: password,
       },
     })
-      .then(() => {
+      .then((response) => {
         // TODO: should redirect or something
+        console.log('response login: ', response);
       })
-      .catch(() => {
-        // TODO: should show errors like invalid credentials or something
+      .catch((error) => {
+        setError(error.message || "An error occurred. Please try again.");
       });
   };
 
@@ -31,7 +35,7 @@ const Login = () => {
         <input type="text" onChange={(e) => setUsername(e.target.value)} />
         <p>password</p>
         <input type="password" onChange={(e) => setPassword(e.target.value)} />
-
+        {error && <div style={{ color: "red" }}>{error}</div>}
         <button type="submit">login</button>
       </form>
     </div>

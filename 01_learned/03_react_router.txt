@@ -1,0 +1,25 @@
+routes from the twitter-clone app that just uses rails
+
+  /
+
+    login or sign up form
+
+    if already logged in you are redirected to /dashboard
+
+  /users/sign_in
+
+  /users/sign_up
+
+  /dashboard
+
+  /explore
+
+  /all_tweets
+
+  /users (maybe rename to /all_users)
+
+  etc...
+
+  /profile
+
+
