@@ -11,10 +11,7 @@ const Login = () => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError("");
-
-    console.log("username: ", username);
-    console.log("password: ", password);
+    setError(""); // reset any possible previous error
 
     requestLogin({
       user: {
@@ -22,9 +19,7 @@ const Login = () => {
         password: password,
       },
     })
-      .then((response) => {
-        // TODO: should redirect or something
-        console.log('response login: ', response);
+      .then(() => {
         navigate('/dashboard')
       })
       .catch((error) => {
