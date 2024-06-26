@@ -1,23 +1,33 @@
 for backend
   in root of the project
 
-    bundle install
-    rails db:setup
-    rails server
+    to install
+
+      bundle install
+      rails db:setup
+
+    to run
+
+      rails server
 
 for frontend
-  in ./client
+  to setup and install
+    in ./client
 
-    create file
-      client/.env.development
+      create file
+        client/.env.development
 
-      with this content for now (is not that sensitive for now)
-        VITE_APP_ENV=development
-        VITE_BASE_URL=http://localhost:4000
-        VITE_API_URL=http://localhost:4000/api/v1
+        with this content for now (is not that sensitive for now)
+          VITE_APP_ENV=development
+          VITE_BASE_URL=http://localhost:4000
+          VITE_API_URL=http://localhost:4000/api/v1
 
-    npm install
+      npm install
+
+  to run
 
     npm run dev
 
-    * if you need to install a new npm package you should do it in client (same level as package.json is)
+    then manually open http://localhost:5173 if not open automatically
+
+  * if you need to install a new npm package you should do it in client (same level as package.json is)
