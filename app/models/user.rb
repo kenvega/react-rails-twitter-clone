@@ -5,4 +5,8 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :validatable, :jwt_authenticatable, jwt_revocation_strategy: self
+
+  has_many :tweets, dependent: :destroy
+
+  validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 end

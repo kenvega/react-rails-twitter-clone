@@ -22,12 +22,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:4000/api/v1/tweets",
+					"raw": "http://localhost:4001/api/v1/tweets",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"api",
 						"v1",
@@ -52,12 +52,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:4000/signup",
+					"raw": "http://localhost:4001/signup",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "4000",
+					"port": "4001",
 					"path": [
 						"signup"
 					]

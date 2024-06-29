@@ -42,8 +42,13 @@ gem "rack-cors"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
+  gem "bullet"
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem "factory_bot_rails"
   gem "faker", "~> 3.3.1"
+  gem "pry-rails"
+  gem "pry-nav"
+  gem "rspec-rails", "~> 6.0.0"
 end
 
 group :development do
@@ -51,3 +56,6 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem "shoulda-matchers", "~>5.0"
+end

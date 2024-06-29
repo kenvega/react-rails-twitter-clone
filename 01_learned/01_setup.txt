@@ -161,7 +161,7 @@ setup devise
 
       port ENV.fetch("PORT") { 3000 }
 
-      change 3000 to 4000 for example
+      change 3000 to 4001 for example
 
   when you try with postman
 
