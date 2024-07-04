@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import TweetsList from './components/TweetsList'
+import MainContainer from './components/MainContainer.tsx';
 import {
   createBrowserRouter,
   RouterProvider,
@@ -17,7 +18,7 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <TweetsList />,
+    element: <MainContainer />,
   },
 ]);
 
