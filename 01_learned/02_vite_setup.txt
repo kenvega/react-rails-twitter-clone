@@ -20,3 +20,19 @@ create client/.env.development
   put something like this
 
     VITE_API_URL=http://localhost:4001/api/v1/tweets
+
+change port
+
+  in package.json you can just pass the port option
+
+    "scripts": {
+      "dev": "vite --port 4242",
+      ...
+    }
+
+    then running npm run dev will run in port 4242
+
+  another solution is to change it in client/vite.config.ts
+
+    https://stackoverflow.com/q/71763113
+

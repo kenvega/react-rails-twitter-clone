@@ -9,7 +9,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     # where your requests come from
     # origins "http://127.0.0.1:5173"
-    origins "http://localhost:5173"
+    # origins "http://localhost:5173"
+    origins "http://localhost:4242" # changed port to 4242 in frontend
 
     # origins "*" # this will 'open' the server to any domain so cors won't be a problem but you will have to be more careful about it
 

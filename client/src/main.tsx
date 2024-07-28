@@ -1,7 +1,7 @@
 // import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
-import TweetsList from './components/TweetsList'
+// import TweetsList from './components/TweetsList'
 import MainContainer from './components/MainContainer.tsx';
 import {
   createBrowserRouter,
@@ -19,6 +19,10 @@ const router = createBrowserRouter([
   {
     path: "dashboard",
     element: <MainContainer />,
+  },
+  {
+    path: "home",
+    element: <p>hello</p>,
   },
 ]);
 

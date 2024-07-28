@@ -26,14 +26,15 @@ const MainContainer = () => {
         <div className="px-6 py-2 flex align-middle gap-5 mb-4 rounded-full">
           <img src={Twitter} alt="Your SVG" width={32} className="" />
         </div>
-        <SidebarButton title="Home" SVGIcon={Home} goTo={goTo("/home")} active />
-        <SidebarButton title="Hashtags" SVGIcon={Hashtag} goTo={goTo("/home")} />
-        <SidebarButton title="All Tweets" SVGIcon={Earth} goTo={goTo("/home")} />
-        <SidebarButton title="All Users" SVGIcon={Users} goTo={goTo("/home")} />
-        <SidebarButton title="Notifications" SVGIcon={Notification} goTo={goTo("/home")} />
-        <SidebarButton title="Messages" SVGIcon={Message} goTo={goTo("/home")} />
-        <SidebarButton title="Bookmarks" SVGIcon={Bookmark} goTo={goTo("/home")} />
-        <SidebarButton title="Profile" SVGIcon={Profile} goTo={goTo("/home")} />
+        <SidebarButton title="Home" SVGIcon={Home} onClick={() => goTo("/home")} active />
+        <SidebarButton title="Hashtags" SVGIcon={Hashtag} onClick={() => goTo("/hashtags")} />
+        <SidebarButton title="All Tweets" SVGIcon={Earth} onClick={() => goTo("/all_tweets")} />
+        <SidebarButton title="All Users" SVGIcon={Users} onClick={() => goTo("/users")} />
+        <SidebarButton title="Notifications" SVGIcon={Notification} onClick={() => goTo("/notifications")} />
+        <SidebarButton title="Messages" SVGIcon={Message} onClick={() => goTo("/channels")} />
+        <SidebarButton title="Bookmarks" SVGIcon={Bookmark} onClick={() => goTo("/bookmarks")} />
+        <SidebarButton title="Profile" SVGIcon={Profile} onClick={() => goTo("/profile")} />
+        <p>link de logout</p>
       </div>
       <div>
         <TweetsList />

@@ -1,0 +1,24 @@
+even if your project have root folders as rails and has a client folder for the react part
+
+  you can create a .prettierrc file in the root of your project with rails and react
+
+    and the react part at least in vscode with the prettier extension should read that .prettierrc file and use the rules from that
+
+      for example i used this rule at the start
+
+        {
+          "printWidth": 120
+        }
+
+      i made sure that in vscode i had this inside my settings.json file
+
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+
+      and with that when formatting files i get my react components formatted with a maximum of 120 characters before making a new line
+
+now you should still have installed prettier as a dev dependency in your project. why?
+
+  ???????
+
