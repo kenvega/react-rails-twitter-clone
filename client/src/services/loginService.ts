@@ -42,7 +42,7 @@ const requestLogin = async (credentials: LoginCredentials) => {
 
 const logout = ({ navigate }: { navigate: NavigateFunction }) => {
   clearJwt();
-  navigate('/')
+  navigate("/");
 };
 
 export { requestLogin, logout };

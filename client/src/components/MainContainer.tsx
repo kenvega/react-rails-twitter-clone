@@ -1,6 +1,7 @@
 import TweetsList from "./TweetsList";
 import SidebarButton from "./SidebarButton";
 import Logout from "./Logout";
+import TweetForm from "./TweetForm";
 
 import Twitter from "../assets/twitter.svg";
 import Home from "../assets/home.svg";
@@ -40,6 +41,7 @@ const MainContainer = () => {
         <Logout />
       </div>
       <div>
+        <TweetForm />
         <TweetsList />
       </div>
       <div>hashtag sidebar</div>

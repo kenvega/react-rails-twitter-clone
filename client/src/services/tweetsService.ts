@@ -1,16 +1,16 @@
-import { AxiosResponse, AxiosError } from 'axios';
+import { AxiosResponse, AxiosError } from "axios";
 import { http } from "../providers";
-import { envsService } from '../commons';
+import { envsService } from "../commons";
 
-const API_URL = envsService.apiUrl
+const API_URL = envsService.apiUrl;
 
 export const handleResponse = (response: AxiosResponse) => {
-  if (response.status === 200) {
-    return response.data
+  if (response.status >= 200 && response.status < 300) {
+    return response.data || "Success probably without data";
   }
 
-  throw new Error('Response status is not 200');
-}
+  throw new Error("Response status is not 200");
+};
 
 export const handleError = (error: AxiosError) => {
   console.error("error", error);
@@ -18,8 +18,12 @@ export const handleError = (error: AxiosError) => {
 };
 
 export const getTweets = async () => {
+  return http.get(`${API_URL}/tweets`).then(handleResponse).catch(handleError);
+};
+
+export const createTweet = async ({ tweetBody }: { tweetBody: string }) => {
   return http
-    .get(`${API_URL}/tweets`)
+    .post(`${API_URL}/tweets`, { tweet: { body: tweetBody } })
     .then(handleResponse)
     .catch(handleError);
-}
+};

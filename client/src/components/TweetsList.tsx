@@ -27,13 +27,11 @@ const TweetsList = () => {
   }, []);
 
   if (error) {
-    return <div>Error</div>
+    return <div>Error</div>;
   }
 
   return (
     <div>
-      <p className="bg-blue-500 text-white p-4">hello there. test to be deleted later.</p>
-
       {loading
         ? "loading"
         : tweets.map((tweet) => {

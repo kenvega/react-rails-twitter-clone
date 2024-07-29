@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { requestLogin } from "../services/loginService";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Login = () => {
       },
     })
       .then(() => {
-        navigate('/dashboard')
+        navigate("/dashboard");
       })
       .catch((error) => {
         setError(error.message || "An error occurred. Please try again.");
