@@ -1,46 +1,23 @@
-import { useState, useEffect } from "react";
-import { getTweets } from "../services/tweetsService";
+import { Tweet } from "../interfaces/Tweet";
 
-interface Tweet {
-  id: number;
-  body: string;
-}
-
-const TweetsList = () => {
-  const [tweets, setTweets] = useState<Tweet[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    getTweets()
-      .then((tweets) => {
-        console.log("response tweets: ", tweets);
-        setTweets(tweets);
-      })
-      .catch((error) => {
-        setError(`Error ocurred: ${error}`);
-        console.error(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
-
+const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
   if (error) {
     return <div>Error</div>;
   }
 
   return (
     <div>
-      {loading
-        ? "loading"
-        : tweets.map((tweet) => {
-            return (
-              <div key={tweet.id}>
-                <p>{tweet.body}</p>
-              </div>
-            );
-          })}
+      {loading ? (
+        <p>Loading tweets...</p>
+      ) : (
+        tweets.map((tweet) => {
+          return (
+            <div key={tweet.id}>
+              <p>{tweet.body}</p>
+            </div>
+          );
+        })
+      )}
     </div>
   );
 };

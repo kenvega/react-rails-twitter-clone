@@ -1,26 +1,29 @@
-import { useState, ChangeEvent, FormEvent, MouseEvent } from "react";
-import { createTweet } from "../services/tweetsService";
+import { ChangeEvent, FormEvent, MouseEvent } from "react";
 
-const TweetForm = () => {
-  const [tweetBody, setTweetBody] = useState("");
-
+const TweetForm = ({
+  tweetBody,
+  setTweetBody,
+  onSubmit,
+}: {
+  tweetBody: string;
+  setTweetBody: (value: string) => void;
+  onSubmit: () => void;
+}) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTweetBody(event.target.value);
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement> | MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    createTweet({ tweetBody });
+    onSubmit();
   };
 
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <input type="text" placeholder="What's happening?" value={tweetBody} onChange={handleChange} />
+        <button type="submit">Submit</button>
       </form>
-      <button type="submit" onClick={handleSubmit}>
-        Submit
-      </button>
     </div>
   );
 };

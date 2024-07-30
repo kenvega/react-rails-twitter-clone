@@ -1,7 +1,6 @@
-import TweetsList from "./TweetsList";
 import SidebarButton from "./SidebarButton";
+import TweetsContainer from "./TweetsContainer";
 import Logout from "./Logout";
-import TweetForm from "./TweetForm";
 
 import Twitter from "../assets/twitter.svg";
 import Home from "../assets/home.svg";
@@ -16,6 +15,7 @@ import Profile from "../assets/profile.svg";
 import { useNavigate } from "react-router-dom";
 
 const MainContainer = () => {
+  // TODO: move navigate logic to sidebarbutton because is not used here i think.. or maybe later it will
   const navigate = useNavigate();
 
   const goTo = (route: string) => {
@@ -40,10 +40,7 @@ const MainContainer = () => {
 
         <Logout />
       </div>
-      <div>
-        <TweetForm />
-        <TweetsList />
-      </div>
+      <TweetsContainer />
       <div>hashtag sidebar</div>
     </div>
   );

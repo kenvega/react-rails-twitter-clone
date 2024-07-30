@@ -1,0 +1,9 @@
+for react setter hook functions that you pass as props to child components
+
+  when declaring them with typescript they should always have a type similar to this:
+
+    (value: string) => void;
+
+    because the setter hook function does not return anything
+
+    also it doesn't have to be 'value'. this is just a placeholder to give more context but it is necessary to indicate a parameter
