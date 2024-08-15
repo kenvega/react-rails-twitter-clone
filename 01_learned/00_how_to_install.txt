@@ -1,0 +1,21 @@
+for backend
+  in root folder of the project
+
+    to install
+
+      bundle install
+      rails db:setup
+
+for frontend
+  to setup and install
+    in ./client
+
+      create file
+        client/.env.development
+
+        with this content for now (is not that sensitive for now)
+          VITE_APP_ENV=development
+          VITE_BASE_URL=http://localhost:4001
+          VITE_API_URL=http://localhost:4001/api/v1
+
+      npm install
