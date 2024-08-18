@@ -1,4 +1,5 @@
 for backend
+
   in root folder of the project
 
     to install
@@ -7,6 +8,7 @@ for backend
       rails db:setup
 
 for frontend
+
   to setup and install
     in ./client
 

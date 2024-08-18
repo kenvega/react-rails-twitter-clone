@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getTweets, createTweet } from "../services/tweetsService";
 
+import { Link } from "react-router-dom";
+
 import TweetForm from "./TweetForm";
 import TweetsList from "./TweetsList";
 
@@ -41,6 +43,9 @@ const TweetsContainer = () => {
 
   return (
     <div>
+      <Link to="#" className="text-2xl font-semibold">
+        <div className="mb-4">Home</div>
+      </Link>
       <TweetForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
       <TweetsList tweets={tweets} loading={loading} error={error} />
     </div>

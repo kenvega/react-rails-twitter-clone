@@ -8,11 +8,12 @@ for backend
 
 for frontend
 
-  in the client folder 
+  in the client folder
+
     to run
 
       npm run dev
 
-        then manually open http://localhost:5173 if not open automatically
+        then manually open http://localhost:4242 if not open automatically
 
   * if you need to install a new npm package you should do it in client (same level as package.json is)

@@ -23,3 +23,11 @@ routes from the twitter-clone app that just uses rails
   /profile
 
 
+why use <Link> instead of <a> to navigate inside the SPA
+
+  using Link does not trigger a full page reload because the navigation is handled internally in react
+    makes a smoother experience
+
+
+
+
