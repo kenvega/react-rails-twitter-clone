@@ -1,6 +1,7 @@
 import { Tweet } from "../interfaces/Tweet";
 
 const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
+  console.log("tweets: ", tweets);
   if (error) {
     return <div>Error</div>;
   }

@@ -26,7 +26,7 @@ const MainContainer = () => {
     <div className="container mx-auto max-w-screen-xl py-4">
       <div className="flex flex-row">
         <div className="basis-1/5">
-          <div>
+          <div className="max-w-fit">
             <div className="px-6 py-2 flex align-middle gap-5 mb-4 rounded-full">
               <img src={Twitter} alt="Your SVG" width={32} className="" />
             </div>

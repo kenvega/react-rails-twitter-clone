@@ -1,5 +1,5 @@
 class Api::V1::TweetsController < ApplicationController
-  before_action :authenticate_user! # TODO: uncomment
+  before_action :authenticate_user!
 
   def show
    
@@ -12,7 +12,7 @@ class Api::V1::TweetsController < ApplicationController
   end
 
   def index
-    tweets = Tweet.all
+    tweets = Tweet.all.order(created_at: :desc)
 
     render json: tweets
   end
