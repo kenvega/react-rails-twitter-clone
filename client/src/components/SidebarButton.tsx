@@ -15,7 +15,7 @@ const SidebarButton = ({
       onClick={onClick}
     >
       <div>
-        <img src={SVGIcon} alt="Your SVG" width={32} />
+        <img src={SVGIcon} alt="An SVG icon" width={32} />
       </div>
       <p className="font-bold text-xl">{title}</p>
     </div>
