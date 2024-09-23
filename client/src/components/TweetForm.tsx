@@ -19,10 +19,19 @@ const TweetForm = ({
   };
 
   return (
-    <div>
+    <div className="bg-slate-200">
       <form onSubmit={handleSubmit}>
-        <input type="text" placeholder="What's happening?" value={tweetBody} onChange={handleChange} />
-        <button type="submit">Submit</button>
+        <input
+          className="w-full"
+          type="text"
+          placeholder="What's happening?"
+          value={tweetBody}
+          onChange={handleChange}
+        />
+
+        <div className="flex justify-end">
+          <button type="submit">Submit</button>
+        </div>
       </form>
     </div>
   );
