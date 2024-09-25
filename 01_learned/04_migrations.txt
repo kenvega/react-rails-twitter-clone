@@ -1,3 +1,5 @@
 
 bundle exec rails g migration add_username_to_users username:string
 
+bundle exec rails g migration add_display_name_to_users display_name:string
+
