@@ -1,5 +1,14 @@
+to run your created migrations (for db and test db)
 
-bundle exec rails g migration add_username_to_users username:string
+  bundle exec rails db:migrate db:test:prepare
 
-bundle exec rails g migration add_display_name_to_users display_name:string
+if you are in development and want to have your tables empty
+
+  bundle exec rails db:drop db:create db:migrate # CAREFUL!!! will destroy all records of data in all tables
+
+migrations done
+
+  bundle exec rails g migration add_username_to_users username:string
+
+  bundle exec rails g migration add_display_name_to_users display_name:string
 

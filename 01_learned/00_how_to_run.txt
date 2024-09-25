@@ -17,3 +17,7 @@ for frontend
         then manually open http://localhost:4242 if not open automatically (depends on the port set)
 
   * if you need to install a new npm package you should do it in client (same level as package.json is)
+
+to run the tests
+
+  bundle exec rspec
