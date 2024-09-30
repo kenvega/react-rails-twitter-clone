@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   validates :username, uniqueness: { case_sensitive: false }, allow_blank: true
 
+  has_one_attached :avatar
+
   # to make sure the display_name always has a value for users
   before_save :set_display_name, if: -> { username.present? && display_name.blank? }
   def set_display_name
