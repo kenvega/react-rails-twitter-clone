@@ -11,7 +11,7 @@ rails new rails-react-twitter-clone --api --database=postgresql -T
 in Gemfile make sure you have this line
   gem "rack-cors"
 
-  then run 
+  then run
 
     bundle install
 
