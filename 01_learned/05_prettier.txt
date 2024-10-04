@@ -18,7 +18,15 @@ even if your project have root folders as rails and has a client folder for the 
 
       and with that when formatting files i get my react components formatted with a maximum of 120 characters before making a new line
 
-now you should still have installed prettier as a dev dependency in your project. why?
+you should still have installed prettier as a dev dependency in your project. why?
 
-  ???????
+  with that you could have a pre-commit set up in the project to make sure files are formatted in every commit
+
+  the prettier vscode extension can use your project installed version of your project even if it is not at the root of your project
+
+    you would need to add this config to your .vscode/settings.json file
+
+      {
+        "prettier.prettierPath": "client/node_modules/prettier"
+      }
 
