@@ -29,4 +29,3 @@ you should still have installed prettier as a dev dependency in your project. wh
       {
         "prettier.prettierPath": "client/node_modules/prettier"
       }
-
