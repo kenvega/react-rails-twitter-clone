@@ -1,4 +1,4 @@
-tutorial:
+tutorial for setup I followed:
   https://www.youtube.com/watch?v=wVNQwrALp1A
   https://dakotaleemartinez.com/tutorials/devise-jwt-api-only-mode-for-authentication/
 
