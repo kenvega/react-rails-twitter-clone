@@ -11,7 +11,7 @@ debugging in rails project
 
       exit
 
-  foreman is running many processes in one terminal
+  if using foreman, that tool is running many processes in one terminal
 
     and that is not very good at capturing input (needed to debug)
 
