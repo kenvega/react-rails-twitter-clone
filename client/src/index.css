@@ -72,3 +72,31 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 } */
+
+/* $twitter-blue: #499be9;
+$twitter-blue-dark: #4390d9; */
+.btn-twitter {
+  background-color: #499be9;
+  color: white;
+  display: block;
+
+  -moz-transition: all .2s ease-in;
+  -o-transition: all .2s ease-in;
+  -webkit-transition: all .2s ease-in;
+  transition: all .2s ease-in;
+
+  font-weight: 600;
+
+  padding: 6px 12px;
+  border-radius: 800px;
+
+  /* &:hover {
+    background-color: #4390d9;
+    color: white;
+  } */
+}
+
+.btn-twitter:hover {
+  background-color: #4390d9;
+  color: white;
+}

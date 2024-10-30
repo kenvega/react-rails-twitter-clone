@@ -1,6 +1,6 @@
 import { useState, FormEvent } from "react";
 import { requestLogin } from "../services/loginService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -28,15 +28,30 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className="mt-6">
       <form onSubmit={handleSubmit}>
-        <p>username</p>
-        <input type="text" onChange={(e) => setUsername(e.target.value)} />
-        <p>password</p>
-        <input type="password" onChange={(e) => setPassword(e.target.value)} />
-        {error && <div style={{ color: "red" }}>{error}</div>}
-        <button type="submit">login</button>
+        <div className="flex">
+          <div className="w-full">
+            <p>Email</p>
+            <input
+              type="text"
+              className="border rounded-md mt-2 mb-4 py-1.5 px-3 w-full"
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <p>Password</p>
+            <input
+              type="password"
+              className="border rounded-md mt-2 py-1.5 px-3 w-full"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            {error && <div style={{ color: "red" }}>{error}</div>}
+            <button type="submit" className="btn-twitter mt-4">
+              Log in
+            </button>
+          </div>
+        </div>
       </form>
+      <Link to="/sign_up">Sign up</Link>
     </div>
   );
 };

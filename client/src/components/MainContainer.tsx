@@ -23,7 +23,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-screen-xl py-4">
+    <div className="container mx-auto max-w-screen-xl py-4 ">
       <div className="flex flex-row">
         <div className="basis-1/5">
           <div className="max-w-fit">
