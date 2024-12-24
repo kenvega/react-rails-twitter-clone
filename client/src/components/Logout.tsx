@@ -6,11 +6,12 @@ const Logout = () => {
 
   return (
     <a
+      className="px-6 text-sky-400 font-medium cursor-pointer"
       onClick={() => {
         logout({ navigate });
       }}
     >
-      logout
+      Log out
     </a>
   );
 };

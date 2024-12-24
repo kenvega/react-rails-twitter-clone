@@ -14,6 +14,8 @@ import Profile from "../assets/profile.svg";
 
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "@radix-ui/themes";
+
 const MainContainer = () => {
   // TODO: move navigate logic to sidebarbutton because is not used here i think.. or maybe later it will
   const navigate = useNavigate();

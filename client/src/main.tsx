@@ -3,10 +3,12 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 // import TweetsList from './components/TweetsList'
 import SignUp from "./components/SignUp.tsx";
+import { Theme } from "@radix-ui/themes";
 import MainContainer from "./components/MainContainer.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import ErrorPage from "./error-page";
 import "./index.css";
+import "@radix-ui/themes/styles.css";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +23,11 @@ const router = createBrowserRouter([
   },
   {
     path: "dashboard",
-    element: <MainContainer />,
+    element: (
+      <Theme>
+        <MainContainer />
+      </Theme>
+    ),
   },
   {
     path: "home",

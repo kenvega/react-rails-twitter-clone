@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, MouseEvent } from "react";
+import { Button } from "@radix-ui/themes";
 
 const TweetForm = ({
   tweetBody,
@@ -19,7 +20,7 @@ const TweetForm = ({
   };
 
   return (
-    <div className="bg-slate-200">
+    <div className="p-4 hover:bg-slate-200">
       <form onSubmit={handleSubmit}>
         <input
           className="w-full"
@@ -30,7 +31,8 @@ const TweetForm = ({
         />
 
         <div className="flex justify-end">
-          <button type="submit">Submit</button>
+          {/* <button type="submit">Submit</button> */}
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>
