@@ -1,0 +1,44 @@
+it is a special kind of rails object
+
+it represents a query
+
+it does not represent an array of actual records yet!
+
+you can chain some special methods to it and still get another active record relation object
+  meaning that the query would still not be executed
+
+  some of these special methods you can chain are: where, order, limit
+
+the query is only called when you call in the object a method that actually requires the data
+
+  methods that are like these are
+
+    iteration methods like
+      each, map, pluck
+
+    retrieval methods like
+      first, last, find, to_a
+
+  building the query and executing only when the data is really needed is called lazy loading
+
+the result of executing the query of the activeRecord relation object could be different types of Ruby 
+
+  tweets = Tweet.all.to_a # this is an array
+
+  tweet = Tweet.first # this would be a single instance of the model (a Tweet object)
+
+  
+
+
+
+
+Active Record Relation provides a chainable interface for querying the database in Rails. It allows you to build complex queries using various methods and conditions.
+
+When you call methods like `where`, `order`, or `joins` on an Active Record Relation object, it returns a new relation object with the added conditions or joins. This allows you to chain multiple methods together to build up your query.
+
+However, it's important to note that an Active Record Relation does not execute the query immediately. It only represents the query and holds the information needed to fetch the actual records from the database.
+
+To retrieve the records, you need to call methods like `all`, `first`, or `find` on the relation object. These methods trigger the execution of the query and return the actual records as an array.
+
+So, while an Active Record Relation object represents a query, it does not represent an array of actual records until you explicitly fetch them using one of the retrieval methods.
+

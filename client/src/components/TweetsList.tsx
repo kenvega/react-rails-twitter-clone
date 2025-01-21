@@ -16,8 +16,9 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
           console.log("tweet: ", tweet);
           return (
             <div key={tweet.id}>
-              {/* <p>from user: {tweet.user_id}</p> */}
+              <p>from user: {tweet.user_id}</p>
               <p>{tweet.body}</p>
+              <hr></hr>
               {/* <Button variant="soft">Let's go</Button> */}
             </div>
           );

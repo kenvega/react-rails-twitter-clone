@@ -1,0 +1,25 @@
+when you have something like
+
+  def index
+    tweets = Tweet.all.includes(:user).order(created_at: :desc)
+
+    render json: tweets
+  end
+
+this will not include the user info on every tweet in your response
+
+this is because render json basically just runs .as_json internally on every tweet
+  and .as_json will only serialize attributes of the tweet model
+    and ignore any other attribute that is not specified explicitly
+
+the user association is eagerly loaded but is not included by the .as_json
+  so it won't be serialized in the json response
+
+
+models are responsible for data and business logic
+
+but serialization which is how we present the data is considered another separate layer
+  models don't decide how data is serialized or presented in API responses
+
+
+

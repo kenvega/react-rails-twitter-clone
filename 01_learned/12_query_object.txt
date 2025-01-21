@@ -1,0 +1,21 @@
+ActiveRecord relation is the main query object but not the only kind of query object
+
+other types of query objects are
+
+  ActiveRecord Associations CollectionProxy
+
+  ARel objects
+
+  Scopes
+
+  ActiveRecord SpawnMethods
+
+
+you can always get which type of query object they are
+
+  examples
+
+    User.all.class # User::ActiveRecord_Relation
+
+    User.first.tweets.class # Tweet::ActiveRecord_Associations_CollectionProxy
+
