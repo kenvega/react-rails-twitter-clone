@@ -13,10 +13,16 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
         <p>Loading tweets...</p>
       ) : (
         tweets.map((tweet) => {
-          console.log("tweet: ", tweet);
+          const formattedDate = new Date(tweet.created_at).toLocaleDateString("en-US", {
+            month: "short",
+            day: "2-digit",
+          });
+
           return (
             <div key={tweet.id}>
-              <p>from user: {tweet.user_id}</p>
+              <p>
+                @{tweet.user.username} - {formattedDate}
+              </p>
               <p>{tweet.body}</p>
               <hr></hr>
               {/* <Button variant="soft">Let's go</Button> */}

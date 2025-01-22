@@ -1,0 +1,49 @@
+it's a serialization library
+
+  this is to have easier control for the output of your json responses
+
+  notice that there are other serialization libraries. an example of a more modern one is "jsonapi-serializer"
+
+how to install
+
+  add to gemfile
+    gem 'active_model_serializers'
+
+  then
+    bundle install
+
+  don't forget to restart the rails server to use the serializer correctly
+
+how to set up
+
+  to create a serializer for a model
+    for example a serializer for your Tweet model
+
+      rails generate serializer tweet
+
+things to note
+
+  when a model does not have a related serializer file created then it uses the rails' basic serialization
+    meaning it will just serialize all attributes
+
+  why it is better to use belongs_to inside serializer files instead of attributes
+    you could do something like this
+
+      class TweetSerializer < ActiveModel::Serializer
+        attributes :id, :body, :user
+      end
+
+    instead of this
+
+      class TweetSerializer < ActiveModel::Serializer
+        attributes :id, :body
+
+        belongs_to :user
+      end
+
+    the first one would work because you will infer the attribute 'user' based on the related model
+
+    but that way you won't be able to customize the output of user
+      if you want to customize you will need to use the belongs_to way
+
+  
