@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { requestLogin } from "../services/loginService";
+import { requestLogin } from "../services/authService";
 import { useNavigate, Link } from "react-router-dom";
 
 const Login = () => {
