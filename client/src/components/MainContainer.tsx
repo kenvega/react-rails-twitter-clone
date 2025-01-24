@@ -17,6 +17,8 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@radix-ui/themes";
 
 const MainContainer = () => {
+  // TODO: add useEffect to check if user is logged in. if not logged in then redirect to login page
+
   // TODO: move navigate logic to sidebarbutton because is not used here i think.. or maybe later it will
   const navigate = useNavigate();
 

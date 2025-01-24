@@ -51,7 +51,7 @@ config/initializers/cors.rb
     going to be used by devise-jwt
 
 
-add this gems
+add these gems
 
   devise
   devise-jwt
