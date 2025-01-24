@@ -1,0 +1,58 @@
+https://github.com/heartcombo/devise
+
+add the gem (try to maintain the alphabetic order of gems)
+
+  gem 'devise'
+
+then install the gem
+
+  in root of the project run
+    bundle
+
+run the devise generator
+
+  bundle exec rails generate devise:install
+
+  this creates config files for devise
+    config/initializers/devise.rb # config file for many options you can set in devise (email configs for sender, notifications, etc)
+    config/locales/devise.en.yml # translations for messages to show related to sign in, password recovery, etc
+
+
+setup the initial model
+
+  generate our first user model
+    bundle exec rails g devise user
+      # this will create a devise model (which handles passwords, encryption, email confirmations, session management, account lockout)
+
+    this creates files
+
+      invoke  active_record
+      create    db/migrate/20230206020419_devise_create_users.rb # migration that creates user table with all user related fields (password recover, confirm email, lock account)
+      create    app/models/user.rb
+      invoke    rspec
+      create      spec/models/user_spec.rb
+      invoke      factory_bot
+      create        spec/factories/users.rb
+      insert    app/models/user.rb
+      route  devise_for :users
+
+run the migration created for the user
+
+  bundle exec rails db:migrate db:test:prepare
+
+
+
+with devise installed these are some helper methods you can use
+
+  current_user (you can access this in controllers)
+    if the user is not signed in the current_user will be nil so you can use safe navigator with this
+      something like current_user&.username&.blank?
+
+
+  destroy_user_session_path (route to log out)
+
+
+if you want to see the routes set up by devise
+
+  rails routes | grep users
+

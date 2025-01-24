@@ -23,7 +23,7 @@ function SignUp() {
         email: email,
         password: password,
         username: username,
-        displayName: displayName,
+        display_name: displayName,
       },
     })
       .then(() => {

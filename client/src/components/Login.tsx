@@ -30,7 +30,7 @@ const Login = () => {
   return (
     <div className="mt-6">
       <form onSubmit={handleSubmit}>
-        <div className="flex">
+        <div className="flex mb-3">
           <div className="w-full">
             <p>Email</p>
             <input

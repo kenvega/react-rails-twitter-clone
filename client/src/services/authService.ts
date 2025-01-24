@@ -13,7 +13,7 @@ interface SignupCredentials {
     email: string;
     password: string;
     username?: string;
-    displayName?: string;
+    display_name?: string;
   };
 }
 
