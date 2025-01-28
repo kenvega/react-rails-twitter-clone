@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :username, :avatar_url, :created_at
+  attributes :id, :email, :username, :display_name, :avatar_url, :created_at
 
   def avatar_url
     return unless object.avatar.attached?

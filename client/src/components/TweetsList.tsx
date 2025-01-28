@@ -1,10 +1,9 @@
 import { Tweet } from "../interfaces/Tweet";
-// import { Button } from "@radix-ui/themes";
 
 import { formatDistanceToNow } from "date-fns";
 
 const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
-  console.log("tweets: ", tweets);
+  console.log("tweets: ", tweets); // TODO: remove log
   if (error) {
     return <div>Error</div>;
   }
@@ -35,17 +34,27 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
           const formattedDate = formatTheDate(tweet.created_at);
 
           return (
-            <div key={tweet.id}>
-              {tweet.user.avatar_url ? (
-                <img src={tweet.user.avatar_url} className="h-14 w-14 rounded-full" alt="user avatar" />
-              ) : (
-                <img src="./src/assets/profile.svg" className="h-14 w-14 rounded-full" />
-              )}
-              <p>
-                @{tweet.user.username} · {formattedDate}
-              </p>
-              <p>{tweet.body}</p>
-              <hr></hr>
+            <div key={tweet.id} className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
+              <div>
+                {tweet.user.avatar_url ? (
+                  <img
+                    src={tweet.user.avatar_url}
+                    className="w-24 rounded-full aspect-square overflow-hidden"
+                    alt="user avatar"
+                  />
+                ) : (
+                  <img src="./src/assets/profile.svg" className="w-16 rounded-full" />
+                )}
+              </div>
+              <div className="ml-4">
+                <p>
+                  <span className="font-bold">{tweet.user.display_name}</span>{" "}
+                  <span className="text-gray-500">
+                    @{tweet.user.username} · {formattedDate}
+                  </span>
+                </p>
+                <p>{tweet.body}</p>
+              </div>
             </div>
           );
         })
