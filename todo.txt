@@ -1,3 +1,8 @@
+todo:
 - install bullet
 - install annotate
+
+done:
 - when creating a user make sure display name is set
+- display avatars for tweets
+- make sure avatars can be sent to backend through postman

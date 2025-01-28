@@ -1,0 +1,52 @@
+when you need to send a file (pdf, image, .txt file, etc) to the backend
+
+you most likely will want to use form-data instead of regular json request
+
+because that way you can send it directly
+
+if you still want to send it as json you will need to encode it in the front and decode it in the back
+
+also when you encode it in base64 in the front and send it to the back it will cause the requests to be heavier in content
+
+
+these are content-types.. for examples rails handles these content-types differently to set up the variable params in the controller
+
+  if the request has Content-type: application/json, rails will parse the body as json.
+
+  if the request has Content-type: multipart/form-data (form-data with files), rails uses the multipart parser.
+
+
+
+when you get the data like an avatar you can usually get it within a url
+
+  this means that you don't necessarily need to use form-data when getting files. just when you are sending them to the back
+
+
+if you later need to get the url from the backend you need to change it in config for development
+
+  in config/environments/development.rb you need to add this line
+
+    Rails.application.configure do
+      ...
+
+      # for urls to be generated for avatars for the react frontend
+      Rails.application.routes.default_url_options[:host] = 'localhost:4001'
+      ...
+
+    end
+
+  this way in your serializer when you do something like
+
+    class UserSerializer < ActiveModel::Serializer
+      attributes :id, :email, :username, :avatar_url, :created_at
+
+      def avatar_url
+        return unless object.avatar.attached?
+
+        Rails.application.routes.url_helpers.url_for(object.avatar)
+      end
+    end
+
+  the Rails.application.routes.url_helpers.url_for(object.avatar) actually works. otherwise you will get an error like
+    ArgumentError (Missing host to link to! Please provide the :host parameter, set default_url_options[:host], or set :only_path to true):
+

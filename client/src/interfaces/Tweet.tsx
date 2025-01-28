@@ -6,5 +6,6 @@ export interface Tweet {
     id: number;
     email: string;
     username: string;
+    avatar_url: string;
   };
 }

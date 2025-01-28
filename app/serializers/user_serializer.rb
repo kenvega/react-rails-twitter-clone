@@ -1,13 +1,9 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :username, :created_at
+  attributes :id, :email, :username, :avatar_url, :created_at
 
-  # TODO: remove comments if not used later
-  # attribute :created_date do |user|
-  #   user.created_at && user.created_at.strftime('%m/%d/%Y')
-  # end
+  def avatar_url
+    return unless object.avatar.attached?
 
-  # def created_date
-  #   object.created_at&.strftime('%m/%d/%Y')
-  # end
-
+    Rails.application.routes.url_helpers.url_for(object.avatar)
+  end
 end

@@ -36,12 +36,16 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
 
           return (
             <div key={tweet.id}>
+              {tweet.user.avatar_url ? (
+                <img src={tweet.user.avatar_url} className="h-14 w-14 rounded-full" alt="user avatar" />
+              ) : (
+                <img src="./src/assets/profile.svg" className="h-14 w-14 rounded-full" />
+              )}
               <p>
-                @{tweet.user.username} - {formattedDate}
+                @{tweet.user.username} · {formattedDate}
               </p>
               <p>{tweet.body}</p>
               <hr></hr>
-              {/* <Button variant="soft">Let's go</Button> */}
             </div>
           );
         })

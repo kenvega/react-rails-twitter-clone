@@ -26,8 +26,6 @@ const requestSignUp = async (credentials: SignupCredentials) => {
     body: JSON.stringify(credentials),
   });
 
-  console.log("response de login: ", response);
-
   // TODO: should show a notification or flash message that credentials are not correct?
   // or maybe just show what the backend responds (?) or maybe just show a template message based on the error code like 401
 

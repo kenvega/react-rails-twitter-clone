@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { requestSignUp } from "../services/authService";
 import { useNavigate, Link } from "react-router-dom";
-import FilePicker from "./FilePicker";
 
 function SignUp() {
   const navigate = useNavigate();
@@ -11,8 +10,6 @@ function SignUp() {
   const [displayName, setDisplayName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  // const fileInputRef = useRef(null);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,10 +30,6 @@ function SignUp() {
         setError(error.message || "An error occurred. Please try again.");
       });
   };
-
-  // const handleAvatarButtonClicked = () => {
-  //   fileInputRef.current.click();
-  // };
 
   return (
     <div className="app flex justify-center py-12">
@@ -71,14 +64,7 @@ function SignUp() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <p className="mt-2">Avatar</p>
-              <FilePicker />
-              {/* <button
-                onClick={handleAvatarButtonClicked}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300"
-              >
-                Choose File
-              </button>
-              <input type="file" ref={fileInputRef} onChange={handleFileChange} className="hidden" /> */}
+
               {error && <div style={{ color: "red" }}>{error}</div>}
               <button type="submit" className="btn-twitter mt-6">
                 Sign Up

@@ -165,7 +165,7 @@ setup devise
 
   when you try with postman
 
-    POST /signup 
+    POST /signup
 
       you will see an error they didn't know how to solve but they created app/controllers/concerns/rack_session_fix.rb
 
