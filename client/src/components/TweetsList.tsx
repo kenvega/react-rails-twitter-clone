@@ -1,5 +1,5 @@
 import { Tweet } from "../interfaces/Tweet";
-
+import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 
 const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
@@ -46,14 +46,46 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
                   <img src="./src/assets/profile.svg" className="w-16 rounded-full" />
                 )}
               </div>
-              <div className="ml-4">
+              <div className="ml-4 grow">
                 <p>
                   <span className="font-bold">{tweet.user.display_name}</span>{" "}
                   <span className="text-gray-500">
                     @{tweet.user.username} · {formattedDate}
                   </span>
                 </p>
-                <p>{tweet.body}</p>
+                <p className="mb-4">{tweet.body}</p>
+                <div className="flex justify-between">
+                  <div>
+                    <Link to="/dashboard" className="flex">
+                      <img src="./src/assets/chart.svg" className="w-4 mr-2" />
+                      <span>14</span>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/dashboard" className="flex">
+                      <img src="./src/assets/chat.svg" className="w-4 mr-2" />
+                      <span>14</span>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/dashboard" className="flex">
+                      <img src="./src/assets/retweet-unfilled.svg" className="w-4 mr-2" />
+                      <span>14</span>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/dashboard" className="flex">
+                      <img src="./src/assets/heart-unfilled.svg" className="w-4 mr-2" />
+                      <span>14</span>
+                    </Link>
+                  </div>
+                  <div>
+                    <Link to="/dashboard" className="flex">
+                      <img src="./src/assets/bookmark-unfilled.svg" className="w-4 mr-2" />
+                      <span>Bookmark</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           );
