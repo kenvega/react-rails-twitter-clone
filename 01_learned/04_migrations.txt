@@ -12,3 +12,6 @@ migrations done
 
   bundle exec rails g migration add_display_name_to_users display_name:string
 
+  bundle exec rails g model like tweet:references user:references
+
+  

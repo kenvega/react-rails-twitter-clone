@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # TODO: here put the routes when they are working. check the changes in files to make too https://youtu.be/koiHRY8Be1A?feature=shared&t=192
-      resources :tweets, only: [:index, :create, :show]
+      resources :tweets, only: [:index, :create, :show] do
+        resources :likes, only: [:create, :destroy]
+      end
     end
   end
 

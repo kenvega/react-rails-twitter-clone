@@ -76,7 +76,7 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
                   <div>
                     <Link to="/dashboard" className="flex">
                       <img src="./src/assets/heart-unfilled.svg" className="w-4 mr-2" />
-                      <span>14</span>
+                      <span>{tweet.likes_count}</span>
                     </Link>
                   </div>
                   <div>

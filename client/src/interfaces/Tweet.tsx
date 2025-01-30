@@ -2,6 +2,7 @@ export interface Tweet {
   id: number;
   body: string;
   created_at: string;
+  likes_count: number;
   user: {
     id: number;
     email: string;
