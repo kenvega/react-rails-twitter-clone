@@ -9,6 +9,8 @@ import TweetsList from "./TweetsList";
 import { Tweet } from "../interfaces/Tweet";
 
 import { ThemeContext } from "../context/ThemeProvider";
+import Sun from "../assets/sun.svg";
+import Moon from "../assets/moon.svg";
 
 const TweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
@@ -53,10 +55,15 @@ const TweetsContainer = () => {
 
   return (
     <div>
-      <Link to="#" className="text-2xl font-semibold">
-        <div className="mb-4">Home</div>
-        <button onClick={toggleDarkMode}>toggle dark mode: {darkMode ? "Dark Mode" : "Light Mode"}</button>
-      </Link>
+      <div className="flex justify-between items-center mb-3 px-2">
+        <Link to="#" className="text-2xl font-semibold">
+          <div>Home</div>
+        </Link>
+        <button onClick={toggleDarkMode}>
+          <img src={darkMode ? Moon : Sun} alt="dark mode SVG toggle icon" width={32} />
+        </button>
+      </div>
+
       <TweetForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
       <TweetsList tweets={tweets} loading={loading} error={error} />
     </div>
