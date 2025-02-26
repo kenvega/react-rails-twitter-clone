@@ -14,12 +14,12 @@ import Profile from "../assets/profile.svg";
 
 import { useNavigate } from "react-router-dom";
 
-import { Button } from "@radix-ui/themes";
+// import { Button } from "@radix-ui/themes";
 
 const MainContainer = () => {
   // TODO: add useEffect to check if user is logged in. if not logged in then redirect to login page
 
-  // TODO: move navigate logic to sidebarbutton because is not used here i think.. or maybe later it will
+  // TODO: move navigate logic to sidebar button because is not used here i think.. or maybe later it will
   const navigate = useNavigate();
 
   const goTo = (route: string) => {
@@ -27,7 +27,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-screen-xl py-4 ">
+    <div className="container mx-auto max-w-screen-xl py-4 dark:bg-gray-800">
       <div className="flex flex-row">
         <div className="basis-1/5">
           <div className="max-w-fit">
