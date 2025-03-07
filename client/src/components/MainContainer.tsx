@@ -3,14 +3,15 @@ import TweetsContainer from "./TweetsContainer";
 import Logout from "./Logout";
 
 import Twitter from "../assets/twitter.svg";
-import Home from "../assets/home.svg";
-import Hashtag from "../assets/hashtag.svg";
-import Earth from "../assets/earth.svg";
-import Users from "../assets/users.svg";
-import Notification from "../assets/notification.svg";
-import Message from "../assets/email.svg";
-import Bookmark from "../assets/bookmark-unfilled.svg";
-import Profile from "../assets/profile.svg";
+
+import Home from "../assets/home.svg?react";
+import Hashtag from "../assets/hashtag.svg?react";
+import Earth from "../assets/earth.svg?react";
+import Users from "../assets/users.svg?react";
+import Notification from "../assets/notification.svg?react";
+import Message from "../assets/email.svg?react";
+import Bookmark from "../assets/bookmark-unfilled.svg?react";
+import Profile from "../assets/profile.svg?react";
 
 import { useNavigate } from "react-router-dom";
 
@@ -32,7 +33,7 @@ const MainContainer = () => {
         <div className="basis-1/5">
           <div className="max-w-fit">
             <div className="px-6 py-2 flex align-middle gap-5 mb-4 rounded-full">
-              <img src={Twitter} alt="Your SVG" width={32} className="" />
+              <img src={Twitter} alt="Your SVG" width={32} />
             </div>
 
             <SidebarButton title="Home" SVGIcon={Home} onClick={() => goTo("/home")} active />

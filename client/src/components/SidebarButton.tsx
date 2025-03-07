@@ -5,8 +5,8 @@ const SidebarButton = ({
   onClick,
 }: {
   active?: boolean;
-  SVGIcon: string;
   title: string;
+  SVGIcon: React.ComponentType<React.SVGProps<SVGSVGElement> & { title?: string }>;
   onClick: () => void;
 }) => {
   return (
@@ -17,7 +17,7 @@ const SidebarButton = ({
       onClick={onClick}
     >
       <div>
-        <img src={SVGIcon} alt="An SVG icon" width={32} />
+        <SVGIcon className="h-6 w-6 dark:stroke-gray-400" />
       </div>
       <p className="font-bold text-xl">{title}</p>
     </div>
