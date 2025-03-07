@@ -29,7 +29,7 @@ const MainContainer = () => {
 
   return (
     <div className="py-4 min-h-screen dark:bg-gray-800">
-      <div className="flex flex-row">
+      <div className="flex flex-row max-w-7xl mx-auto">
         <div className="basis-1/5">
           <div className="max-w-fit">
             <div className="px-6 py-2 flex align-middle gap-5 mb-4 rounded-full">
