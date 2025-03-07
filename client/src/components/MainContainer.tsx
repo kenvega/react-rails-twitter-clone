@@ -28,7 +28,7 @@ const MainContainer = () => {
   };
 
   return (
-    <div className="container mx-auto max-w-screen-xl py-4 dark:bg-gray-800">
+    <div className="py-4 min-h-screen dark:bg-gray-800">
       <div className="flex flex-row">
         <div className="basis-1/5">
           <div className="max-w-fit">
@@ -48,9 +48,11 @@ const MainContainer = () => {
             <Logout />
           </div>
         </div>
+
         <div className="basis-3/5">
           <TweetsContainer />
         </div>
+
         <div className="basis-1/5">hashtag sidebar</div>
       </div>
     </div>

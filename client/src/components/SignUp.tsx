@@ -32,38 +32,38 @@ function SignUp() {
   };
 
   return (
-    <div className="app flex justify-center py-12">
+    <div className="app flex justify-center py-12 dark:bg-gray-800 min-h-screen">
       <div>
-        <h2 className="text-3xl font-bold mb-4">Twitter Clone made with React and Rails</h2>
-        <h4 className="text-xl text-gray-700 mb-4">To see tweets you can sign up or log in</h4>
+        <h2 className="text-3xl font-bold mb-4 dark:text-slate-400">Twitter Clone made with React and Rails</h2>
+        <h4 className="text-xl text-gray-700 mb-4 dark:text-gray-500">To see tweets you can sign up or log in</h4>
         <form onSubmit={handleSubmit}>
           <div className="flex mb-3">
             <div className="w-full">
-              <p>Email</p>
+              <p className="dark:text-gray-300">Email</p>
               <input
                 type="text"
                 className="border rounded-md mt-2 mb-4 py-1.5 px-3 w-full"
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <p>Username</p>
+              <p className="dark:text-gray-300">Username</p>
               <input
                 type="text"
                 className="border rounded-md mt-2 mb-4 py-1.5 px-3 w-full"
                 onChange={(e) => setUsername(e.target.value)}
               />
-              <p>Display Name</p>
+              <p className="dark:text-gray-300">Display Name</p>
               <input
                 type="text"
                 className="border rounded-md mt-2 mb-4 py-1.5 px-3 w-full"
                 onChange={(e) => setDisplayName(e.target.value)}
               />
-              <p>Password</p>
+              <p className="dark:text-gray-300">Password</p>
               <input
                 type="password"
                 className="border rounded-md mt-2 py-1.5 px-3 w-full"
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <p className="mt-2">Avatar</p>
+              <p className="mt-2 dark:text-gray-300">Avatar</p>
 
               {error && <div style={{ color: "red" }}>{error}</div>}
               <button type="submit" className="btn-twitter mt-6">
@@ -72,7 +72,9 @@ function SignUp() {
             </div>
           </div>
         </form>
-        <Link to="/">Log in</Link>
+        <Link className="dark:text-gray-300" to="/">
+          Log in
+        </Link>
       </div>
     </div>
   );

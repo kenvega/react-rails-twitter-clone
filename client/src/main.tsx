@@ -6,7 +6,7 @@ import SignUp from "./components/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
 import MainContainer from "./components/MainContainer.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "./context/ThemeProvider"; // Import ThemeProvider
+import { ThemeProvider } from "./context/ThemeProvider";
 
 // import ErrorPage from "./error-page";
 import "./index.css";
