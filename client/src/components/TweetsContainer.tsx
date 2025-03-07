@@ -9,8 +9,9 @@ import TweetsList from "./TweetsList";
 import { Tweet } from "../interfaces/Tweet";
 
 import { ThemeContext } from "../context/ThemeProvider";
-import Sun from "../assets/sun.svg";
-import Moon from "../assets/moon.svg";
+
+import MoonIcon from "../assets/moon.svg?react";
+import SunIcon from "../assets/sun.svg?react";
 
 const TweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
@@ -60,7 +61,7 @@ const TweetsContainer = () => {
           <div>Home</div>
         </Link>
         <button onClick={toggleDarkMode}>
-          <img src={darkMode ? Moon : Sun} alt="dark mode SVG toggle icon" width={32} />
+          {darkMode ? <MoonIcon className="w-8 h-8 dark:stroke-gray-400" /> : <SunIcon className="w-8 h-8" />}
         </button>
       </div>
 
