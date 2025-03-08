@@ -23,7 +23,7 @@ const TweetForm = ({
     <div className="p-4 rounded-md hover:bg-slate-200 dark:hover:bg-cyan-900/40">
       <form onSubmit={handleSubmit}>
         <input
-          className="w-full rounded-sm px-2 mb-2 dark:text-stone-600"
+          className="w-full rounded-sm px-2 py-2 mb-3 dark:text-stone-600"
           type="text"
           placeholder="What's happening?"
           value={tweetBody}
