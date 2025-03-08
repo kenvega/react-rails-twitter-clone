@@ -1,7 +1,7 @@
 // import React from 'react'
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 // import TweetsList from './components/TweetsList'
+import Login from "./components/Login";
 import SignUp from "./components/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
 import MainContainer from "./components/MainContainer.tsx";
@@ -13,9 +13,10 @@ import "./index.css";
 import "@radix-ui/themes/styles.css";
 
 const router = createBrowserRouter([
+  // when already logged in, redirect to dashboard
   {
     path: "/",
-    element: <App />,
+    element: <Login />,
     // errorElement: <ErrorPage />,
   },
   {
