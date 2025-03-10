@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import { getTweets, createTweet } from "../services/tweetsService";
-
 import { Link } from "react-router-dom";
+import { getTweets, createTweet } from "../services/tweetsService";
+import { getDecodedJwt } from "../helpers/jwtHelper";
 
 import TweetForm from "./TweetForm";
 import TweetsList from "./TweetsList";
@@ -17,6 +17,13 @@ const TweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  let username = null;
+
+  const decodedJwt = getDecodedJwt();
+  if (decodedJwt) {
+    username = decodedJwt.username;
+  }
 
   const [tweetBody, setTweetBody] = useState("");
 
@@ -58,7 +65,7 @@ const TweetsContainer = () => {
     <div>
       <div className="flex justify-between items-center mb-3 px-2">
         <Link to="#" className="text-2xl font-semibold">
-          <div>Home</div>
+          <div>Hello {username}</div>
         </Link>
         <button onClick={toggleDarkMode}>
           {darkMode ? <MoonIcon className="w-8 h-8 dark:stroke-gray-400" /> : <SunIcon className="w-8 h-8" />}

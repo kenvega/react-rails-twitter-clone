@@ -15,6 +15,11 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  # to add more data to the jwt token
+  def jwt_payload
+    super.merge('username' => self.username, 'user_id' => self.id)
+  end
+
   # to make sure the display_name always has a value for users
   before_save :set_display_name, if: -> { username.present? && display_name.blank? }
   def set_display_name
