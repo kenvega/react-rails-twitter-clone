@@ -73,7 +73,7 @@ const TweetsContainer = () => {
       </div>
 
       <TweetForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
-      <TweetsList tweets={tweets} loading={loading} error={error} />
+      <TweetsList tweets={tweets} loadingTweets={loading} error={error} />
     </div>
   );
 };

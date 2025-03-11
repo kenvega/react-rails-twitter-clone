@@ -1,10 +1,23 @@
+import { useState } from "react";
 import { Tweet } from "../interfaces/Tweet";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
 import { likeTweet, dislikeTweet } from "../services/tweetsService";
+import LoadingIcon from "../assets/loading.svg?react";
 
-const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
+const TweetsList = ({
+  tweets,
+  loadingTweets,
+  error,
+}: {
+  tweets: Tweet[];
+  loadingTweets: boolean;
+  error: string | null;
+}) => {
   console.log("tweets: ", tweets); // TODO: remove log
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [targetTweetId, setTargetTweetId] = useState<number | null>(null);
 
   if (error) {
     return <div>Error</div>;
@@ -28,20 +41,35 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
   };
 
   const handleLikeClick = ({ tweetId }: { tweetId: number }) => {
+    // poner un loader al costado
+    // bloquear el botón mientras que se esta esperando
+    // cuando se tiene respuesta entonces cambiar el estado de ese tweet en la lista local (?)
+    // mejor es hacer request de todo de nuevo creo.. fijate que es lo que se hace para cuando se crea un nuevo tweet... pero esto generaria problemas para cuando tengas infinite scroll (?)
+    //
+    setLoading(true);
+    setTargetTweetId(tweetId);
+
     likeTweet({ tweetId }).then(() => {
+      setTargetTweetId(null);
+      setLoading(false);
       console.log("already did the thing");
     });
   };
 
   const handleDislikeClick = ({ tweetId }: { tweetId: number }) => {
+    setLoading(true);
+    setTargetTweetId(tweetId);
+
     dislikeTweet({ tweetId }).then(() => {
+      setTargetTweetId(null);
+      setLoading(false);
       console.log("already did the thing");
     });
   };
 
   return (
     <div>
-      {loading ? (
+      {loadingTweets ? (
         <p>Loading tweets...</p>
       ) : (
         tweets.map((tweet) => {
@@ -88,17 +116,57 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
                     </Link>
                   </div>
 
-                  {tweet.tweet_liked_by_current_user ? (
-                    <div className="flex cursor-pointer" onClick={() => handleDislikeClick({ tweetId: tweet.id })}>
-                      <img src="./src/assets/heart-filled.svg" className="w-4 mr-2" />
+                  {/* <div className="flex items-center">
+                    {tweet.tweet_liked_by_current_user ? (
+                      <button className="flex cursor-pointer" onClick={() => handleDislikeClick({ tweetId: tweet.id })}>
+                        <img
+                          src="./src/assets/heart-filled.svg"
+                          className={`w-4 mr-2 ${loading && targetTweetId == tweet.id ? "opacity-50" : ""}`}
+                        />
+                        <span>{tweet.likes_count}</span>
+                      </button>
+                    ) : (
+                      <button className="flex cursor-pointer" onClick={() => handleLikeClick({ tweetId: tweet.id })}>
+                        <img
+                          src="./src/assets/heart-unfilled.svg"
+                          className={`w-4 mr-2 ${loading && targetTweetId == tweet.id ? "opacity-50" : ""}`}
+                        />
+                        <span>{tweet.likes_count}</span>
+                      </button>
+                    )}
+                    {loading && targetTweetId == tweet.id ? (
+                      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+                    ) : (
+                      <div className="w-3 h-3 ml-3"></div>
+                    )}
+                  </div> */}
+
+                  <div className="flex items-center">
+                    <button
+                      className="flex cursor-pointer"
+                      onClick={() =>
+                        tweet.tweet_liked_by_current_user
+                          ? handleDislikeClick({ tweetId: tweet.id })
+                          : handleLikeClick({ tweetId: tweet.id })
+                      }
+                    >
+                      <img
+                        src={
+                          tweet.tweet_liked_by_current_user
+                            ? "./src/assets/heart-filled.svg"
+                            : "./src/assets/heart-unfilled.svg"
+                        }
+                        className={`w-4 mr-2 ${loading && targetTweetId === tweet.id ? "opacity-50" : ""}`}
+                        alt="like icon"
+                      />
                       <span>{tweet.likes_count}</span>
-                    </div>
-                  ) : (
-                    <div className="flex cursor-pointer" onClick={() => handleLikeClick({ tweetId: tweet.id })}>
-                      <img src="./src/assets/heart-unfilled.svg" className="w-4 mr-2" />
-                      <span>{tweet.likes_count}</span>
-                    </div>
-                  )}
+                    </button>
+                    {loading && targetTweetId === tweet.id ? (
+                      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+                    ) : (
+                      <div className="w-3 h-3 ml-3" />
+                    )}
+                  </div>
 
                   <div>
                     <Link to="/dashboard" className="flex">
