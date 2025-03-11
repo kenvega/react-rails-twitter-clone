@@ -3,6 +3,7 @@ export interface Tweet {
   body: string;
   created_at: string;
   likes_count: number;
+  tweet_liked_by_current_user: boolean;
   user: {
     id: number;
     email: string;

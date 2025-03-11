@@ -17,7 +17,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       # TODO: here put the routes when they are working. check the changes in files to make too https://youtu.be/koiHRY8Be1A?feature=shared&t=192
       resources :tweets, only: [:index, :create, :show] do
-        resources :likes, only: [:create, :destroy]
+        # you can use like (instead of 'likes') in route resources, but the controller will still be likes_controller
+        resource :like, only: [:create, :destroy]
       end
     end
   end

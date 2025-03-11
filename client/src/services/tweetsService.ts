@@ -27,3 +27,11 @@ export const createTweet = async ({ tweetBody }: { tweetBody: string }) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const likeTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.post(`${API_URL}/tweets/${tweetId}/like`).then(handleResponse).catch(handleError);
+};
+
+export const dislikeTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.delete(`${API_URL}/tweets/${tweetId}/like`).then(handleResponse).catch(handleError);
+};

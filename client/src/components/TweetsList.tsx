@@ -1,9 +1,11 @@
 import { Tweet } from "../interfaces/Tweet";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
+import { likeTweet, dislikeTweet } from "../services/tweetsService";
 
 const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: boolean; error: string | null }) => {
   console.log("tweets: ", tweets); // TODO: remove log
+
   if (error) {
     return <div>Error</div>;
   }
@@ -23,6 +25,18 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
     } else {
       return formatDistanceToNow(tweetDateObj, { addSuffix: true });
     }
+  };
+
+  const handleLikeClick = ({ tweetId }: { tweetId: number }) => {
+    likeTweet({ tweetId }).then(() => {
+      console.log("already did the thing");
+    });
+  };
+
+  const handleDislikeClick = ({ tweetId }: { tweetId: number }) => {
+    dislikeTweet({ tweetId }).then(() => {
+      console.log("already did the thing");
+    });
   };
 
   return (
@@ -73,12 +87,19 @@ const TweetsList = ({ tweets, loading, error }: { tweets: Tweet[]; loading: bool
                       <span>14</span>
                     </Link>
                   </div>
-                  <div>
-                    <Link to="/dashboard" className="flex">
+
+                  {tweet.tweet_liked_by_current_user ? (
+                    <div className="flex cursor-pointer" onClick={() => handleDislikeClick({ tweetId: tweet.id })}>
+                      <img src="./src/assets/heart-filled.svg" className="w-4 mr-2" />
+                      <span>{tweet.likes_count}</span>
+                    </div>
+                  ) : (
+                    <div className="flex cursor-pointer" onClick={() => handleLikeClick({ tweetId: tweet.id })}>
                       <img src="./src/assets/heart-unfilled.svg" className="w-4 mr-2" />
                       <span>{tweet.likes_count}</span>
-                    </Link>
-                  </div>
+                    </div>
+                  )}
+
                   <div>
                     <Link to="/dashboard" className="flex">
                       <img src="./src/assets/bookmark-unfilled.svg" className="w-4 mr-2" />
