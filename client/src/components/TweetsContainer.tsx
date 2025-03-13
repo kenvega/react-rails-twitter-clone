@@ -15,7 +15,7 @@ import SunIcon from "../assets/sun.svg?react";
 
 const TweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loadingTweets, setLoadingTweets] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   let username = null;
@@ -36,7 +36,7 @@ const TweetsContainer = () => {
   const { darkMode, toggleDarkMode } = themeContext;
 
   const fetchTweets = () => {
-    getTweets()
+    return getTweets()
       .then((tweets) => {
         console.log("response tweets: ", tweets);
         setTweets(tweets);
@@ -46,7 +46,7 @@ const TweetsContainer = () => {
         console.error(error);
       })
       .finally(() => {
-        setLoading(false);
+        setLoadingTweets(false);
       });
   };
 
@@ -61,6 +61,8 @@ const TweetsContainer = () => {
     });
   };
 
+  // TODO: agregar un loading para cuando se esta creando el tweet supongo
+  //        seria bueno que sea dentro del input al que le diste enter
   return (
     <div>
       <div className="flex justify-between items-center mb-3 px-2">
@@ -73,7 +75,7 @@ const TweetsContainer = () => {
       </div>
 
       <TweetForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
-      <TweetsList tweets={tweets} loadingTweets={loading} error={error} />
+      <TweetsList tweets={tweets} loadingTweets={loadingTweets} error={error} fetchTweets={fetchTweets} />
     </div>
   );
 };

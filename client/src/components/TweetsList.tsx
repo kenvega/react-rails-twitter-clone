@@ -8,10 +8,12 @@ import LoadingIcon from "../assets/loading.svg?react";
 const TweetsList = ({
   tweets,
   loadingTweets,
+  fetchTweets,
   error,
 }: {
   tweets: Tweet[];
   loadingTweets: boolean;
+  fetchTweets: () => Promise<void>;
   error: string | null;
 }) => {
   console.log("tweets: ", tweets); // TODO: remove log
@@ -41,29 +43,30 @@ const TweetsList = ({
   };
 
   const handleLikeClick = ({ tweetId }: { tweetId: number }) => {
-    // poner un loader al costado
-    // bloquear el botón mientras que se esta esperando
-    // cuando se tiene respuesta entonces cambiar el estado de ese tweet en la lista local (?)
-    // mejor es hacer request de todo de nuevo creo.. fijate que es lo que se hace para cuando se crea un nuevo tweet... pero esto generaria problemas para cuando tengas infinite scroll (?)
-    //
+    if (loading) return;
+
     setLoading(true);
     setTargetTweetId(tweetId);
 
     likeTweet({ tweetId }).then(() => {
-      setTargetTweetId(null);
-      setLoading(false);
-      console.log("already did the thing");
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+      });
     });
   };
 
   const handleDislikeClick = ({ tweetId }: { tweetId: number }) => {
+    if (loading) return;
+
     setLoading(true);
     setTargetTweetId(tweetId);
 
     dislikeTweet({ tweetId }).then(() => {
-      setTargetTweetId(null);
-      setLoading(false);
-      console.log("already did the thing");
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+      });
     });
   };
 
@@ -116,33 +119,9 @@ const TweetsList = ({
                     </Link>
                   </div>
 
-                  {/* <div className="flex items-center">
-                    {tweet.tweet_liked_by_current_user ? (
-                      <button className="flex cursor-pointer" onClick={() => handleDislikeClick({ tweetId: tweet.id })}>
-                        <img
-                          src="./src/assets/heart-filled.svg"
-                          className={`w-4 mr-2 ${loading && targetTweetId == tweet.id ? "opacity-50" : ""}`}
-                        />
-                        <span>{tweet.likes_count}</span>
-                      </button>
-                    ) : (
-                      <button className="flex cursor-pointer" onClick={() => handleLikeClick({ tweetId: tweet.id })}>
-                        <img
-                          src="./src/assets/heart-unfilled.svg"
-                          className={`w-4 mr-2 ${loading && targetTweetId == tweet.id ? "opacity-50" : ""}`}
-                        />
-                        <span>{tweet.likes_count}</span>
-                      </button>
-                    )}
-                    {loading && targetTweetId == tweet.id ? (
-                      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
-                    ) : (
-                      <div className="w-3 h-3 ml-3"></div>
-                    )}
-                  </div> */}
-
                   <div className="flex items-center">
                     <button
+                      disabled={loading}
                       className="flex cursor-pointer"
                       onClick={() =>
                         tweet.tweet_liked_by_current_user
