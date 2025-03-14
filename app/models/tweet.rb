@@ -3,5 +3,5 @@ class Tweet < ApplicationRecord
 
   validates :body, presence: true, length: { maximum: 280 }
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
 end
