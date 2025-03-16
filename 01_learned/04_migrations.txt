@@ -14,4 +14,8 @@ migrations done
 
   bundle exec rails g model like tweet:references user:references
 
+  bundle exec rails g model Bookmark user:references tweet:references
+
+    and add to the migration index unique for combination of references (a user can only bookmark the same tweet once)
+
   

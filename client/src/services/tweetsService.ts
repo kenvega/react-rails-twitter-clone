@@ -35,3 +35,11 @@ export const likeTweet = async ({ tweetId }: { tweetId: number }) => {
 export const dislikeTweet = async ({ tweetId }: { tweetId: number }) => {
   return http.delete(`${API_URL}/tweets/${tweetId}/like`).then(handleResponse).catch(handleError);
 };
+
+export const bookmarkTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.post(`${API_URL}/tweets/${tweetId}/bookmark`).then(handleResponse).catch(handleError);
+};
+
+export const clearBookmarkTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.delete(`${API_URL}/tweets/${tweetId}/bookmark`).then(handleResponse).catch(handleError);
+};

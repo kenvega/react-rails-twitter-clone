@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Tweet } from "../interfaces/Tweet";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
-import { likeTweet, dislikeTweet } from "../services/tweetsService";
+import { likeTweet, dislikeTweet, bookmarkTweet, clearBookmarkTweet } from "../services/tweetsService";
 import LoadingIcon from "../assets/loading.svg?react";
 
 const TweetsList = ({
@@ -63,6 +63,34 @@ const TweetsList = ({
     setTargetTweetId(tweetId);
 
     dislikeTweet({ tweetId }).then(() => {
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+      });
+    });
+  };
+
+  const handleBookmarkClick = ({ tweetId }: { tweetId: number }) => {
+    if (loading) return;
+
+    setLoading(true);
+    setTargetTweetId(tweetId);
+
+    bookmarkTweet({ tweetId }).then(() => {
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+      });
+    });
+  };
+
+  const handleClearBookmarkClick = ({ tweetId }: { tweetId: number }) => {
+    if (loading) return;
+
+    setLoading(true);
+    setTargetTweetId(tweetId);
+
+    clearBookmarkTweet({ tweetId }).then(() => {
       fetchTweets().finally(() => {
         setTargetTweetId(null);
         setLoading(false);
@@ -147,12 +175,39 @@ const TweetsList = ({
                     )}
                   </div>
 
-                  <div>
+                  <div className="flex items-center">
+                    <button
+                      disabled={loading}
+                      className="flex cursor-pointer"
+                      onClick={() =>
+                        tweet.tweet_bookmarked_by_current_user
+                          ? handleClearBookmarkClick({ tweetId: tweet.id })
+                          : handleBookmarkClick({ tweetId: tweet.id })
+                      }
+                    >
+                      <img
+                        src={
+                          tweet.tweet_bookmarked_by_current_user
+                            ? "./src/assets/bookmark-filled.svg"
+                            : "./src/assets/bookmark-unfilled.svg"
+                        }
+                        className={`w-4 mr-2 ${loading && targetTweetId === tweet.id ? "opacity-50" : ""}`}
+                        alt="like icon"
+                      />
+                    </button>
+                    {loading && targetTweetId === tweet.id ? (
+                      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+                    ) : (
+                      <div className="w-3 h-3 ml-3" />
+                    )}
+                  </div>
+
+                  {/* <div>
                     <Link to="/dashboard" className="flex">
                       <img src="./src/assets/bookmark-unfilled.svg" className="w-4 mr-2" />
                       <span>Bookmark</span>
                     </Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

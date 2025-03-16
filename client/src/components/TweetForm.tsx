@@ -31,7 +31,7 @@ const TweetForm = ({
         />
 
         <div className="flex justify-end">
-          <Button type="submit">Submit</Button>
+          <Button type="submit">Tweet</Button>
         </div>
       </form>
     </div>

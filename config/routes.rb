@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :tweets, only: [:index, :create, :show] do
         # you can use like (instead of 'likes') in route resources, but the controller will still be likes_controller
         resource :like, only: [:create, :destroy]
+        resource :bookmark, only: [:create, :destroy]
       end
     end
   end
