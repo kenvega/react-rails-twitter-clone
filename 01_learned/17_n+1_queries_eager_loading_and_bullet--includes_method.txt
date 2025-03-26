@@ -1,0 +1,176 @@
+if your code ends up doing queries to the database like this
+
+  SELECT categories.* FROM categories
+
+  SELECT products.* FROM products WHERE products.category_id = 1
+  SELECT products.* FROM products WHERE products.category_id = 2
+  SELECT products.* FROM products WHERE products.category_id = 3
+  SELECT products.* FROM products WHERE products.category_id = 4
+  SELECT products.* FROM products WHERE products.category_id = 5
+
+  you have an N+1 query problem
+
+your queries in that case can be reduced to just 2 making the application feel faster
+
+  SELECT categories.* FROM categories
+
+  SELECT products.* FROM products WHERE products.category_id IN (1,2,3,4,5)
+
+in general to get the root of the issue in N+1 queries
+  you have to check where you are loading a collection of objects that later need related data for each one of those objects
+    usually (not always) this happen when those initial objects are inside a loop then accessing other related objects without preloading those related objects
+
+  example
+    at some point you load tweets
+    and then you need to access the avatar of every user of that tweet
+    so you do something like tweet.user.avatar inside a loop
+
+      this should create an N+1 problem because for every tweet you will need to look for a user in different database queries
+        and even after that you will have to query also for every avatar_attachment of every user
+
+          to solve these kind of issues you use .includes in the moment you load the original collection of objects that later load the related ones
+
+            so following the example where you load the tweets you would do something like:
+              Tweet.includes(user: :avatar_attachment)
+
+                this will preload in the same query the users related to those tweets and also the avatars related to those users
+                  this way the number of queries will be reduced and the N+1 query issue will be gone
+
+the .includes methods is very flexible so many syntax cases work on it
+
+  this is because the includes method can include nested relationships so it can become a little confusing to read at first
+
+  here are some examples of syntaxes that work with includes
+
+    1. Single Association
+      Syntax: .includes(:user)
+      Use: Preloads the user association.
+
+    2. Multiple Associations at the Same Level
+      Syntax: .includes(:user, :activity_creator)
+      Use: Preloads both the user and activity_creator associations.
+
+    3. Nested Associations
+      Syntax: .includes(user: [:profile])
+      Use: Preloads the user association and, for each user, their profile association.
+
+    4. Nested Associations with Multiple Nested Levels
+      Syntax: .includes(user: { profile: :avatar_attachment })
+      Use: Preloads the user association, for each user their profile association, and for each profile, the avatar_attachment.
+
+    5. Mixed Single and Nested Associations
+      Syntax: .includes(:activity_creator, user: [:profile])
+      Use: Preloads the activity_creator association at the top level, and the user association along with its nested profile association.
+
+    6. Multiple Nested Associations for the Same Parent
+      Syntax: .includes(user: [:profile, :avatar_attachment])
+      Use: Preloads the user association, and for each user, their profile and avatar_attachment associations.
+
+    7. Deeply Nested Associations
+      Syntax: .includes(user: { profile: { avatar_attachment: :blob } })
+      Use: Preloads the user association, for each user their profile, for each profile the avatar_attachment, and then the blob for each avatar_attachment.
+
+    8. Combining Nested and Multiple Associations at Different Levels
+      Syntax: .includes(:activity_creator, user: [:profile, posts: [:comments]])
+      Use: Preloads the activity_creator association at the top level; for each user, preloads their profile and posts, and for each post, preloads its comments.
+
+    9. Using Arrays and Hashes for Complex Scenarios
+      Syntax: .includes({ user: [:profile, { posts: :comments }] }, :activity_creator)
+      Use: Preloads the user association with its profile and posts, for each post preloads its comments, and also preloads the activity_creator at the top level.
+
+to detect these issues automatically you can use the gem 'bullet'
+
+  how to setup the gem 'bullet'
+
+    in your Gemfile add this in the development environment group
+
+      group :development, :test do
+        gem "bullet"
+      end
+
+    then install the gem
+      bundle install
+
+    add the configuration with the generator
+      bundle exec rails g bullet:install
+        if you set the gem in the test group it will also ask if you want to change that config too
+
+      this will add configs related to bullet and its levels of notifications for the app in these files
+        config/environments/development.rb
+        config/environments/test.rb
+
+      example
+        Rails.application.configure do
+          config.after_initialize do
+            Bullet.enable        = true
+            Bullet.alert         = true
+            Bullet.bullet_logger = true
+            Bullet.console       = true
+            Bullet.rails_logger  = true
+            Bullet.add_footer    = true
+          end
+          ...
+        end
+
+      more info can be found here: https://github.com/flyerhzm/bullet#configuration
+
+some examples of warnings (and solutions) coming from bullet (as alerts in the webpage)
+
+  example 1
+    user: ken
+    USE eager loading detected
+    Tweet => [:user]
+    Add to your query: .includes([:user])
+    Call stack
+    /.../twitter-clone/app/presenters/tweet_presenter.rb:14:in `user'
+    /.../twitter-clone/app/presenters/tweet_presenter.rb:16:in `avatar'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb__1807938016359427898_25940'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb__1807938016359427898_25940'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__2773724442013305419_25900'
+
+    solved with
+      Tweet.includes(:user).order(created_at: :desc)
+
+  example 2
+    user: ken
+    USE eager loading detected
+    User => [:avatar_attachment]
+    Add to your query: .includes([:avatar_attachment])
+    Call stack
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb__1185747669266298221_26100'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb__1185747669266298221_26100'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__3692966136732348537_26060'
+
+    solved with
+      Tweet.includes(user: :avatar_attachment).order(created_at: :desc)
+
+  example 3
+    user: ken
+    USE eager loading detected
+    ActiveStorage::Attachment => [:blob]
+    Add to your query: .includes([:blob])
+    Call stack
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:4:in `block in _app_views_tweets__tweet_html_erb___1153556395896471480_26460'
+    /.../twitter-clone/app/views/tweets/_tweet.html.erb:1:in `_app_views_tweets__tweet_html_erb___1153556395896471480_26460'
+    /.../twitter-clone/app/views/dashboard/index.html.erb:11:in `_app_views_dashboard_index_html_erb__1358306816733789125_26420'
+
+    solved with
+      Tweet.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
+
+  example 4
+    @notifications = current_user.received_notifications.includes(:notifier, :tweet)
+
+    user: ken
+    USE eager loading detected
+    User => [:avatar_attachment]
+    Add to your query: .includes([:avatar_attachment])
+    Call stack
+    /.../twitter-clone/app/views/notifications/index.html.erb:19:in `block in _app_views_notifications_index_html_erb__3037442438228216196_343540'
+    /.../twitter-clone/app/views/notifications/index.html.erb:7:in `_app_views_notifications_index_html_erb__3037442438228216196_343540
+
+    solved with
+
+      @notifications = current_user.received_notifications.includes({notifier: [:avatar_attachment]}, :tweet)
+
+      because I was iterating through notifications and then doing notification.notifier.avatar so i needed the avatar
+
