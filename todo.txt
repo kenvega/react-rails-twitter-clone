@@ -1,9 +1,0 @@
-todo:
-- install bullet
-- install annotate
-- use radix components (?)
-
-done:
-- when creating a user make sure display name is set
-- display avatars for tweets
-- make sure avatars can be sent to backend through postman

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
 
@@ -20,7 +22,7 @@ class User < ApplicationRecord
 
   # to add more data to the jwt token
   def jwt_payload
-    super.merge('username' => self.username, 'user_id' => self.id)
+    super.merge('username' => self.username, 'user_id' => self.id) # rubocop:disable Style/RedundantSelf
   end
 
   # to make sure the display_name always has a value for users
@@ -37,5 +39,4 @@ class User < ApplicationRecord
     # TODO: ??? probar (?) quizas no tiene sentido asi
     @bookmarked_tweet_ids ||= bookmarks.pluck(:tweet_id)
   end
-
 end

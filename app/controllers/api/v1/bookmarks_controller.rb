@@ -1,18 +1,24 @@
-class Api::V1::BookmarksController < ApplicationController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  # POST /tweets/:tweet_id/bookmark
-  def create
-    # Creates the bookmark if it doesn't already exist
-    current_user.bookmarks.find_or_create_by(tweet_id: params[:tweet_id])
-    render json: { bookmarked: true }
-  end
+module Api
+  module V1
+    class BookmarksController < ApplicationController
+      before_action :authenticate_user!
 
-  # DELETE /tweets/:tweet_id/bookmark
-  def destroy
-    bookmark = current_user.bookmarks.find_by(tweet_id: params[:tweet_id])
-    bookmark&.destroy
+      # POST /tweets/:tweet_id/bookmark
+      def create
+        # Creates the bookmark if it doesn't already exist
+        current_user.bookmarks.find_or_create_by(tweet_id: params[:tweet_id])
+        render json: { bookmarked: true }
+      end
 
-    render json: { bookmarked: false }
+      # DELETE /tweets/:tweet_id/bookmark
+      def destroy
+        bookmark = current_user.bookmarks.find_by(tweet_id: params[:tweet_id])
+        bookmark&.destroy
+
+        render json: { bookmarked: false }
+      end
+    end
   end
 end

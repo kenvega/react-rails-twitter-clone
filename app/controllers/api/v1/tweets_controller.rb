@@ -1,25 +1,29 @@
-class Api::V1::TweetsController < ApplicationController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  def show
-   
-  end
+module Api
+  module V1
+    class TweetsController < ApplicationController
+      before_action :authenticate_user!
 
-  def create
-    tweet = Tweet.new(tweet_params.merge(user: current_user))
+      def show; end
 
-    tweet.save
-  end
+      def create
+        tweet = Tweet.new(tweet_params.merge(user: current_user))
 
-  def index
-    tweets = Tweet.all.includes(:user).order(created_at: :desc)
+        tweet.save
+      end
 
-    render json: tweets
-  end
+      def index
+        tweets = Tweet.all.includes(:user).order(created_at: :desc)
 
-  private
+        render json: tweets
+      end
 
-  def tweet_params
-    params.require(:tweet).permit(:body)
+      private
+
+      def tweet_params
+        params.require(:tweet).permit(:body)
+      end
+    end
   end
 end

@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
 class TweetSerializer < ActiveModel::Serializer
-  attributes :id, :body, :created_at, :updated_at, :likes_count, :tweet_liked_by_current_user, :tweet_bookmarked_by_current_user
+  attributes :id, :body, :created_at, :updated_at, :likes_count, :tweet_liked_by_current_user,
+             :tweet_bookmarked_by_current_user
 
   belongs_to :user
 

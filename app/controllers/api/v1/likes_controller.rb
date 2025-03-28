@@ -1,18 +1,24 @@
-class Api::V1::LikesController < ApplicationController
-  before_action :authenticate_user!
+# frozen_string_literal: true
 
-  # POST /tweets/:tweet_id/like
-  def create
-    # Creates the like if it doesn't already exist
-    current_user.likes.find_or_create_by(tweet_id: params[:tweet_id])
-    render json: { liked: true }
-  end
+module Api
+  module V1
+    class LikesController < ApplicationController
+      before_action :authenticate_user!
 
-  # DELETE /tweets/:tweet_id/like
-  def destroy
-    like = current_user.likes.find_by(tweet_id: params[:tweet_id])
-    like&.destroy
+      # POST /tweets/:tweet_id/like
+      def create
+        # Creates the like if it doesn't already exist
+        current_user.likes.find_or_create_by(tweet_id: params[:tweet_id])
+        render json: { liked: true }
+      end
 
-    render json: { liked: false }
+      # DELETE /tweets/:tweet_id/like
+      def destroy
+        like = current_user.likes.find_by(tweet_id: params[:tweet_id])
+        like&.destroy
+
+        render json: { liked: false }
+      end
+    end
   end
 end

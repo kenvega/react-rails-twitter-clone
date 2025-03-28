@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Like < ApplicationRecord
   # TODO: en realidad deberías usar counter_cache creo para los likes de los tweets -> belongs_to :tweet, counter_cache: :likes_count
   belongs_to :tweet

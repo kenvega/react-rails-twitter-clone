@@ -1,9 +1,13 @@
 TODO:
 
-- 
+- install annotate
+- fix queries with bullet
 
 DONE:
 
+- when creating a user make sure display name is set
+- display avatars for tweets
+- make sure avatars can be sent to backend through postman
 - add bullet gem
 - fix ruby-lsp extension in vscode
 - add rubocop gem
