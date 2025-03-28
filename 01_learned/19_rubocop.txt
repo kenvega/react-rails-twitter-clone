@@ -1,0 +1,11 @@
+official vscode extension
+  https://marketplace.visualstudio.com/items?itemName=rubocop.vscode-rubocop
+
+you will need to install the rubocop gem in your project
+
+  group :development, :test do
+    ...
+    gem 'rubocop', require: false
+    ...
+  end
+

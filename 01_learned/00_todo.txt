@@ -1,0 +1,9 @@
+TODO:
+
+- 
+
+DONE:
+
+- add bullet gem
+- fix ruby-lsp extension in vscode
+- add rubocop gem

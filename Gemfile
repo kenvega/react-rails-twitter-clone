@@ -50,6 +50,7 @@ group :development, :test do
   gem "pry-rails"
   gem "pry-nav"
   gem "rspec-rails", "~> 6.0.0"
+  gem "rubocop", require: false
 end
 
 group :development do

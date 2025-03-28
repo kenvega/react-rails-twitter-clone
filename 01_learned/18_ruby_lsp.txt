@@ -1,0 +1,13 @@
+
+worked with rbenv
+
+it was telling me that there was an error launching
+  and this typically happens due to an error with version manager integration or bundled issues
+
+solved the issue with this command
+
+  gem update --system
+
+features can be found here
+  https://shopify.github.io/ruby-lsp/
+

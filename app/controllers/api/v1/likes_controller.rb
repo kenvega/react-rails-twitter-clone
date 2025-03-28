@@ -15,4 +15,4 @@ class Api::V1::LikesController < ApplicationController
 
     render json: { liked: false }
   end
-end 
+end

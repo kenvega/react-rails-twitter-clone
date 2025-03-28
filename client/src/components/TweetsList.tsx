@@ -201,13 +201,6 @@ const TweetsList = ({
                       <div className="w-3 h-3 ml-3" />
                     )}
                   </div>
-
-                  {/* <div>
-                    <Link to="/dashboard" className="flex">
-                      <img src="./src/assets/bookmark-unfilled.svg" className="w-4 mr-2" />
-                      <span>Bookmark</span>
-                    </Link>
-                  </div> */}
                 </div>
               </div>
             </div>
