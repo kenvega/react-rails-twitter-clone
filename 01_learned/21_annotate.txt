@@ -1,0 +1,16 @@
+generate annotations for models
+
+  rails g annotate:install
+
+this creates a file
+
+  lib/tasks/auto_annotate_models.rake
+
+then run
+
+  bundle exec annotate
+
+    you get output like this
+
+      Annotated (13): app/models/bookmark.rb, spec/models/bookmark_spec.rb, ... , app/serializers/user_serializer.rb
+

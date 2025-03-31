@@ -1,7 +1,7 @@
 TODO:
 
-- install annotate
 - fix queries with bullet
+- when liking a tweet show loading only on what is needed
 
 DONE:
 
@@ -11,3 +11,4 @@ DONE:
 - add bullet gem
 - fix ruby-lsp extension in vscode
 - add rubocop gem
+- install annotate and create annotations in models
