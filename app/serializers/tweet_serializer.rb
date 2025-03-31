@@ -6,10 +6,6 @@ class TweetSerializer < ActiveModel::Serializer
 
   belongs_to :user
 
-  def likes_count
-    object.likes.count
-  end
-
   def tweet_liked_by_current_user
     current_user.liked_tweet_ids.include?(object.id)
   end

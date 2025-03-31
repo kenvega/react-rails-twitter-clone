@@ -174,3 +174,29 @@ some examples of warnings (and solutions) coming from bullet (as alerts in the w
 
       because I was iterating through notifications and then doing notification.notifier.avatar so i needed the avatar
 
+  example 5
+    user: kenrankmi
+    GET /api/v1/tweets
+    Need Counter Cache with Active Record size
+      Tweet => [:likes]
+
+
+    caused by something like this method in a tweet_serializer
+
+    class TweetSerializer < ActiveModel::Serializer
+      def likes_count
+        object.likes.count
+      end
+
+    solved by adding the counter_cache property to a model
+
+      from
+        class Like < ApplicationRecord
+          belongs_to :tweet
+
+      to
+        class Like < ApplicationRecord
+          belongs_to :tweet, counter_cache: :likes_count
+
+      and creating the column likes_count for the tweets table
+
