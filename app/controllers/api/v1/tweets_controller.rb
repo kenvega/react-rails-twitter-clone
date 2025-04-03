@@ -14,7 +14,11 @@ module Api
       end
 
       def index
-        tweets = Tweet.all.includes(:user).order(created_at: :desc)
+        # these two are the same:
+        #   .includes(user: :avatar_attachment)
+        #   .includes(user: { avatar_attachment: :blob })
+        # but second one is more explicit
+        tweets = Tweet.all.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
 
         render json: tweets
       end

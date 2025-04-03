@@ -40,6 +40,18 @@ the .includes methods is very flexible so many syntax cases work on it
 
   this is because the includes method can include nested relationships so it can become a little confusing to read at first
 
+  the pattern is as follows
+
+    Model.includes(association: nested_association)
+
+    example
+      Tweet.all.includes(user: :avatar_attachment)
+
+        this will
+          load all tweets (Tweet.all)
+          also load their user associations (since a Tweet belongs to a User)
+          also load the avatar_attachment for those users (so rails doesn't run an extra query when accessing user.avatar)
+
   here are some examples of syntaxes that work with includes
 
     1. Single Association
@@ -175,7 +187,7 @@ some examples of warnings (and solutions) coming from bullet (as alerts in the w
       because I was iterating through notifications and then doing notification.notifier.avatar so i needed the avatar
 
   example 5
-    user: kenrankmi
+    user: ken
     GET /api/v1/tweets
     Need Counter Cache with Active Record size
       Tweet => [:likes]

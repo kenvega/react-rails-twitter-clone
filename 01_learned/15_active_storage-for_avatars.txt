@@ -24,14 +24,75 @@ active storage
 
   about the tables created:
 
+    active_storage_attachments
+
+      this table saves info about which records in your database are related to which files
+        if there is no record for what you are looking for then basically that record does not relate to any file
+
+      it's basically a join table that connects a model (like User) with a blob that is saved in active_storage_blobs
+        so it determines which blob is related with which record
+
     active_storage_blobs
       stores metadata about the file/blob that is saved
           like the filename, content type (e.g., image/png), byte size, etc.
 
-    active_storage_attachments
-      it's basically a join table that connects a model (like User) with a blob that is saved in active_storage_blobs
-        so it determines which blob is related with which record
+    both of these tables don't actually save the file itself but in a storage service
+      that file is instead saved inside a folder called storage in the root project if in development
+        in production most likely you will use a cloud service to store the actual files there
 
+      the key column in the active_storage_blobs table has values with the names of the files that are actually saved in the storage folder created
+        for example it could have a value like 'eqi8qyuezd7ev7e5th0bhk1ayceb' and that would be the name of the file inside the storage root folder 
+
+  user.avatar - what happens internally when you call user.avatar
+
+    when you call user.avatar
+      rails checks on active_storage_attachments to see if there is an attachment for that user
+
+      if an attachment exists then rails queries the active_storage_blobs table to get the file details
+
+  how could you attach a file to a user
+
+    example
+
+      user.avatar.attach(io: File.open("profile.jpg"), filename: "profile.jpg", content_type: "image/jpeg")
+
+        rails copies profile.jpg into your storage service
+
+        a row is added to the active_storage_blobs table, storing metadata about the file like filename (profile.jpg), content type (image/jpeg), storage location and other metadata
+
+        a row is added to active_storage_attachments to link the User to this active_storage_blobs record
+
+  what happens when you do something like user.avatar
+
+    rails looks for an active_storage_attachments row where
+      record_type = 'User'
+      record_id = user.id
+      name = 'avatar'
+
+    with this record found you get the blob_id
+      for which then rails can look in active_storage_blobs table
+
+    with the blob record found then rails returns an Active Storage object which lets you
+      get the URL
+
+          Rails.application.routes.url_helpers.url_for(user.avatar)
+
+      get metadata
+
+        user.avatar.filename
+        user.avatar.content_type
+
+      check if a file exists
+
+        user.avatar.attached?
+
+      delete it
+
+        user.avatar.purge
+
+            deletes the row from active_storage_attachments so the user is no longer linked to the file
+            deletes the actual file from storage or s3
+            the file metadata (blob) may still exist in active_storage_blobs temporarily
 
   other considerations:
 
