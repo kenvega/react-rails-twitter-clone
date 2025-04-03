@@ -19,6 +19,8 @@ const TweetsList = ({
   console.log("tweets: ", tweets); // TODO: remove log
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [loadingAction, setLoadingAction] = useState<string>("");
+
   const [targetTweetId, setTargetTweetId] = useState<number | null>(null);
 
   if (error) {
@@ -46,12 +48,14 @@ const TweetsList = ({
     if (loading) return;
 
     setLoading(true);
+    setLoadingAction("like");
     setTargetTweetId(tweetId);
 
     likeTweet({ tweetId }).then(() => {
       fetchTweets().finally(() => {
         setTargetTweetId(null);
         setLoading(false);
+        setLoadingAction("");
       });
     });
   };
@@ -60,12 +64,14 @@ const TweetsList = ({
     if (loading) return;
 
     setLoading(true);
+    setLoadingAction("like");
     setTargetTweetId(tweetId);
 
     dislikeTweet({ tweetId }).then(() => {
       fetchTweets().finally(() => {
         setTargetTweetId(null);
         setLoading(false);
+        setLoadingAction("");
       });
     });
   };
@@ -74,12 +80,14 @@ const TweetsList = ({
     if (loading) return;
 
     setLoading(true);
+    setLoadingAction("bookmark");
     setTargetTweetId(tweetId);
 
     bookmarkTweet({ tweetId }).then(() => {
       fetchTweets().finally(() => {
         setTargetTweetId(null);
         setLoading(false);
+        setLoadingAction("");
       });
     });
   };
@@ -88,12 +96,14 @@ const TweetsList = ({
     if (loading) return;
 
     setLoading(true);
+    setLoadingAction("bookmark");
     setTargetTweetId(tweetId);
 
     clearBookmarkTweet({ tweetId }).then(() => {
       fetchTweets().finally(() => {
         setTargetTweetId(null);
         setLoading(false);
+        setLoadingAction("");
       });
     });
   };
@@ -147,6 +157,7 @@ const TweetsList = ({
                     </Link>
                   </div>
 
+                  {/* like/dislike tweet button */}
                   <div className="flex items-center">
                     <button
                       disabled={loading}
@@ -168,13 +179,14 @@ const TweetsList = ({
                       />
                       <span>{tweet.likes_count}</span>
                     </button>
-                    {loading && targetTweetId === tweet.id ? (
+                    {loading && targetTweetId === tweet.id && loadingAction == "like" ? (
                       <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
                     ) : (
                       <div className="w-3 h-3 ml-3" />
                     )}
                   </div>
 
+                  {/* bookmark/unbookmark tweet button */}
                   <div className="flex items-center">
                     <button
                       disabled={loading}
@@ -195,7 +207,7 @@ const TweetsList = ({
                         alt="like icon"
                       />
                     </button>
-                    {loading && targetTweetId === tweet.id ? (
+                    {loading && targetTweetId === tweet.id && loadingAction == "bookmark" ? (
                       <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
                     ) : (
                       <div className="w-3 h-3 ml-3" />
