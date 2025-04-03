@@ -1,0 +1,11 @@
+we put constraints in the versions to avoid breaking changes
+
+gemfile.lock does this but the version contraints in gems helps if the gemfile.lock was not added
+
+these are the recommendations I found
+
+  for most gems → use ~> x.y.z (pessimistic constraint).
+  for major frameworks (rails, devise) → use an exact version 'x.y.z'.
+  for libraries that follow semantic versioning (puma, sidekiq) → use ~> x.y.
+  for security-sensitive gems (nokogiri, openssl) → use >= x.y.z.
+  for low-risk gems (pg, sqlite3) → you might not need a version constraint at all.

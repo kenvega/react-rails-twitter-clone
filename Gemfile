@@ -8,7 +8,7 @@ ruby '3.2.0'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.8', '>= 7.0.8.1'
 
-gem 'active_model_serializers'
+gem 'active_model_serializers', '~> 0.10.15'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
@@ -16,8 +16,8 @@ gem 'pg', '~> 1.1'
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '~> 5.0'
 
-gem 'devise'
-gem 'devise-jwt'
+gem 'devise', '~> 4.9.3'
+gem 'devise-jwt', '~> 0.11.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -45,15 +45,15 @@ gem 'rack-cors'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem 'annotate'
-  gem 'bullet'
-  gem 'debug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
+  gem 'annotate', '~> 3.2.0'
+  gem 'bullet', '~> 7.1.6'
+  gem 'debug', '~> 1.9.1', platforms: %i[mri mingw x64_mingw]
+  gem 'factory_bot_rails', '~> 6.4.3'
   gem 'faker', '~> 3.3.1'
-  gem 'pry-nav'
-  gem 'pry-rails'
+  gem 'pry-nav', '~> 1.0.0'
+  gem 'pry-rails', '~> 0.3.11'
   gem 'rspec-rails', '~> 6.0.0'
-  gem 'rubocop', require: false
+  gem 'rubocop', '~> 1.75.1', require: false
 end
 
 group :development do
