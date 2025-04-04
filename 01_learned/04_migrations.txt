@@ -20,3 +20,4 @@ migrations done
 
   bundle exec rails g model retweet user:references tweet:references
 
+  bundle exec rails g migration add_retweets_count_to_tweets retweets_count:integer
