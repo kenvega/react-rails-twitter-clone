@@ -43,3 +43,11 @@ export const bookmarkTweet = async ({ tweetId }: { tweetId: number }) => {
 export const clearBookmarkTweet = async ({ tweetId }: { tweetId: number }) => {
   return http.delete(`${API_URL}/tweets/${tweetId}/bookmark`).then(handleResponse).catch(handleError);
 };
+
+export const retweetTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.post(`${API_URL}/tweets/${tweetId}/retweet`).then(handleResponse).catch(handleError);
+};
+
+export const clearRetweetTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.delete(`${API_URL}/tweets/${tweetId}/retweet`).then(handleResponse).catch(handleError);
+};

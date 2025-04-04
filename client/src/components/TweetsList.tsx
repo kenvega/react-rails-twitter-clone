@@ -2,7 +2,14 @@ import { useState } from "react";
 import { Tweet } from "../interfaces/Tweet";
 import { Link } from "react-router-dom";
 import { formatDistanceToNow } from "date-fns";
-import { likeTweet, dislikeTweet, bookmarkTweet, clearBookmarkTweet } from "../services/tweetsService";
+import {
+  likeTweet,
+  dislikeTweet,
+  bookmarkTweet,
+  clearBookmarkTweet,
+  retweetTweet,
+  clearRetweetTweet,
+} from "../services/tweetsService";
 import LoadingIcon from "../assets/loading.svg?react";
 
 const TweetsList = ({
@@ -108,6 +115,38 @@ const TweetsList = ({
     });
   };
 
+  const handleRetweetClick = ({ tweetId }: { tweetId: number }) => {
+    if (loading) return;
+
+    setLoading(true);
+    setLoadingAction("retweet");
+    setTargetTweetId(tweetId);
+
+    retweetTweet({ tweetId }).then(() => {
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+        setLoadingAction("");
+      });
+    });
+  };
+
+  const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) => {
+    if (loading) return;
+
+    setLoading(true);
+    setLoadingAction("retweet");
+    setTargetTweetId(tweetId);
+
+    clearRetweetTweet({ tweetId }).then(() => {
+      fetchTweets().finally(() => {
+        setTargetTweetId(null);
+        setLoading(false);
+        setLoadingAction("");
+      });
+    });
+  };
+
   return (
     <div>
       {loadingTweets ? (
@@ -150,11 +189,35 @@ const TweetsList = ({
                       <span>14</span>
                     </Link>
                   </div>
-                  <div>
-                    <Link to="/dashboard" className="flex">
-                      <img src="./src/assets/retweet-unfilled.svg" className="w-4 mr-2" />
-                      <span>14</span>
-                    </Link>
+
+                  {/* retweet tweet button */}
+                  <div className="flex items-center">
+                    <button
+                      disabled={loading}
+                      className="flex cursor-pointer"
+                      onClick={() =>
+                        tweet.tweet_retweeted_by_current_user
+                          ? handleUnRetweetClick({ tweetId: tweet.id })
+                          : handleRetweetClick({ tweetId: tweet.id })
+                      }
+                    >
+                      <img
+                        src={
+                          tweet.tweet_retweeted_by_current_user
+                            ? "./src/assets/retweet-filled.svg"
+                            : "./src/assets/retweet-unfilled.svg"
+                        }
+                        className={`w-4 mr-2 ${
+                          loading && targetTweetId === tweet.id && loadingAction == "retweet" ? "opacity-50" : ""
+                        }`}
+                        alt="like icon"
+                      />
+                    </button>
+                    {loading && targetTweetId === tweet.id && loadingAction == "retweet" ? (
+                      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+                    ) : (
+                      <div className="w-3 h-3 ml-3" />
+                    )}
                   </div>
 
                   {/* like/dislike tweet button */}
@@ -174,7 +237,9 @@ const TweetsList = ({
                             ? "./src/assets/heart-filled.svg"
                             : "./src/assets/heart-unfilled.svg"
                         }
-                        className={`w-4 mr-2 ${loading && targetTweetId === tweet.id ? "opacity-50" : ""}`}
+                        className={`w-4 mr-2 ${
+                          loading && targetTweetId === tweet.id && loadingAction == "like" ? "opacity-50" : ""
+                        }`}
                         alt="like icon"
                       />
                       <span>{tweet.likes_count}</span>
@@ -203,7 +268,9 @@ const TweetsList = ({
                             ? "./src/assets/bookmark-filled.svg"
                             : "./src/assets/bookmark-unfilled.svg"
                         }
-                        className={`w-4 mr-2 ${loading && targetTweetId === tweet.id ? "opacity-50" : ""}`}
+                        className={`w-4 mr-2 ${
+                          loading && targetTweetId === tweet.id && loadingAction == "bookmark" ? "opacity-50" : ""
+                        }`}
                         alt="like icon"
                       />
                     </button>

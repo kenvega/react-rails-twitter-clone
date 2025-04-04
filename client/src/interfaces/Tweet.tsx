@@ -5,6 +5,7 @@ export interface Tweet {
   likes_count: number;
   tweet_liked_by_current_user: boolean;
   tweet_bookmarked_by_current_user: boolean;
+  tweet_retweeted_by_current_user: boolean;
   user: {
     id: number;
     email: string;

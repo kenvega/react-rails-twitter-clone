@@ -1,6 +1,6 @@
 TODO:
 
-- add retweets to app
+- add retweet count
 
 DONE:
 
@@ -13,4 +13,5 @@ DONE:
 - install annotate and create annotations in models
 - fix queries with bullet
 - assign versions in the gemfile to gems
-- when liking a tweet show loading only on what is needed
+- when liking or bookmarking a tweet: show the loading indicator only for that icon
+- add retweets to app

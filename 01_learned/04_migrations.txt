@@ -18,4 +18,5 @@ migrations done
 
     and add to the migration index unique for combination of references (a user can only bookmark the same tweet once)
 
-  
+  bundle exec rails g model retweet user:references tweet:references
+
