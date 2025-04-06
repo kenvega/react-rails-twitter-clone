@@ -9,3 +9,13 @@ you will need to install the rubocop gem in your project
     ...
   end
 
+options
+
+  -a
+
+    only does safe fixes
+
+  -A
+
+    also do unsafe fixes
+

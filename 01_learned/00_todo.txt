@@ -1,6 +1,7 @@
 TODO:
 
-- add retweet count
+- use the retweet count in the app
+- setup overcommit gem for githooks and setup rubocop fix before every commit
 
 DONE:
 
@@ -15,3 +16,4 @@ DONE:
 - assign versions in the gemfile to gems
 - when liking or bookmarking a tweet: show the loading indicator only for that icon
 - add retweets to app
+- add retweet count as migration
