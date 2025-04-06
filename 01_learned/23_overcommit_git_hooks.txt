@@ -30,7 +30,6 @@ setup overcommit for git hooks
           enabled: true
           problem_on_unmodified_line: report # warn about unmodified lines from files in commit
           on_warn: fail # treat all warnings as failures
-          required_executable: "bundle exec rubocop" # make sure to use project local rubocop version instead of glogal version
           command: ["bundle", "exec", "rubocop", "--auto-correct", "--force-exclusion"] # force-exclusion to make sure no matter what it will respect .rubocop.yml
 
 other things i noticed
