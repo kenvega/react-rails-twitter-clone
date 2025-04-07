@@ -1,5 +1,6 @@
 TODO:
 
+- add a new route/page for viewing a single tweet and later its replies
 - add comments for a tweet
 - add views in tweet
 

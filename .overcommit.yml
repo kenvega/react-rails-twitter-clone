@@ -32,6 +32,10 @@
 #  IndexTags:
 #    enabled: true # Generate a tags file with `ctags` each time HEAD changes
 
+CommitMsg:
+  CapitalizedSubject:
+    enabled: false
+
 PreCommit:
   RuboCop:
     enabled: true
