@@ -14,8 +14,8 @@ module Api
 
       # DELETE /tweets/:tweet_id/retweet
       def destroy
-        bookmark = current_user.retweets.find_by(tweet_id: params[:tweet_id])
-        bookmark&.destroy
+        retweet = current_user.retweets.find_by(tweet_id: params[:tweet_id])
+        retweet&.destroy
 
         render json: { retweeted: false }
       end

@@ -212,6 +212,7 @@ const TweetsList = ({
                         }`}
                         alt="like icon"
                       />
+                      <span>{tweet.retweets_count}</span>
                     </button>
                     {loading && targetTweetId === tweet.id && loadingAction == "retweet" ? (
                       <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
