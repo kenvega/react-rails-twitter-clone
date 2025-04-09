@@ -12,6 +12,8 @@ import {
 } from "../services/tweetsService";
 import LoadingIcon from "../assets/loading.svg?react";
 
+import { useNavigate } from "react-router-dom";
+
 const TweetsList = ({
   tweets,
   loadingTweets,
@@ -23,15 +25,15 @@ const TweetsList = ({
   fetchTweets: () => Promise<void>;
   error: string | null;
 }) => {
-  console.log("tweets: ", tweets); // TODO: remove log
-
   const [loading, setLoading] = useState<boolean>(false);
   const [loadingAction, setLoadingAction] = useState<string>("");
 
   const [targetTweetId, setTargetTweetId] = useState<number | null>(null);
 
+  const navigate = useNavigate();
+
   if (error) {
-    return <div>Error</div>;
+    return <div>Error: {error}</div>;
   }
 
   const formatTheDate = (tweetDate: string) => {
@@ -183,14 +185,16 @@ const TweetsList = ({
                       <span>14</span>
                     </Link>
                   </div>
+
+                  {/* replies to tweet button */}
                   <div>
-                    <Link to="/dashboard" className="flex">
+                    <button className="flex cursor-pointer" onClick={() => navigate(`/tweets/${tweet.id}`)}>
                       <img src="./src/assets/chat.svg" className="w-4 mr-2" />
                       <span>14</span>
-                    </Link>
+                    </button>
                   </div>
 
-                  {/* retweet tweet button */}
+                  {/* retweet/unretweet this tweet button */}
                   <div className="flex items-center">
                     <button
                       disabled={loading}
@@ -221,7 +225,7 @@ const TweetsList = ({
                     )}
                   </div>
 
-                  {/* like/dislike tweet button */}
+                  {/* like/dislike this tweet button */}
                   <div className="flex items-center">
                     <button
                       disabled={loading}

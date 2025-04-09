@@ -5,7 +5,10 @@ module Api
     class TweetsController < ApplicationController
       before_action :authenticate_user!
 
-      def show; end
+      def show
+        tweet = Tweet.find(params[:id])
+        render json: tweet
+      end
 
       def create
         tweet = Tweet.new(tweet_params.merge(user: current_user))

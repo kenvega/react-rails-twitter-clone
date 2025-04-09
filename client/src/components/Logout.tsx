@@ -8,7 +8,7 @@ const Logout = () => {
     <a
       className="px-6 text-sky-400 font-medium cursor-pointer"
       onClick={() => {
-        logout({ navigate });
+        logout({ navigate: navigate });
       }}
     >
       Log out

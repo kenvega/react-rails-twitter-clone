@@ -21,6 +21,10 @@ export const getTweets = async () => {
   return http.get(`${API_URL}/tweets`).then(handleResponse).catch(handleError);
 };
 
+export const getTweet = async ({ tweetId }: { tweetId: number }) => {
+  return http.get(`${API_URL}/tweets/${tweetId}`).then(handleResponse).catch(handleError);
+};
+
 export const createTweet = async ({ tweetBody }: { tweetBody: string }) => {
   return http
     .post(`${API_URL}/tweets`, { tweet: { body: tweetBody } })

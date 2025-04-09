@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import SignUp from "./components/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
 import MainContainer from "./components/MainContainer.tsx";
+import TweetPage from "./components/TweetPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
 
@@ -23,6 +24,14 @@ const router = createBrowserRouter([
     path: "/sign_up",
     element: <SignUp />,
     // errorElement: <ErrorPage />,
+  },
+  {
+    path: "tweets/:tweetIdParam",
+    element: (
+      <Theme>
+        <TweetPage />
+      </Theme>
+    ),
   },
   {
     path: "dashboard",
