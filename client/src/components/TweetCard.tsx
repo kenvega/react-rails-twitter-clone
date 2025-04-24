@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom";
 import LoadingIcon from "../assets/loading.svg?react";
 import { Tweet } from "../interfaces/Tweet";
-import { formatDate } from "../helpers/dateUtils"; // or wherever your date formatting lives
+import { formatDate } from "../helpers/dateUtils";
 
 type TweetCardProps = {
   tweet: Tweet;
-  loading: boolean;
-  loadingAction: string;
-  targetTweetId: number | null;
+  isActionLoading: boolean;
+  activeAction: string;
+  activeTweetId: number | null;
   onLike: (tweetId: number) => void;
   onDislike: (tweetId: number) => void;
   onBookmark: (tweetId: number) => void;
@@ -19,9 +19,9 @@ type TweetCardProps = {
 
 function TweetCard({
   tweet,
-  loading,
-  loadingAction,
-  targetTweetId,
+  isActionLoading,
+  activeAction,
+  activeTweetId,
   onLike,
   onDislike,
   onBookmark,
@@ -72,7 +72,7 @@ function TweetCard({
           {/* retweet/unretweet button */}
           <div className="flex items-center">
             <button
-              disabled={loading}
+              disabled={isActionLoading}
               className="flex cursor-pointer"
               onClick={() => (tweet.tweet_retweeted_by_current_user ? onUnRetweet(tweet.id) : onRetweet(tweet.id))}
             >
@@ -83,13 +83,13 @@ function TweetCard({
                     : "./src/assets/retweet-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
-                  loading && targetTweetId === tweet.id && loadingAction === "retweet" ? "opacity-50" : ""
+                  isActionLoading && activeTweetId === tweet.id && activeAction === "retweet" ? "opacity-50" : ""
                 }`}
                 alt="retweet icon"
               />
               <span>{tweet.retweets_count}</span>
             </button>
-            {loading && targetTweetId === tweet.id && loadingAction === "retweet" ? (
+            {isActionLoading && activeTweetId === tweet.id && activeAction === "retweet" ? (
               <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
             ) : (
               <div className="w-3 h-3 ml-3" />
@@ -99,7 +99,7 @@ function TweetCard({
           {/* like/dislike button */}
           <div className="flex items-center">
             <button
-              disabled={loading}
+              disabled={isActionLoading}
               className="flex cursor-pointer"
               onClick={() => (tweet.tweet_liked_by_current_user ? onDislike(tweet.id) : onLike(tweet.id))}
             >
@@ -110,13 +110,13 @@ function TweetCard({
                     : "./src/assets/heart-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
-                  loading && targetTweetId === tweet.id && loadingAction === "like" ? "opacity-50" : ""
+                  isActionLoading && activeTweetId === tweet.id && activeAction === "like" ? "opacity-50" : ""
                 }`}
                 alt="like icon"
               />
               <span>{tweet.likes_count}</span>
             </button>
-            {loading && targetTweetId === tweet.id && loadingAction === "like" ? (
+            {isActionLoading && activeTweetId === tweet.id && activeAction === "like" ? (
               <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
             ) : (
               <div className="w-3 h-3 ml-3" />
@@ -126,7 +126,7 @@ function TweetCard({
           {/* bookmark/unbookmark button */}
           <div className="flex items-center">
             <button
-              disabled={loading}
+              disabled={isActionLoading}
               className="flex cursor-pointer"
               onClick={() =>
                 tweet.tweet_bookmarked_by_current_user ? onClearBookmark(tweet.id) : onBookmark(tweet.id)
@@ -139,12 +139,12 @@ function TweetCard({
                     : "./src/assets/bookmark-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
-                  loading && targetTweetId === tweet.id && loadingAction === "bookmark" ? "opacity-50" : ""
+                  isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark" ? "opacity-50" : ""
                 }`}
                 alt="bookmark icon"
               />
             </button>
-            {loading && targetTweetId === tweet.id && loadingAction === "bookmark" ? (
+            {isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark" ? (
               <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
             ) : (
               <div className="w-3 h-3 ml-3" />

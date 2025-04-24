@@ -12,6 +12,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import TweetCard from "./TweetCard";
 
+type ActionType = "like" | "bookmark" | "retweet";
+
 const TweetsList = ({
   tweets,
   loadingTweets,
@@ -23,10 +25,9 @@ const TweetsList = ({
   fetchTweets: () => Promise<void>;
   error: string | null;
 }) => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const [loadingAction, setLoadingAction] = useState<string>("");
-
-  const [targetTweetId, setTargetTweetId] = useState<number | null>(null);
+  const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
+  const [activeAction, setActiveAction] = useState<string>("");
+  const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
 
   const navigate = useNavigate();
 
@@ -34,101 +35,48 @@ const TweetsList = ({
     return <div>Error: {error}</div>;
   }
 
-  const handleLikeClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
+  const runAction = async ({
+    tweetId,
+    actionType,
+    actionFn,
+  }: {
+    tweetId: number;
+    actionType: ActionType;
+    actionFn: (args: { tweetId: number }) => Promise<void>;
+  }) => {
+    if (isActionLoading) return;
 
-    setLoading(true);
-    setLoadingAction("like");
-    setTargetTweetId(tweetId);
+    setIsActionLoading(true);
+    setActiveAction(actionType);
+    setActiveTweetId(tweetId);
 
-    likeTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
+    try {
+      await actionFn({ tweetId });
+      await fetchTweets();
+    } finally {
+      setActiveTweetId(null);
+      setIsActionLoading(false);
+      setActiveAction("");
+    }
   };
 
-  const handleDislikeClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
+  const handleLikeClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "like", actionFn: likeTweet });
 
-    setLoading(true);
-    setLoadingAction("like");
-    setTargetTweetId(tweetId);
+  const handleDislikeClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "like", actionFn: dislikeTweet });
 
-    dislikeTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
-  };
+  const handleBookmarkClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "bookmark", actionFn: bookmarkTweet });
 
-  const handleBookmarkClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
+  const handleClearBookmarkClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "bookmark", actionFn: clearBookmarkTweet });
 
-    setLoading(true);
-    setLoadingAction("bookmark");
-    setTargetTweetId(tweetId);
+  const handleRetweetClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "retweet", actionFn: retweetTweet });
 
-    bookmarkTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
-  };
-
-  const handleClearBookmarkClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
-
-    setLoading(true);
-    setLoadingAction("bookmark");
-    setTargetTweetId(tweetId);
-
-    clearBookmarkTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
-  };
-
-  const handleRetweetClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
-
-    setLoading(true);
-    setLoadingAction("retweet");
-    setTargetTweetId(tweetId);
-
-    retweetTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
-  };
-
-  const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) => {
-    if (loading) return;
-
-    setLoading(true);
-    setLoadingAction("retweet");
-    setTargetTweetId(tweetId);
-
-    clearRetweetTweet({ tweetId }).then(() => {
-      fetchTweets().finally(() => {
-        setTargetTweetId(null);
-        setLoading(false);
-        setLoadingAction("");
-      });
-    });
-  };
+  const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "retweet", actionFn: clearRetweetTweet });
 
   return (
     <div>
@@ -139,9 +87,9 @@ const TweetsList = ({
           <TweetCard
             key={tweet.id}
             tweet={tweet}
-            loading={loading}
-            loadingAction={loadingAction}
-            targetTweetId={targetTweetId}
+            isActionLoading={isActionLoading}
+            activeAction={activeAction}
+            activeTweetId={activeTweetId}
             onLike={(id) => handleLikeClick({ tweetId: id })}
             onDislike={(id) => handleDislikeClick({ tweetId: id })}
             onBookmark={(id) => handleBookmarkClick({ tweetId: id })}
