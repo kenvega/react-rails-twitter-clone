@@ -6,6 +6,24 @@ TODO:
   - add route for single show of tweet
   - 
 - add comments for a tweet
+- maybe separate TweetDetails into these components
+  - MainTweet
+  - ReplyInput
+  - ReplyTweetsList
+
+- you might need this code to get the username
+  to use in TweetDetails when responding to a tweet based on the current_logged_in_user
+
+    code:
+
+        import { getDecodedJwt } from "../helpers/jwtHelper";
+        ...
+        let username = null;
+
+        const decodedJwt = getDecodedJwt();
+        if (decodedJwt) {
+          username = decodedJwt.username;
+        }
 
 DONE:
 
