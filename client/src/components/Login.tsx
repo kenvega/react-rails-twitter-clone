@@ -20,7 +20,7 @@ const Login = () => {
       },
     })
       .then(() => {
-        navigate("/dashboard");
+        navigate("/home");
       })
       .catch((error) => {
         setError(error.message || "An error occurred. Please try again.");

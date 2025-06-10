@@ -34,7 +34,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "dashboard",
+    path: "home",
     element: (
       <Theme>
         <MainContainer />
@@ -42,8 +42,8 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "home",
-    element: <p>hello</p>,
+    path: "test_hello",
+    element: <p>hello: you can put jsx directly here as well</p>,
   },
 ]);
 
