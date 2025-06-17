@@ -1,6 +1,6 @@
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, parseISO, format } from "date-fns";
 
-export const formatDate = (tweetDate: string) => {
+export const formatToMMMdd = (tweetDate: string) => {
   const now = new Date();
   const tweetDateObj = new Date(tweetDate);
   const oneDayInMs = 24 * 60 * 60 * 1000;
@@ -15,4 +15,9 @@ export const formatDate = (tweetDate: string) => {
   } else {
     return formatDistanceToNow(tweetDateObj, { addSuffix: true });
   }
+};
+
+export const formatToTimeMMMddYYYY = (tweetDate: string): string => {
+  const date = parseISO(tweetDate); // converts string to Date object
+  return format(date, "h:mm a · MMM dd, yyyy");
 };
