@@ -18,7 +18,10 @@ else
 fi
 
 # Lines that will be added by *this* commit
-added=$(git diff --cached --numstat | awk '{sum += $1} END {print sum}')
+# added=$(git diff --cached --numstat | awk '{sum += $1} END {print sum}')
+added=$(git diff --cached --numstat \
+        | awk '$3 != ".metrics/total_lines_added.txt" {sum+=$1} END{print sum}')
+
 
 # If nothing new is staged, exit quietly so other hooks can run
 [[ "$added" -eq 0 ]] && exit 0
