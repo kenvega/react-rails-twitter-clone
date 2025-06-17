@@ -1,19 +1,22 @@
-in components like
+don't use relative paths for images. use absolute paths
 
-  client/src/components/TweetDetails.tsx
+  example
 
-    this will fail in some routes (but not all. so is not recommended)
-      <img src="./src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
+    client/src/components/TweetDetails.tsx
 
-    what you have to do is this
-      <img src="/src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
+      this will fail in some routes (but not all. so is not recommended)
+        <img src="./src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
 
-    notice there is no relative path but an absolute path
+      what you have to do is this
+        <img src="/src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
 
-    you could also do something like
+      notice there is no relative path but an absolute path
 
-      import LoadingIcon from "../assets/loading.svg?react";
-      ...
-      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+      you could also do something like
 
-      so that you don't use <img /> but import it directly
+        import LoadingIcon from "../assets/loading.svg?react";
+        ...
+        <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+
+        so that you don't use <img /> but import it directly
+
