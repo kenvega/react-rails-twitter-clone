@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import LoadingIcon from "../assets/loading.svg?react";
+// import ChartIcon from "../assets/chart.svg?react";
 import { Tweet } from "../interfaces/Tweet";
-import { formatDate } from "../helpers/dateUtils";
+import { formatToMMMdd } from "../helpers/dateUtils";
 
 type TweetCardProps = {
   tweet: Tweet;
@@ -30,13 +31,13 @@ function TweetCard({
   onUnRetweet,
   onNavigateToTweet,
 }: TweetCardProps) {
-  const formattedDate = formatDate(tweet.created_at);
+  const formattedDate = formatToMMMdd(tweet.created_at);
 
   return (
     <div className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
       <div>
         <img
-          src={tweet.user.avatar_url || "./src/assets/profile.svg"}
+          src={tweet.user.avatar_url || "/src/assets/profile.svg"}
           className={`w-16 rounded-full ${tweet.user.avatar_url ? "aspect-square overflow-hidden" : ""}`}
           alt="user avatar"
         />
@@ -56,7 +57,7 @@ function TweetCard({
           {/* Some example link – adapt to your actual usage */}
           <div>
             <Link to="/dashboard" className="flex">
-              <img src="./src/assets/chart.svg" className="w-4 mr-2" />
+              <img src="/src/assets/chart.svg" className="w-4 mr-2" />
               <span>14</span>
             </Link>
           </div>
@@ -64,7 +65,7 @@ function TweetCard({
           {/* replies to tweet button */}
           <div>
             <button className="flex cursor-pointer" onClick={() => onNavigateToTweet(tweet.id)}>
-              <img src="./src/assets/chat.svg" className="w-4 mr-2" />
+              <img src="/src/assets/chat.svg" className="w-4 mr-2" />
               <span>14</span>
             </button>
           </div>
@@ -79,8 +80,8 @@ function TweetCard({
               <img
                 src={
                   tweet.tweet_retweeted_by_current_user
-                    ? "./src/assets/retweet-filled.svg"
-                    : "./src/assets/retweet-unfilled.svg"
+                    ? "/src/assets/retweet-filled.svg"
+                    : "/src/assets/retweet-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
                   isActionLoading && activeTweetId === tweet.id && activeAction === "retweet" ? "opacity-50" : ""
@@ -105,9 +106,7 @@ function TweetCard({
             >
               <img
                 src={
-                  tweet.tweet_liked_by_current_user
-                    ? "./src/assets/heart-filled.svg"
-                    : "./src/assets/heart-unfilled.svg"
+                  tweet.tweet_liked_by_current_user ? "/src/assets/heart-filled.svg" : "/src/assets/heart-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
                   isActionLoading && activeTweetId === tweet.id && activeAction === "like" ? "opacity-50" : ""
@@ -135,8 +134,8 @@ function TweetCard({
               <img
                 src={
                   tweet.tweet_bookmarked_by_current_user
-                    ? "./src/assets/bookmark-filled.svg"
-                    : "./src/assets/bookmark-unfilled.svg"
+                    ? "/src/assets/bookmark-filled.svg"
+                    : "/src/assets/bookmark-unfilled.svg"
                 }
                 className={`w-4 mr-2 ${
                   isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark" ? "opacity-50" : ""
