@@ -11,6 +11,8 @@ don't use relative paths for images. use absolute paths
         <img src="/src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
 
       notice there is no relative path but an absolute path
+        if you use relative paths those images might work sometimes
+          but is not the ideal way to use them
 
       you could also do something like
 

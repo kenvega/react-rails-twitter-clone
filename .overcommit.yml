@@ -47,10 +47,11 @@ PreCommit:
 
   LinesAddedMetric:
     enabled: true
+    type: script # <— tell Overcommit "this is a Script hook"
     description: "Update .metrics/total_lines_added.txt with cumulative additions"
     required_executable: "bash"
     command:
       - bash
       - scripts/update_lines_added.sh
-    modify_index: true # tells Overcommit we will `git add` inside the hook
+    modify_index: true # tells Overcommit we will 'git add' inside the hook
     quiet: false
