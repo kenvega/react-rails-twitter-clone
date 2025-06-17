@@ -1,0 +1,19 @@
+in components like
+
+  client/src/components/TweetDetails.tsx
+
+    this will fail in some routes (but not all. so is not recommended)
+      <img src="./src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
+
+    what you have to do is this
+      <img src="/src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
+
+    notice there is no relative path but an absolute path
+
+    you could also do something like
+
+      import LoadingIcon from "../assets/loading.svg?react";
+      ...
+      <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+
+      so that you don't use <img /> but import it directly

@@ -42,3 +42,15 @@ PreCommit:
     problem_on_unmodified_line: report # warn about unmodified lines from files in commit
     on_warn: fail # treat all warnings as failures
     command: ["bundle", "exec", "rubocop", "--auto-correct", "--force-exclusion"] # force-exclusion to make sure no matter what it will respect .rubocop.yml
+    exclude:
+      - ".metrics/**/*"
+
+LinesAddedMetric:
+  enabled: true
+  description: "Update .metrics/total_lines_added.txt with cumulative additions"
+  required_executable: "bash"
+  command:
+    - bash
+    - scripts/update_lines_added.sh
+  modify_index: true # tells Overcommit we will `git add` inside the hook
+  quiet: false
