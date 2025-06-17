@@ -3,6 +3,8 @@ WARNING
   when using this tool you always have to make sure to review what changed if the signature changed
     (maybe that's why i haven't seen this tool being used in project teams because someone might forget)
 
+    you are forced to do a overcommit --sign to make sure you consciously reviewed the changes made to the hooks
+
   https://github.com/sds/overcommit?tab=readme-ov-file#security
 
 setup overcommit for git hooks
