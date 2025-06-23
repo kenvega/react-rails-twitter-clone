@@ -50,7 +50,6 @@ group :development, :test do
   gem 'debug', '~> 1.9.1', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '~> 6.4.3'
   gem 'faker', '~> 3.3.1'
-  gem 'overcommit', '~> 0.67.1'
   gem 'pry-nav', '~> 1.0.0'
   gem 'pry-rails', '~> 0.3.11'
   gem 'rspec-rails', '~> 6.0.0'

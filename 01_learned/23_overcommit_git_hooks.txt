@@ -7,6 +7,19 @@ WARNING
 
   https://github.com/sds/overcommit?tab=readme-ov-file#security
 
+why I decided not to use this tool
+
+  the pre-commit in overcommit is meant to use read only and based on that info to cancel the commit for example
+
+      if you need to write to the repo during a hook it will most likely not work on the precommit when using overcommit
+
+        you can do that in the post-commit
+
+          you can see more details here https://github.com/sds/overcommit/issues/238
+
+  I used this tool for automatic rubocop linting and fixing before commits
+    but I wanted something more that is not possible with this tool
+
 setup overcommit for git hooks
 
   add the gem in Gemfile
@@ -23,6 +36,33 @@ setup overcommit for git hooks
 
       this creates a .overcommit.yml file
 
+        an example of that .overcommit.yml file could be (careful the indentation matters)
+
+          CommitMsg:
+            CapitalizedSubject:
+              enabled: false
+
+          PreCommit:
+            RuboCop:
+              enabled: true
+              problem_on_unmodified_line: report # warn about unmodified lines from files in commit
+              on_warn: fail # treat all warnings as failures
+              command: ["bundle", "exec", "rubocop", "--auto-correct", "--force-exclusion"] # force-exclusion to make sure no matter what it will respect .rubocop.yml
+              exclude:
+                - ".metrics/**/*"
+
+          # this next hook doesn't work because of https://github.com/sds/overcommit/issues/238. it's the reason why i uninstalled overcommit at the end
+          LinesAddedMetric:
+            enabled: true
+            type: script # <— tell Overcommit "this is a Script hook"
+            description: "Update .metrics/total_lines_added.txt with cumulative additions"
+            required_executable: "bash"
+            command:
+              - bash
+              - scripts/update_lines_added.sh
+            modify_index: true # tells Overcommit we will 'git add' inside the hook
+            quiet: false
+
   and example to run rubocop on pre commits with overcommit
 
     in the .overcommit.yml file put this
@@ -34,6 +74,10 @@ setup overcommit for git hooks
           on_warn: fail # treat all warnings as failures
           command: ["bundle", "exec", "rubocop", "--auto-correct", "--force-exclusion"] # force-exclusion to make sure no matter what it will respect .rubocop.yml
 
+  to uninstall
+
+    bundle exec overcommit --uninstall
+
 other things i noticed
 
   it might be using global versions of gems intalled when running the hooks
@@ -43,4 +87,6 @@ other things i noticed
       Ignoring debug-1.7.1 because its extensions are not built. Try: gem pristine debug --version 1.7.1
 
       but i had debug 1.9.1 in my project and 1.7.1 was installed globaly
+
+  
 
