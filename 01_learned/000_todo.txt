@@ -1,11 +1,9 @@
 TODO:
 
 
-- add pre-commit to update lines added
 - add views in tweet
   - add a new route/page for viewing a single tweet and later its replies
   - add route for single show of tweet
-  - 
 - add comments for a tweet
 - maybe separate TweetDetails into these components
   - MainTweet
@@ -42,3 +40,4 @@ DONE:
 - add retweet count as migration
 - setup overcommit gem for githooks and setup rubocop fix before every commit
 - use the retweet count in the app
+- add pre-commit to update lines added
