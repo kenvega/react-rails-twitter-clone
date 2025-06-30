@@ -1,42 +1,25 @@
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { getDecodedJwt } from "../helpers/jwtHelper";
+import { useParams } from "react-router-dom";
 import { getTweet } from "../services/tweetsService";
 import { Tweet } from "../interfaces/Tweet";
 import { useNavigate } from "react-router-dom";
-import { formatDistanceToNow } from "date-fns";
+import BackIcon from "../assets/back.svg?react";
+import { formatToTimeMMMddYYYY } from "../helpers/dateUtils";
+
+import LoadingIcon from "../assets/loading.svg?react";
 
 const TweetDetail = () => {
   const navigate = useNavigate();
-
-  const formatTheDate = (tweetDate: string) => {
-    const now = new Date();
-    const tweetDateObj = new Date(tweetDate);
-    const oneDayInMs = 24 * 60 * 60 * 1000;
-
-    const isMoreThanADayAgo = now.getTime() - tweetDateObj.getTime() > oneDayInMs;
-
-    if (isMoreThanADayAgo) {
-      return tweetDateObj.toLocaleDateString("en-US", {
-        month: "short",
-        day: "2-digit",
-      });
-    } else {
-      return formatDistanceToNow(tweetDateObj, { addSuffix: true });
-    }
-  };
 
   const { tweetIdParam } = useParams();
   const tweetId = Number(tweetIdParam);
 
   const [tweet, setTweet] = useState<Tweet | null>(null);
+  console.log("tweet: ", tweet);
 
-  let username = null;
-
-  const decodedJwt = getDecodedJwt();
-  if (decodedJwt) {
-    username = decodedJwt.username;
-  }
+  const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
+  const [activeAction, setActiveAction] = useState<string>("");
+  // const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
 
   useEffect(() => {
     getTweet({ tweetId })
@@ -56,40 +39,111 @@ const TweetDetail = () => {
 
   return (
     <div>
+      {/* Go back button and title */}
       <div>
-        <button onClick={() => navigate("/dashboard")}>Back button</button>
-      </div>
-      <div className="flex justify-between items-center mb-3 px-2">
-        <div>
-          Hello {username}, your tweet is: {tweet.body}
+        <div className="flex mb-4">
+          <button onClick={() => navigate("/home")}>
+            <BackIcon />
+          </button>
+          <span className="ml-5 font-bold text-xl">Tweet</span>
         </div>
-        <div key={tweet.id} className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
+      </div>
+
+      {/* Main Content */}
+      <div className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
+        {/* Avatar */}
+        <div>
+          {tweet.user.avatar_url ? (
+            <img
+              src={tweet.user.avatar_url}
+              className="w-16 rounded-full aspect-square overflow-hidden"
+              alt="user avatar"
+            />
+          ) : (
+            <img src="/src/assets/profile.svg" className="w-16 rounded-full" />
+          )}
+        </div>
+
+        {/* Tweet text content and tweet action buttons */}
+        <div className="ml-4 grow">
+          {/* Tweet content */}
           <div>
-            {tweet.user.avatar_url ? (
-              <img
-                src={tweet.user.avatar_url}
-                className="w-24 rounded-full aspect-square overflow-hidden"
-                alt="user avatar"
-              />
-            ) : (
-              <img src="./src/assets/profile.svg" className="w-16 rounded-full" />
-            )}
+            <p className="font-bold">{tweet.user.display_name}</p>
+            <p className="text-gray-500">@{tweet.user.username} </p>
+            <p className="mb-3 text-3xl">{tweet.body}</p>
+            <p className="text-gray-500">{formatToTimeMMMddYYYY(tweet.created_at)}</p>
           </div>
-          <div className="ml-4 grow">
-            <p>
-              <span className="font-bold">{tweet.user.display_name}</span>{" "}
-              <span className="text-gray-500">
-                @{tweet.user.username} · {formatTheDate(tweet.created_at)}
-              </span>
-            </p>
-            <p className="mb-4">{tweet.body}</p>
-            <div className="flex justify-between">
-              <div>
-                <Link to="/dashboard" className="flex">
-                  <img src="./src/assets/chart.svg" className="w-4 mr-2" />
-                  <span>14</span>
-                </Link>
-              </div>
+
+          {/* Tweet action buttons */}
+          <div className="flex justify-evenly mt-5">
+            {/* replies to tweet button */}
+            <div>
+              <button className="flex cursor-pointer" onClick={() => {}}>
+                <img src="/src/assets/chat.svg" alt="chat icon" className="w-4 mr-2" />
+                <span>14</span>
+              </button>
+            </div>
+
+            {/* retweet/unretweet button */}
+            <div className="flex items-center">
+              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+                <img
+                  src={
+                    tweet.tweet_retweeted_by_current_user
+                      ? "/src/assets/retweet-filled.svg"
+                      : "/src/assets/retweet-unfilled.svg"
+                  }
+                  className={`w-4 mr-2 ${isActionLoading && activeAction === "retweet" ? "opacity-50" : ""}`}
+                  alt="retweet icon"
+                />
+                <span>{tweet.retweets_count}</span>
+              </button>
+              {isActionLoading && activeAction === "retweet" ? (
+                <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+              ) : (
+                <div className="w-3 h-3 ml-3" />
+              )}
+            </div>
+
+            {/* like/dislike button */}
+            <div className="flex items-center">
+              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+                <img
+                  src={
+                    tweet.tweet_liked_by_current_user
+                      ? "/src/assets/heart-filled.svg"
+                      : "/src/assets/heart-unfilled.svg"
+                  }
+                  className={`w-4 mr-2 ${isActionLoading && activeAction === "like" ? "opacity-50" : ""}`}
+                  alt="like icon"
+                />
+                <span>{tweet.likes_count}</span>
+              </button>
+              {isActionLoading && activeAction === "like" ? (
+                <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+              ) : (
+                <div className="w-3 h-3 ml-3" />
+              )}
+            </div>
+
+            {/* bookmark/unbookmark button */}
+            <div className="flex items-center">
+              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+                <img
+                  src={
+                    tweet.tweet_bookmarked_by_current_user
+                      ? "/src/assets/bookmark-filled.svg"
+                      : "/src/assets/bookmark-unfilled.svg"
+                  }
+                  className={`w-4 mr-2 ${isActionLoading && activeAction === "bookmark" ? "opacity-50" : ""}`}
+                  alt="bookmark icon"
+                />
+              </button>
+              {isActionLoading && activeAction === "bookmark" ? (
+                <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
+              ) : (
+                <div className="w-3 h-3 ml-3" />
+              )}
             </div>
           </div>
         </div>
