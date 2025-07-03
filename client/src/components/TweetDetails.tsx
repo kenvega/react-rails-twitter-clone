@@ -5,8 +5,11 @@ import { Tweet } from "../interfaces/Tweet";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../assets/back.svg?react";
 import { formatToTimeMMMddYYYY } from "../helpers/dateUtils";
+import { retweetTweet, clearRetweetTweet } from "../services/tweetsService";
 
 import LoadingIcon from "../assets/loading.svg?react";
+
+type ActionType = "like" | "bookmark" | "retweet";
 
 const TweetDetail = () => {
   const navigate = useNavigate();
@@ -19,10 +22,13 @@ const TweetDetail = () => {
 
   const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
   const [activeAction, setActiveAction] = useState<string>("");
-  // const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
 
   useEffect(() => {
-    getTweet({ tweetId })
+    fetchTweet({ tweetId });
+  }, [tweetId]);
+
+  const fetchTweet = ({ tweetId }: { tweetId: number }) => {
+    return getTweet({ tweetId })
       .then((tweet) => {
         console.log("response tweet: ", tweet);
         setTweet(tweet);
@@ -31,7 +37,36 @@ const TweetDetail = () => {
         // setError(`Error occurred: ${error}`);
         console.error(error);
       });
-  }, [tweetId]);
+  };
+
+  const runAction = async ({
+    tweetId,
+    actionType,
+    actionFn,
+  }: {
+    tweetId: number;
+    actionType: ActionType;
+    actionFn: (args: { tweetId: number }) => Promise<void>;
+  }) => {
+    if (isActionLoading) return;
+
+    setIsActionLoading(true);
+    setActiveAction(actionType);
+
+    try {
+      await actionFn({ tweetId });
+      await fetchTweet({ tweetId });
+    } finally {
+      setIsActionLoading(false);
+      setActiveAction("");
+    }
+  };
+
+  const handleRetweetClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "retweet", actionFn: retweetTweet });
+
+  const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "retweet", actionFn: clearRetweetTweet });
 
   if (!tweet) {
     return <p>Loading tweet...</p>;
@@ -86,7 +121,15 @@ const TweetDetail = () => {
 
             {/* retweet/unretweet button */}
             <div className="flex items-center">
-              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+              <button
+                disabled={isActionLoading}
+                className="flex cursor-pointer"
+                onClick={() => {
+                  tweet.tweet_retweeted_by_current_user
+                    ? handleUnRetweetClick({ tweetId: tweet.id })
+                    : handleRetweetClick({ tweetId: tweet.id });
+                }}
+              >
                 <img
                   src={
                     tweet.tweet_retweeted_by_current_user
