@@ -5,7 +5,7 @@ import { Tweet } from "../interfaces/Tweet";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../assets/back.svg?react";
 import { formatToTimeMMMddYYYY } from "../helpers/dateUtils";
-import { retweetTweet, clearRetweetTweet } from "../services/tweetsService";
+import { likeTweet, dislikeTweet, retweetTweet, clearRetweetTweet } from "../services/tweetsService";
 
 import LoadingIcon from "../assets/loading.svg?react";
 
@@ -67,6 +67,12 @@ const TweetDetail = () => {
 
   const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) =>
     runAction({ tweetId, actionType: "retweet", actionFn: clearRetweetTweet });
+
+  const handleLikeClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "like", actionFn: likeTweet });
+
+  const handleDislikeClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "like", actionFn: dislikeTweet });
 
   if (!tweet) {
     return <p>Loading tweet...</p>;
@@ -150,7 +156,15 @@ const TweetDetail = () => {
 
             {/* like/dislike button */}
             <div className="flex items-center">
-              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+              <button
+                disabled={isActionLoading}
+                className="flex cursor-pointer"
+                onClick={() => {
+                  tweet.tweet_liked_by_current_user
+                    ? handleDislikeClick({ tweetId: tweet.id })
+                    : handleLikeClick({ tweetId: tweet.id });
+                }}
+              >
                 <img
                   src={
                     tweet.tweet_liked_by_current_user
