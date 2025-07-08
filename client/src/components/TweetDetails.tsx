@@ -5,7 +5,14 @@ import { Tweet } from "../interfaces/Tweet";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../assets/back.svg?react";
 import { formatToTimeMMMddYYYY } from "../helpers/dateUtils";
-import { likeTweet, dislikeTweet, retweetTweet, clearRetweetTweet } from "../services/tweetsService";
+import {
+  bookmarkTweet,
+  clearBookmarkTweet,
+  likeTweet,
+  dislikeTweet,
+  retweetTweet,
+  clearRetweetTweet,
+} from "../services/tweetsService";
 
 import LoadingIcon from "../assets/loading.svg?react";
 
@@ -73,6 +80,12 @@ const TweetDetail = () => {
 
   const handleDislikeClick = ({ tweetId }: { tweetId: number }) =>
     runAction({ tweetId, actionType: "like", actionFn: dislikeTweet });
+
+  const handleBookmarkClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "bookmark", actionFn: bookmarkTweet });
+
+  const handleClearBookmarkClick = ({ tweetId }: { tweetId: number }) =>
+    runAction({ tweetId, actionType: "bookmark", actionFn: clearBookmarkTweet });
 
   if (!tweet) {
     return <p>Loading tweet...</p>;
@@ -185,7 +198,15 @@ const TweetDetail = () => {
 
             {/* bookmark/unbookmark button */}
             <div className="flex items-center">
-              <button disabled={isActionLoading} className="flex cursor-pointer" onClick={() => {}}>
+              <button
+                disabled={isActionLoading}
+                className="flex cursor-pointer"
+                onClick={() => {
+                  tweet.tweet_bookmarked_by_current_user
+                    ? handleClearBookmarkClick({ tweetId: tweet.id })
+                    : handleBookmarkClick({ tweetId: tweet.id });
+                }}
+              >
                 <img
                   src={
                     tweet.tweet_bookmarked_by_current_user
