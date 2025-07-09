@@ -4,13 +4,14 @@
 #
 # Table name: tweets
 #
-#  id             :bigint           not null, primary key
-#  body           :string
-#  likes_count    :integer          default(0), not null
-#  retweets_count :integer          default(0), not null
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  user_id        :bigint           not null
+#  id              :bigint           not null, primary key
+#  body            :string
+#  likes_count     :integer          default(0), not null
+#  retweets_count  :integer          default(0), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  parent_tweet_id :bigint
+#  user_id         :bigint           not null
 #
 # Indexes
 #
@@ -18,6 +19,7 @@
 #
 # Foreign Keys
 #
+#  fk_rails_...  (parent_tweet_id => tweets.id)
 #  fk_rails_...  (user_id => users.id)
 #
 class TweetSerializer < ActiveModel::Serializer
