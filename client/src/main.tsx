@@ -6,6 +6,7 @@ import SignUp from "./components/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
 import MainContainer from "./components/MainContainer.tsx";
 import ProfileContainer from "./components/ProfileContainer.tsx";
+import BookmarksContainer from "./components/BookmarksContainer.tsx";
 import TweetPage from "./components/TweetPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
     element: (
       <Theme>
         <ProfileContainer />
+      </Theme>
+    ),
+  },
+  {
+    path: "bookmarks",
+    element: (
+      <Theme>
+        <BookmarksContainer />
       </Theme>
     ),
   },
