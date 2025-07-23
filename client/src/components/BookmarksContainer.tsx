@@ -1,21 +1,26 @@
-import Sidebar from "./Sidebar";
+import { useState, useEffect } from "react";
+import { getBookmarks } from "../services/tweetsService";
 
 const BookmarksContainer = () => {
-  return (
-    <div className="py-4 min-h-screen dark:bg-gray-800">
-      <div className="flex flex-row max-w-7xl mx-auto">
-        <div className="basis-1/5">
-          <Sidebar />
-        </div>
+  useEffect(() => {
+    fetchBookmarks();
+  }, []);
 
-        <div className="basis-3/5">Here the Bookmarks container</div>
+  const [bookmarks, setBookmarks] = useState([]);
 
-        <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
-        </div>
-      </div>
-    </div>
-  );
+  const fetchBookmarks = () => {
+    return getBookmarks()
+      .then((bookmarks) => {
+        console.log("bookmarks: ", bookmarks);
+        setBookmarks(bookmarks);
+      })
+      .catch((error) => {
+        // setError(`Error occurred: ${error}`);
+        console.error(error);
+      });
+  };
+
+  return <div>aqui van los bookmarks container</div>;
 };
 
 export default BookmarksContainer;

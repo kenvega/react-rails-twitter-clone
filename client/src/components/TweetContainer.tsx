@@ -18,7 +18,7 @@ import LoadingIcon from "../assets/loading.svg?react";
 
 type ActionType = "like" | "bookmark" | "retweet";
 
-const TweetDetail = () => {
+const TweetContainer = () => {
   const navigate = useNavigate();
 
   const { tweetIdParam } = useParams();
@@ -230,4 +230,4 @@ const TweetDetail = () => {
   );
 };
 
-export default TweetDetail;
+export default TweetContainer;

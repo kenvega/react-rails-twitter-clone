@@ -27,6 +27,8 @@ Rails.application.routes.draw do
         resource :bookmark, only: [:create, :destroy]
         resource :retweet, only: [:create, :destroy]
       end
+
+      get 'bookmarks', to: 'bookmarks#index'
     end
   end
 

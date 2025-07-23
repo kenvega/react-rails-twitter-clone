@@ -17,6 +17,10 @@ export const handleError = (error: AxiosError) => {
   throw error;
 };
 
+export const getBookmarks = async () => {
+  return http.get(`${API_URL}/bookmarks`).then(handleResponse).catch(handleError);
+};
+
 export const getTweets = async () => {
   return http.get(`${API_URL}/tweets`).then(handleResponse).catch(handleError);
 };

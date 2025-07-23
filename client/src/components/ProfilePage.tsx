@@ -1,7 +1,6 @@
 import Sidebar from "./Sidebar";
-import TweetContainer from "./TweetContainer";
 
-const TweetPage = () => {
+const ProfilePage = () => {
   return (
     <div className="py-4 min-h-screen dark:bg-gray-800">
       <div className="flex flex-row max-w-7xl mx-auto">
@@ -9,10 +8,7 @@ const TweetPage = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">
-          <TweetContainer />
-          {/* TweetReplies (?) */}
-        </div>
+        <div className="basis-3/5">Here the Profile Container</div>
 
         <div className="basis-1/5">
           <div className="flex justify-center">hashtag sidebar</div>
@@ -22,4 +18,4 @@ const TweetPage = () => {
   );
 };
 
-export default TweetPage;
+export default ProfilePage;

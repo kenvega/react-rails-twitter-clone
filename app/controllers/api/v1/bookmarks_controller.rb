@@ -5,6 +5,11 @@ module Api
     class BookmarksController < ApplicationController
       before_action :authenticate_user!
 
+      # GET /bookmarks
+      def index
+        render json: { bookmarks: current_user.bookmarks }
+      end
+
       # POST /tweets/:tweet_id/bookmark
       def create
         # Creates the bookmark if it doesn't already exist

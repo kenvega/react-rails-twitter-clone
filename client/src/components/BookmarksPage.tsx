@@ -1,6 +1,7 @@
 import Sidebar from "./Sidebar";
+import BookmarksContainer from "./BookmarksContainer";
 
-const ProfileContainer = () => {
+const BookmarksPage = () => {
   return (
     <div className="py-4 min-h-screen dark:bg-gray-800">
       <div className="flex flex-row max-w-7xl mx-auto">
@@ -8,7 +9,9 @@ const ProfileContainer = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">Here the Profile Container</div>
+        <div className="basis-3/5">
+          <BookmarksContainer />
+        </div>
 
         <div className="basis-1/5">
           <div className="flex justify-center">hashtag sidebar</div>
@@ -18,4 +21,4 @@ const ProfileContainer = () => {
   );
 };
 
-export default ProfileContainer;
+export default BookmarksPage;
