@@ -8,6 +8,7 @@ import MainContainer from "./components/MainContainer.tsx";
 import ProfilePage from "./components/ProfilePage.tsx";
 import BookmarksPage from "./components/BookmarksPage.tsx";
 import MessagesPage from "./components/MessagesPage.tsx";
+import AllTweetsPage from "./components/AllTweetsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -41,6 +42,14 @@ const router = createBrowserRouter([
     element: (
       <Theme>
         <MainContainer />
+      </Theme>
+    ),
+  },
+  {
+    path: "all_tweets",
+    element: (
+      <Theme>
+        <AllTweetsPage />
       </Theme>
     ),
   },
