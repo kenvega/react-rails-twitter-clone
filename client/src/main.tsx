@@ -9,6 +9,9 @@ import ProfilePage from "./components/ProfilePage.tsx";
 import BookmarksPage from "./components/BookmarksPage.tsx";
 import MessagesPage from "./components/MessagesPage.tsx";
 import AllTweetsPage from "./components/AllTweetsPage.tsx";
+import HashtagsPage from "./components/HashtagsPage.tsx";
+import AllUsersPage from "./components/AllUsersPage.tsx";
+import NotificationsPage from "./components/NotificationsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -46,10 +49,34 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "hashtags",
+    element: (
+      <Theme>
+        <HashtagsPage />
+      </Theme>
+    ),
+  },
+  {
     path: "all_tweets",
     element: (
       <Theme>
         <AllTweetsPage />
+      </Theme>
+    ),
+  },
+  {
+    path: "all_users",
+    element: (
+      <Theme>
+        <AllUsersPage />
+      </Theme>
+    ),
+  },
+  {
+    path: "notifications",
+    element: (
+      <Theme>
+        <NotificationsPage />
       </Theme>
     ),
   },
