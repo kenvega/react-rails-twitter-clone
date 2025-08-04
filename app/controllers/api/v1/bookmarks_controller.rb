@@ -7,7 +7,9 @@ module Api
 
       # GET /bookmarks
       def index
-        render json: { bookmarks: current_user.bookmarks }
+        render json: Tweet.where(id: current_user.bookmarks.pluck(:tweet_id))
+                          .includes(user: { avatar_attachment: :blob })
+                          .order(created_at: :desc)
       end
 
       # POST /tweets/:tweet_id/bookmark
