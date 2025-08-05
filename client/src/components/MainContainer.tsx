@@ -1,5 +1,6 @@
 import TweetsContainer from "./TweetsContainer";
 import Sidebar from "./Sidebar";
+import HashtagSidebar from "./HashtagSidebar";
 
 const MainContainer = () => {
   // TODO: add useEffect to check if user is logged in. if not logged in then redirect to login page
@@ -16,7 +17,7 @@ const MainContainer = () => {
         </div>
 
         <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
+          <HashtagSidebar />
         </div>
       </div>
     </div>

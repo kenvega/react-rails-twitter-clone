@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import BookmarksContainer from "./BookmarksContainer";
+import HashtagSidebar from "./HashtagSidebar";
 
 const BookmarksPage = () => {
   return (
@@ -14,7 +15,7 @@ const BookmarksPage = () => {
         </div>
 
         <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
+          <HashtagSidebar />
         </div>
       </div>
     </div>

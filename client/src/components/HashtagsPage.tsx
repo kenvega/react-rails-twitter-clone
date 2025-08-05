@@ -1,4 +1,5 @@
 import Sidebar from "./Sidebar";
+import HashtagSidebar from "./HashtagSidebar";
 
 const HashtagsPage = () => {
   return (
@@ -11,7 +12,7 @@ const HashtagsPage = () => {
         <div className="basis-3/5">Hashtags Page</div>
 
         <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
+          <HashtagSidebar />
         </div>
       </div>
     </div>

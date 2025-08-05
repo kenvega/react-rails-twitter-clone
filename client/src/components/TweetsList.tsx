@@ -81,7 +81,7 @@ const TweetsList = ({
   return (
     <div>
       {loadingTweets ? (
-        <p>Loading tweets...</p>
+        <p>Loading...</p>
       ) : (
         tweets.map((tweet) => (
           <TweetCard

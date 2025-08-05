@@ -1,4 +1,5 @@
 import Sidebar from "./Sidebar";
+import HashtagSidebar from "./HashtagSidebar";
 
 const NotificationsPage = () => {
   return (
@@ -11,7 +12,7 @@ const NotificationsPage = () => {
         <div className="basis-3/5">Notifications Page</div>
 
         <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
+          <HashtagSidebar />
         </div>
       </div>
     </div>

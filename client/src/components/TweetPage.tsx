@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import TweetContainer from "./TweetContainer";
+import HashtagSidebar from "./HashtagSidebar";
 
 const TweetPage = () => {
   return (
@@ -15,7 +16,7 @@ const TweetPage = () => {
         </div>
 
         <div className="basis-1/5">
-          <div className="flex justify-center">hashtag sidebar</div>
+          <HashtagSidebar />
         </div>
       </div>
     </div>
