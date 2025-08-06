@@ -1,21 +1,5 @@
-import { AxiosResponse, AxiosError } from "axios";
 import { http } from "../providers";
-import { envsService } from "../commons";
-
-const API_URL = envsService.apiUrl;
-
-export const handleResponse = (response: AxiosResponse) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response.data || "Success probably without data";
-  }
-
-  throw new Error("Response status is not 200");
-};
-
-export const handleError = (error: AxiosError) => {
-  console.error("error", error);
-  throw error;
-};
+import { handleResponse, handleError, API_URL } from "./serviceHelper";
 
 export const getBookmarks = async () => {
   return http.get(`${API_URL}/bookmarks`).then(handleResponse).catch(handleError);
