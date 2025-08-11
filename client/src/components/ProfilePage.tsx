@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import HashtagSidebar from "./HashtagSidebar";
+import ProfileContainer from "./ProfileContainer";
 
 const ProfilePage = () => {
   return (
@@ -9,7 +10,9 @@ const ProfilePage = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">Here the Profile Container</div>
+        <div className="basis-3/5">
+          <ProfileContainer />
+        </div>
 
         <div className="basis-1/5">
           <HashtagSidebar />

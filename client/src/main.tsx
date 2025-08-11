@@ -44,6 +44,7 @@ const router = createBrowserRouter([
     path: "home",
     element: (
       <Theme>
+        {/* TODO: change from MainContainer to TweetsContainer */}
         <MainContainer />
       </Theme>
     ),
