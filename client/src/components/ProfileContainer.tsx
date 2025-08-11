@@ -38,7 +38,19 @@ const ProfileContainer = () => {
     <div>
       <h1 className="text-2xl font-semibold mb-3 px-2">Profile</h1>
 
-      <p>{profile.email}</p>
+      {profile && !loadingProfile ? (
+        <div>
+          <img
+            className="w-32 rounded-full"
+            src={profile.avatar_url || "/src/assets/profile.svg"}
+            alt="profile avatar"
+          />
+          <p>{profile.display_name}</p>
+          <p>{profile.username}</p>
+        </div>
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
 };

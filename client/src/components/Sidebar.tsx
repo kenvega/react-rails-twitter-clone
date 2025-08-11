@@ -23,7 +23,7 @@ const TweetsContainer = () => {
         <img src={Twitter} alt="Your SVG" width={32} />
       </div>
 
-      <SidebarButton title="Home" SVGIcon={Home} onClick={() => navigate("/home")} active />
+      <SidebarButton title="Tweets" SVGIcon={Home} onClick={() => navigate("/tweets")} active />
       <SidebarButton title="Hashtags" SVGIcon={Hashtag} onClick={() => navigate("/hashtags")} />
       <SidebarButton title="All Tweets" SVGIcon={Earth} onClick={() => navigate("/all_tweets")} />
       <SidebarButton title="All Users" SVGIcon={Users} onClick={() => navigate("/all_users")} />

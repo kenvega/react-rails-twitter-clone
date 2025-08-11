@@ -2,7 +2,7 @@ import TweetsContainer from "./TweetsContainer";
 import Sidebar from "./Sidebar";
 import HashtagSidebar from "./HashtagSidebar";
 
-const MainContainer = () => {
+const TweetsPage = () => {
   // TODO: add useEffect to check if user is logged in. if not logged in then redirect to login page
 
   return (
@@ -24,4 +24,4 @@ const MainContainer = () => {
   );
 };
 
-export default MainContainer;
+export default TweetsPage;

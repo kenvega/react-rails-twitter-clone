@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import Login from "./components/Login";
 import SignUp from "./components/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
-import MainContainer from "./components/MainContainer.tsx";
+import TweetsPage from "./components/TweetsPage.tsx";
 import ProfilePage from "./components/ProfilePage.tsx";
 import BookmarksPage from "./components/BookmarksPage.tsx";
 import MessagesPage from "./components/MessagesPage.tsx";
@@ -41,11 +41,10 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "home",
+    path: "tweets",
     element: (
       <Theme>
-        {/* TODO: change from MainContainer to TweetsContainer */}
-        <MainContainer />
+        <TweetsPage />
       </Theme>
     ),
   },
