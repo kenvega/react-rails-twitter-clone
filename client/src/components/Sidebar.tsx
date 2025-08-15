@@ -12,10 +12,20 @@ import Message from "../assets/email.svg?react";
 import Bookmark from "../assets/bookmark-unfilled.svg?react";
 import Profile from "../assets/profile.svg?react";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation, matchPath } from "react-router-dom";
 
 const TweetsContainer = () => {
   const navigate = useNavigate();
+
+  const { pathname } = useLocation();
+
+  const isActive = ({ to, exactMatch = true }: { to: string; exactMatch?: boolean }) => {
+    const pattern = { path: to, end: exactMatch };
+    // checks if pathname matches a pattern
+    //  if it matches, returns a match object (truthy)
+    //  if not, returns null (falsy)
+    return matchPath(pattern, pathname) !== null;
+  };
 
   return (
     <div className="max-w-fit">
@@ -23,14 +33,54 @@ const TweetsContainer = () => {
         <img src={Twitter} alt="Your SVG" width={32} />
       </div>
 
-      <SidebarButton title="Tweets" SVGIcon={Home} onClick={() => navigate("/tweets")} active />
-      <SidebarButton title="Hashtags" SVGIcon={Hashtag} onClick={() => navigate("/hashtags")} />
-      <SidebarButton title="All Tweets" SVGIcon={Earth} onClick={() => navigate("/all_tweets")} />
-      <SidebarButton title="All Users" SVGIcon={Users} onClick={() => navigate("/all_users")} />
-      <SidebarButton title="Notifications" SVGIcon={Notification} onClick={() => navigate("/notifications")} />
-      <SidebarButton title="Messages" SVGIcon={Message} onClick={() => navigate("/channels")} />
-      <SidebarButton title="Bookmarks" SVGIcon={Bookmark} onClick={() => navigate("/bookmarks")} />
-      <SidebarButton title="Profile" SVGIcon={Profile} onClick={() => navigate("/profile")} />
+      <SidebarButton
+        title="Home"
+        SVGIcon={Home}
+        onClick={() => navigate("/tweets")}
+        active={isActive({ to: "/tweets" })}
+      />
+      <SidebarButton
+        title="Hashtags"
+        SVGIcon={Hashtag}
+        onClick={() => navigate("/hashtags")}
+        active={isActive({ to: "/hashtags" })}
+      />
+      <SidebarButton
+        title="All Tweets"
+        SVGIcon={Earth}
+        onClick={() => navigate("/all_tweets")}
+        active={isActive({ to: "/all_tweets" })}
+      />
+      <SidebarButton
+        title="All Users"
+        SVGIcon={Users}
+        onClick={() => navigate("/all_users")}
+        active={isActive({ to: "/all_users" })}
+      />
+      <SidebarButton
+        title="Notifications"
+        SVGIcon={Notification}
+        onClick={() => navigate("/notifications")}
+        active={isActive({ to: "/notifications" })}
+      />
+      <SidebarButton
+        title="Messages"
+        SVGIcon={Message}
+        onClick={() => navigate("/channels")}
+        active={isActive({ to: "/channels", exactMatch: false })}
+      />
+      <SidebarButton
+        title="Bookmarks"
+        SVGIcon={Bookmark}
+        onClick={() => navigate("/bookmarks")}
+        active={isActive({ to: "/bookmarks" })}
+      />
+      <SidebarButton
+        title="Profile"
+        SVGIcon={Profile}
+        onClick={() => navigate("/profile")}
+        active={isActive({ to: "/profile", exactMatch: false })}
+      />
 
       <Logout />
     </div>

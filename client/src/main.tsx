@@ -48,7 +48,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "hashtags",
     element: (
@@ -57,7 +56,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "all_tweets",
     element: (
@@ -66,7 +64,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "all_users",
     element: (
@@ -75,7 +72,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "notifications",
     element: (
@@ -84,7 +80,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "profile",
     element: (
@@ -93,7 +88,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "bookmarks",
     element: (
@@ -102,7 +96,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "channels",
     element: (
@@ -111,7 +104,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "test_hello",
     element: <p>hello: you can put jsx directly here as well</p>,
