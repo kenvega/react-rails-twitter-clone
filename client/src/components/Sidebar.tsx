@@ -20,6 +20,9 @@ const TweetsContainer = () => {
   const { pathname } = useLocation();
 
   const isActive = ({ to, exactMatch = true }: { to: string; exactMatch?: boolean }) => {
+    // for the pattern: when 'end' is false the route can continue
+    //  but must continue with a '/'
+    //  examples: "/profile/edit" will be ok but "/profiles" not
     const pattern = { path: to, end: exactMatch };
     // checks if pathname matches a pattern
     //  if it matches, returns a match object (truthy)
