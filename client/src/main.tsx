@@ -40,6 +40,7 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
+
   {
     path: "tweets",
     element: (
@@ -80,6 +81,7 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
+
   {
     path: "profile",
     element: (
