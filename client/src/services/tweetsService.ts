@@ -43,3 +43,17 @@ export const retweetTweet = async ({ tweetId }: { tweetId: number }) => {
 export const clearRetweetTweet = async ({ tweetId }: { tweetId: number }) => {
   return http.delete(`${API_URL}/tweets/${tweetId}/retweet`).then(handleResponse).catch(handleError);
 };
+
+export const createReplyTweet = async ({ tweetId, tweetBody }: { tweetId: number; tweetBody: string }) => {
+  return http
+    .post(`${API_URL}/reply_tweets`, { tweet: { tweet_id: tweetId, body: tweetBody } })
+    .then(handleResponse)
+    .catch(handleError);
+};
+
+export const getReplyTweets = async ({ tweetId }: { tweetId: number }) => {
+  return http
+    .get(`${API_URL}/reply_tweets`, { params: { tweet_id: tweetId } })
+    .then(handleResponse)
+    .catch(handleError);
+};

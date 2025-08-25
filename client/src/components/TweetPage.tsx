@@ -3,16 +3,45 @@ import TweetContainer from "./TweetContainer";
 import HashtagSidebar from "./HashtagSidebar";
 import TweetReplyForm from "./TweetReplyForm";
 
-import { useState } from "react";
+import { useParams } from "react-router-dom";
 
-import { createReplyTweet, fetchReplyTweets } from "../services/tweetsService";
+import { useState, useEffect } from "react";
+
+import { Tweet } from "../interfaces/Tweet";
+
+import { createReplyTweet, getReplyTweets } from "../services/tweetsService";
 
 const TweetPage = () => {
   const [tweetBody, setTweetBody] = useState("");
+  const [replyTweets, setReplyTweets] = useState<Tweet[]>([]);
+  const [loadingReplyTweets, setLoadingReplyTweets] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+
+  const { tweetIdParam } = useParams();
+
+  const fetchReplyTweets = () => {
+    return getReplyTweets({ tweetId: Number(tweetIdParam) })
+      .then((replyTweets) => {
+        console.log("response replyTweets: ", replyTweets);
+        setReplyTweets(replyTweets);
+      })
+      .catch((error) => {
+        setError(`Error occurred: ${error}`);
+        console.error(error);
+      })
+      .finally(() => {
+        setLoadingReplyTweets(false);
+      });
+  };
+
+  useEffect(() => {
+    console.log("hello from useEFfect on tweetPage");
+    fetchReplyTweets();
+  }, []);
 
   const handleFormSubmit = () => {
-    createReplyTweet({ tweetBody }).then(() => {
-      fetchReplyTweets(); // tendrias que enviar el id, o quizas hacer un fetch de nuevo a todo el tweet con replies?
+    createReplyTweet({ tweetId: Number(tweetIdParam), tweetBody: tweetBody }).then(() => {
+      fetchReplyTweets();
       setTweetBody("");
     });
   };

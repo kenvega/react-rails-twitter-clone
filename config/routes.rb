@@ -28,6 +28,8 @@ Rails.application.routes.draw do
         resource :retweet, only: [:create, :destroy]
       end
 
+      resources :reply_tweets, only: [:index, :create]
+
       get 'profile', to: 'profile#show'
 
       get 'bookmarks', to: 'bookmarks#index'

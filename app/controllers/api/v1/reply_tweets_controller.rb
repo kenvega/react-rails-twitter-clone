@@ -5,8 +5,12 @@ module Api
     class ReplyTweetsController < ApplicationController
       before_action :authenticate_user!
 
+      def index
+        render json: tweet.reply_tweets
+      end
+
       def create
-        @reply_tweet = tweet.reply_tweets.create(tweet_params.merge(user: current_user))
+        @reply_tweet = Tweet.find(params[:tweet][:tweet_id]).reply_tweets.create(tweet_params.merge(user: current_user))
 
         @reply_tweet.save
       end
