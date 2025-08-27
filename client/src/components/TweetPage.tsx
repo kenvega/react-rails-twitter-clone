@@ -2,6 +2,7 @@ import Sidebar from "./Sidebar";
 import TweetContainer from "./TweetContainer";
 import HashtagSidebar from "./HashtagSidebar";
 import TweetReplyForm from "./TweetReplyForm";
+import TweetReplies from "./TweetReplies";
 
 import { useParams } from "react-router-dom";
 
@@ -57,8 +58,7 @@ const TweetPage = () => {
           <TweetContainer />
           <TweetReplyForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
 
-          {/* <TweetReplyForm /> */}
-          {/* TweetReplies (?) */}
+          <TweetReplies replyTweets={replyTweets} />
         </div>
 
         <div className="basis-1/5">
