@@ -24,6 +24,7 @@ const TweetReplies = ({ replyTweets }: { replyTweets: Tweet[] }) => {
               </div>
             </div>
             <div className="flex items-center">
+              {/* retweet/unretweet button */}
               <button className="flex cursor-pointer">
                 <img
                   src={
@@ -31,10 +32,37 @@ const TweetReplies = ({ replyTweets }: { replyTweets: Tweet[] }) => {
                       ? "/src/assets/retweet-filled.svg"
                       : "/src/assets/retweet-unfilled.svg"
                   }
-                  className={`w-4 mr-2`}
+                  className="w-4 mr-2"
                   alt="retweet icon"
                 />
                 <span>{replyTweet.retweets_count}</span>
+              </button>
+
+              {/* like/dislike button */}
+              <button className="flex cursor-pointer">
+                <img
+                  src={
+                    replyTweet.tweet_liked_by_current_user
+                      ? "/src/assets/heart-filled.svg"
+                      : "/src/assets/heart-unfilled.svg"
+                  }
+                  className="w-4 mr-2"
+                  alt="like icon"
+                />
+                <span>{replyTweet.likes_count}</span>
+              </button>
+
+              {/* bookmark/unbookmark button */}
+              <button className="flex cursor-pointer">
+                <img
+                  src={
+                    replyTweet.tweet_bookmarked_by_current_user
+                      ? "/src/assets/bookmark-filled.svg"
+                      : "/src/assets/bookmark-unfilled.svg"
+                  }
+                  className="w-4 mr-2"
+                  alt="bookmark icon"
+                />
               </button>
             </div>
           </div>
