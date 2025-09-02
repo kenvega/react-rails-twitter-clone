@@ -1,3 +1,4 @@
+import UsersContainer from "./UsersContainer";
 import Sidebar from "./Sidebar";
 import HashtagSidebar from "./HashtagSidebar";
 
@@ -9,7 +10,9 @@ const AllUsersPage = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">All Users Page</div>
+        <div className="basis-3/5">
+          <UsersContainer />
+        </div>
 
         <div className="basis-1/5">
           <HashtagSidebar />
