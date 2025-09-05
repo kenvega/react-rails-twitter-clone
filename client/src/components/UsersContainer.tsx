@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUsers } from "../services/tweetsService";
+import { getUsers } from "../services/userService";
 
 const UsersContainer = () => {
   const [users, setUsers] = useState([]);
@@ -27,8 +27,16 @@ const UsersContainer = () => {
 
   return (
     <div>
-      {/* TODO: render the users */}
-      <p>here the users</p>
+      <div>
+        {users.map((user) => {
+          return (
+            <div key={user.id}>
+              <p>user:</p>
+              <p>email: {user.email}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

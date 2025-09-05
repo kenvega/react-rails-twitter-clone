@@ -33,6 +33,8 @@ Rails.application.routes.draw do
       get 'profile', to: 'profile#show'
 
       get 'bookmarks', to: 'bookmarks#index'
+
+      get 'users', to: 'users#index'
     end
   end
 
