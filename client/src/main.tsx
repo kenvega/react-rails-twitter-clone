@@ -13,6 +13,7 @@ import HashtagsPage from "./components/HashtagsPage.tsx";
 import AllUsersPage from "./components/AllUsersPage.tsx";
 import NotificationsPage from "./components/NotificationsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
+import UserPage from "./components/UserPage.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
 
@@ -40,7 +41,6 @@ const router = createBrowserRouter([
       </Theme>
     ),
   },
-
   {
     path: "tweets",
     element: (
@@ -87,6 +87,14 @@ const router = createBrowserRouter([
     element: (
       <Theme>
         <ProfilePage />
+      </Theme>
+    ),
+  },
+  {
+    path: "users/:userIdParam",
+    element: (
+      <Theme>
+        <UserPage />
       </Theme>
     ),
   },
