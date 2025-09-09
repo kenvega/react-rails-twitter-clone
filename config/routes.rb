@@ -34,7 +34,10 @@ Rails.application.routes.draw do
 
       get 'bookmarks', to: 'bookmarks#index'
 
-      get 'users', to: 'users#index'
+      resources :users, only: [:index, :show]
+      # same as above
+      # get 'users', to: 'users#index'
+      # get 'users/:id', to: 'users#show'
     end
   end
 
