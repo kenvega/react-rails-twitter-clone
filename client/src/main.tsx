@@ -14,6 +14,7 @@ import AllUsersPage from "./components/AllUsersPage.tsx";
 import NotificationsPage from "./components/NotificationsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
 import UserPage from "./components/UserPage.tsx";
+import RequireAuth from "./components/RequireAuth";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
 
@@ -44,9 +45,11 @@ const router = createBrowserRouter([
   {
     path: "tweets",
     element: (
-      <Theme>
-        <TweetsPage />
-      </Theme>
+      <RequireAuth>
+        <Theme>
+          <TweetsPage />
+        </Theme>
+      </RequireAuth>
     ),
   },
   {
