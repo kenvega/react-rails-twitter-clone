@@ -1,6 +1,7 @@
 import TweetsContainer from "./TweetsContainer";
 import Sidebar from "./Sidebar";
 import HashtagSidebar from "./HashtagSidebar";
+import ContentTitle from "./ContentTitle";
 
 const AllTweetsPage = () => {
   return (
@@ -11,6 +12,7 @@ const AllTweetsPage = () => {
         </div>
 
         <div className="basis-3/5">
+          <ContentTitle title="All tweets" />
           {/* TODO: should not have the form */}
           <TweetsContainer />
         </div>

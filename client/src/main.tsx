@@ -37,9 +37,11 @@ const router = createBrowserRouter([
   {
     path: "tweets/:tweetIdParam",
     element: (
-      <Theme>
-        <TweetPage />
-      </Theme>
+      <RequireAuth>
+        <Theme>
+          <TweetPage />
+        </Theme>
+      </RequireAuth>
     ),
   },
   {
@@ -88,9 +90,11 @@ const router = createBrowserRouter([
   {
     path: "profile",
     element: (
-      <Theme>
-        <ProfilePage />
-      </Theme>
+      <RequireAuth>
+        <Theme>
+          <ProfilePage />
+        </Theme>
+      </RequireAuth>
     ),
   },
   {
@@ -104,9 +108,11 @@ const router = createBrowserRouter([
   {
     path: "bookmarks",
     element: (
-      <Theme>
-        <BookmarksPage />
-      </Theme>
+      <RequireAuth>
+        <Theme>
+          <BookmarksPage />
+        </Theme>
+      </RequireAuth>
     ),
   },
   {
