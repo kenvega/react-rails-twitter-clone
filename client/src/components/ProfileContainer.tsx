@@ -36,8 +36,6 @@ const ProfileContainer = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-3 px-2">Profile</h1>
-
       {profile && !loadingProfile ? (
         <div>
           <img

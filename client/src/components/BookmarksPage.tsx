@@ -1,6 +1,7 @@
 import Sidebar from "./Sidebar";
 import BookmarksContainer from "./BookmarksContainer";
 import HashtagSidebar from "./HashtagSidebar";
+import ContentTitle from "./ContentTitle";
 
 const BookmarksPage = () => {
   return (
@@ -11,6 +12,7 @@ const BookmarksPage = () => {
         </div>
 
         <div className="basis-3/5">
+          <ContentTitle title="Bookmarks" />
           <BookmarksContainer />
         </div>
 

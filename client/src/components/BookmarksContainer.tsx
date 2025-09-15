@@ -29,7 +29,6 @@ const BookmarksContainer = () => {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold mb-3 px-2">Bookmarks</h1>
       <TweetsList tweets={bookmarks} loadingTweets={loadingBookmarks} error={error} fetchTweets={fetchBookmarks} />
     </div>
   );

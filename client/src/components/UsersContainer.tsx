@@ -32,7 +32,6 @@ const UsersContainer = () => {
 
   return (
     <div>
-      <div className="text-2xl font-semibold mb-3">All Users</div>
       <div>
         {loadingUsers ? (
           <p>Loading...</p>

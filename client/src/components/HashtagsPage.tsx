@@ -1,5 +1,6 @@
 import Sidebar from "./Sidebar";
 import HashtagSidebar from "./HashtagSidebar";
+import ContentTitle from "./ContentTitle";
 
 const HashtagsPage = () => {
   return (
@@ -9,7 +10,9 @@ const HashtagsPage = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">Hashtags Page</div>
+        <div className="basis-3/5">
+          <ContentTitle title="Hashtags Page" />
+        </div>
 
         <div className="basis-1/5">
           <HashtagSidebar />
