@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getProfile } from "../services/userService";
+import { getProfile } from "../../../services/userService";
 
 interface Profile {
   id: number;

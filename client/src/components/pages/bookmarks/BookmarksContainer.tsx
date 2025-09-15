@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { getBookmarks } from "../services/tweetsService";
-import TweetsList from "./TweetsList";
-import { Tweet } from "../interfaces/Tweet";
+import { getBookmarks } from "../../../services/tweetsService";
+import TweetsList from "../../TweetsList";
+import { Tweet } from "../../../interfaces/Tweet";
 
 const BookmarksContainer = () => {
   useEffect(() => {

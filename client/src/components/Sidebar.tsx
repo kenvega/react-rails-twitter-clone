@@ -14,7 +14,7 @@ import Profile from "../assets/profile.svg?react";
 
 import { useNavigate, useLocation, matchPath } from "react-router-dom";
 
-const TweetsContainer = () => {
+const Sidebar = () => {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();
@@ -90,4 +90,4 @@ const TweetsContainer = () => {
   );
 };
 
-export default TweetsContainer;
+export default Sidebar;

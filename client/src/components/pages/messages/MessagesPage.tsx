@@ -1,9 +1,8 @@
-import Sidebar from "./Sidebar";
-import BookmarksContainer from "./BookmarksContainer";
-import HashtagSidebar from "./HashtagSidebar";
-import ContentTitle from "./ContentTitle";
+import Sidebar from "../../Sidebar";
+import HashtagSidebar from "../../HashtagSidebar";
+import ContentTitle from "../../ContentTitle";
 
-const BookmarksPage = () => {
+const MessagesPage = () => {
   return (
     <div className="py-4 min-h-screen dark:bg-gray-800">
       <div className="flex flex-row max-w-7xl mx-auto">
@@ -12,8 +11,7 @@ const BookmarksPage = () => {
         </div>
 
         <div className="basis-3/5">
-          <ContentTitle title="Bookmarks" />
-          <BookmarksContainer />
+          <ContentTitle title="Messages Page" />
         </div>
 
         <div className="basis-1/5">
@@ -24,4 +22,4 @@ const BookmarksPage = () => {
   );
 };
 
-export default BookmarksPage;
+export default MessagesPage;

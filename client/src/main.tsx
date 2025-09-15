@@ -1,19 +1,19 @@
 // import React from 'react'
 import ReactDOM from "react-dom/client";
 // import TweetsList from './components/TweetsList'
-import Login from "./components/Login";
-import SignUp from "./components/SignUp.tsx";
+import Login from "./components/pages/auth/Login.tsx";
+import SignUp from "./components/pages/auth/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
-import TweetsPage from "./components/TweetsPage.tsx";
-import ProfilePage from "./components/ProfilePage.tsx";
-import BookmarksPage from "./components/BookmarksPage.tsx";
-import MessagesPage from "./components/MessagesPage.tsx";
-import AllTweetsPage from "./components/AllTweetsPage.tsx";
-import HashtagsPage from "./components/HashtagsPage.tsx";
-import AllUsersPage from "./components/AllUsersPage.tsx";
-import NotificationsPage from "./components/NotificationsPage.tsx";
+import FeedTweetsPage from "./components/pages/feed_tweets/FeedTweetsPage.tsx";
+import ProfilePage from "./components/pages/profile/ProfilePage.tsx";
+import BookmarksPage from "./components/pages/bookmarks/BookmarksPage.tsx";
+import MessagesPage from "./components/pages/messages/MessagesPage.tsx";
+import AllTweetsPage from "./components/pages/all_tweets/AllTweetsPage.tsx";
+import HashtagsPage from "./components/pages/hashtags/HashtagsPage.tsx";
+import AllUsersPage from "./components/pages/all_users/AllUsersPage.tsx";
+import NotificationsPage from "./components/pages/notifications/NotificationsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
-import UserPage from "./components/UserPage.tsx";
+import UserPage from "./components/pages/user/UserPage.tsx";
 import RequireAuth from "./components/RequireAuth";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
@@ -49,7 +49,7 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <Theme>
-          <TweetsPage />
+          <FeedTweetsPage />
         </Theme>
       </RequireAuth>
     ),

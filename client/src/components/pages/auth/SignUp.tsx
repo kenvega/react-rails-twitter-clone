@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { requestSignUp } from "../services/authService";
+import { requestSignUp } from "../../../services/authService";
 import { useNavigate, Link } from "react-router-dom";
 
 function SignUp() {

@@ -1,14 +1,14 @@
 import { useState, useEffect, useContext } from "react";
-import { getTweets, createTweet } from "../services/tweetsService";
+import { getTweets, createTweet } from "../../../services/tweetsService";
 
-import TweetForm from "./TweetForm";
-import TweetsList from "./TweetsList";
+import TweetForm from "../../TweetForm";
+import TweetsList from "../../TweetsList";
 
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../../../interfaces/Tweet";
 
-import { ThemeContext } from "../context/ThemeProvider";
+import { ThemeContext } from "../../../context/ThemeProvider";
 
-const TweetsContainer = () => {
+const AllTweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [loadingTweets, setLoadingTweets] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -57,4 +57,4 @@ const TweetsContainer = () => {
   );
 };
 
-export default TweetsContainer;
+export default AllTweetsContainer;

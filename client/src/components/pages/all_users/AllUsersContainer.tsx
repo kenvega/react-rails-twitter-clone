@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { getUsers } from "../services/userService";
-import { User } from "../interfaces/User";
+import { getUsers } from "../../../services/userService";
+import { User } from "../../../interfaces/User";
 
-const UsersContainer = () => {
+const AllUsersContainer = () => {
   const [users, setUsers] = useState<User[]>([]);
   const [loadingUsers, setLoadingUsers] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -65,4 +65,4 @@ const UsersContainer = () => {
   );
 };
 
-export default UsersContainer;
+export default AllUsersContainer;

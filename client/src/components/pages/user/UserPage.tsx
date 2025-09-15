@@ -1,8 +1,8 @@
-import Sidebar from "./Sidebar";
-import HashtagSidebar from "./HashtagSidebar";
-import ContentTitle from "./ContentTitle";
+import Sidebar from "../../Sidebar";
+import HashtagSidebar from "../../HashtagSidebar";
+// import ProfileContainer from "./ProfileContainer";
 
-const MessagesPage = () => {
+const UserPage = () => {
   return (
     <div className="py-4 min-h-screen dark:bg-gray-800">
       <div className="flex flex-row max-w-7xl mx-auto">
@@ -10,9 +10,7 @@ const MessagesPage = () => {
           <Sidebar />
         </div>
 
-        <div className="basis-3/5">
-          <ContentTitle title="Messages Page" />
-        </div>
+        <div className="basis-3/5">User Page here</div>
 
         <div className="basis-1/5">
           <HashtagSidebar />
@@ -22,4 +20,4 @@ const MessagesPage = () => {
   );
 };
 
-export default MessagesPage;
+export default UserPage;

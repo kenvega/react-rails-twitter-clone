@@ -1,6 +1,6 @@
-import Sidebar from "./Sidebar";
-import HashtagSidebar from "./HashtagSidebar";
-import ContentTitle from "./ContentTitle";
+import Sidebar from "../../Sidebar";
+import HashtagSidebar from "../../HashtagSidebar";
+import ContentTitle from "../../ContentTitle";
 
 const NotificationsPage = () => {
   return (

@@ -1,7 +1,7 @@
-import UsersContainer from "./UsersContainer";
-import Sidebar from "./Sidebar";
-import HashtagSidebar from "./HashtagSidebar";
-import ContentTitle from "./ContentTitle";
+import AllUsersContainer from "./AllUsersContainer";
+import Sidebar from "../../Sidebar";
+import HashtagSidebar from "../../HashtagSidebar";
+import ContentTitle from "../../ContentTitle";
 
 const AllUsersPage = () => {
   return (
@@ -13,7 +13,7 @@ const AllUsersPage = () => {
 
         <div className="basis-3/5">
           <ContentTitle title="All Users" />
-          <UsersContainer />
+          <AllUsersContainer />
         </div>
 
         <div className="basis-1/5">
