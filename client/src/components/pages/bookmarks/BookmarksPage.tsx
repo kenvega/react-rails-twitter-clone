@@ -1,26 +1,13 @@
-import Sidebar from "../../Sidebar";
 import BookmarksContainer from "./BookmarksContainer";
-import HashtagSidebar from "../../HashtagSidebar";
 import ContentTitle from "../../ContentTitle";
+import PageLayout from "../../layout/PageLayout";
 
 const BookmarksPage = () => {
   return (
-    <div className="py-4 min-h-screen dark:bg-gray-800">
-      <div className="flex flex-row max-w-7xl mx-auto">
-        <div className="basis-1/5">
-          <Sidebar />
-        </div>
-
-        <div className="basis-3/5">
-          <ContentTitle title="Bookmarks" />
-          <BookmarksContainer />
-        </div>
-
-        <div className="basis-1/5">
-          <HashtagSidebar />
-        </div>
-      </div>
-    </div>
+    <PageLayout>
+      <ContentTitle title="Bookmarks" />
+      <BookmarksContainer />
+    </PageLayout>
   );
 };
 

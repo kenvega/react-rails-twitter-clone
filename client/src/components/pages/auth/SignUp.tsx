@@ -24,7 +24,7 @@ function SignUp() {
       },
     })
       .then(() => {
-        navigate("/dashboard");
+        navigate("/tweets");
       })
       .catch((error) => {
         setError(error.message || "An error occurred. Please try again.");

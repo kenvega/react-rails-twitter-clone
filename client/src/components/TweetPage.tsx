@@ -1,8 +1,7 @@
-import Sidebar from "./Sidebar";
 import TweetContainer from "./TweetContainer";
-import HashtagSidebar from "./HashtagSidebar";
 import TweetReplyForm from "./TweetReplyForm";
 import TweetReplies from "./TweetReplies";
+import PageLayout from "./layout/PageLayout";
 
 import { useParams } from "react-router-dom";
 
@@ -48,24 +47,11 @@ const TweetPage = () => {
   };
 
   return (
-    <div className="py-4 min-h-screen dark:bg-gray-800">
-      <div className="flex flex-row max-w-7xl mx-auto">
-        <div className="basis-1/5">
-          <Sidebar />
-        </div>
-
-        <div className="basis-3/5">
-          <TweetContainer />
-          <TweetReplyForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
-
-          <TweetReplies replyTweets={replyTweets} />
-        </div>
-
-        <div className="basis-1/5">
-          <HashtagSidebar />
-        </div>
-      </div>
-    </div>
+    <PageLayout>
+      <TweetContainer />
+      <TweetReplyForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
+      <TweetReplies replyTweets={replyTweets} />
+    </PageLayout>
   );
 };
 

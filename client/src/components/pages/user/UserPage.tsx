@@ -1,22 +1,12 @@
-import Sidebar from "../../Sidebar";
-import HashtagSidebar from "../../HashtagSidebar";
-// import ProfileContainer from "./ProfileContainer";
+import ContentTitle from "../../ContentTitle";
+import PageLayout from "../../layout/PageLayout";
 
 const UserPage = () => {
   return (
-    <div className="py-4 min-h-screen dark:bg-gray-800">
-      <div className="flex flex-row max-w-7xl mx-auto">
-        <div className="basis-1/5">
-          <Sidebar />
-        </div>
-
-        <div className="basis-3/5">User Page here</div>
-
-        <div className="basis-1/5">
-          <HashtagSidebar />
-        </div>
-      </div>
-    </div>
+    <PageLayout>
+      <ContentTitle title="User Page" />
+      {/* TODO: need the profile for a user here. probably needs a component that ProfilePage also uses */}
+    </PageLayout>
   );
 };
 
