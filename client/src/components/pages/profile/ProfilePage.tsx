@@ -5,7 +5,7 @@ import PageLayout from "../../layout/PageLayout";
 const ProfilePage = () => {
   return (
     <PageLayout>
-      <ContentTitle title="All Users" />
+      <ContentTitle title="Your Profile" />
       <ProfileContainer />
     </PageLayout>
   );

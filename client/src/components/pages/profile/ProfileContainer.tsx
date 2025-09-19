@@ -19,7 +19,6 @@ const ProfileContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchProfile = () => {
-    // TODO: backend for this route needed
     return getProfile()
       .then((profile) => {
         console.log("profile: ", profile);
@@ -37,14 +36,24 @@ const ProfileContainer = () => {
   return (
     <div>
       {profile && !loadingProfile ? (
-        <div>
-          <img
-            className="w-32 rounded-full"
-            src={profile.avatar_url || "/src/assets/profile.svg"}
-            alt="profile avatar"
-          />
-          <p>{profile.display_name}</p>
-          <p>{profile.username}</p>
+        <div className="px-2">
+          <div className="mb-8 mt-8 flex justify-between">
+            <img
+              className="w-32 h-32 rounded-full"
+              src={profile.avatar_url || "/src/assets/profile.svg"}
+              alt="profile avatar"
+            />
+            {/* TODO: the edit profile button should be here */}
+            <button>Edit Profile</button>
+          </div>
+          <div>
+            <p className="text-xl font-bold">{profile.display_name}</p>
+            <p className="text-slate-400">@{profile.username}</p>
+            <p>Bio should be here if user has a Bio set</p>
+            {/* TODO: profile details: location, url, when did they joined, following and followers count */}
+          </div>
+
+          {/* TODO: tweets from your user */}
         </div>
       ) : (
         <p>Loading...</p>
