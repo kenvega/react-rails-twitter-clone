@@ -6,6 +6,8 @@ interface Profile {
   email: string;
   display_name: string;
   bio: string;
+  location: string;
+  url: string;
   username: string;
   avatar_url: string;
 }
@@ -50,8 +52,10 @@ const ProfileContainer = () => {
           <div>
             <p className="text-xl font-bold">{profile.display_name}</p>
             <p className="text-slate-400">@{profile.username}</p>
-            <p>{profile.bio}</p>
-            {/* TODO: profile details: location, url, when did they joined, following and followers count */}
+            <p>bio: {profile.bio}</p>
+            <p>location: {profile.location}</p>
+            <p>url: {profile.url}</p>
+            {/* TODO: profile details: when did they joined, following and followers count */}
           </div>
 
           {/* TODO: tweets from your user */}

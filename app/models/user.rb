@@ -10,9 +10,11 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  jti                    :string           not null
+#  location               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  url                    :string
 #  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null

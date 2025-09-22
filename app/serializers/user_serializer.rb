@@ -10,9 +10,11 @@
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  jti                    :string           not null
+#  location               :string
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  url                    :string
 #  username               :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -24,7 +26,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :username, :display_name, :bio, :avatar_url, :created_at
+  attributes :id, :email, :username, :display_name, :bio, :location, :url, :avatar_url, :created_at
 
   def avatar_url
     return unless object.avatar.attached?
