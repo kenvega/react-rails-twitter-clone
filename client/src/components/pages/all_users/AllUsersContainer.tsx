@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getUsers } from "../../../services/userService";
 import { User } from "../../../interfaces/User";
+import { Link } from "react-router-dom";
 
 const AllUsersContainer = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -53,9 +54,12 @@ const AllUsersContainer = () => {
               </div>
 
               <div className="mr-6">
-                <a className="px-4 py-1 border border-sky-500 text-sky-600 rounded-full hover:bg-sky-50">
+                <Link
+                  to={`/users/${user.id}`}
+                  className="px-4 py-1 border border-sky-500 text-sky-600 rounded-full hover:bg-sky-50"
+                >
                   Go to profile
-                </a>
+                </Link>
               </div>
             </div>
           ))

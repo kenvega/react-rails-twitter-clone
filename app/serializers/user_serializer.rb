@@ -5,6 +5,7 @@
 # Table name: users
 #
 #  id                     :bigint           not null, primary key
+#  bio                    :text
 #  display_name           :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
@@ -23,7 +24,7 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :username, :display_name, :avatar_url, :created_at
+  attributes :id, :email, :username, :display_name, :bio, :avatar_url, :created_at
 
   def avatar_url
     return unless object.avatar.attached?

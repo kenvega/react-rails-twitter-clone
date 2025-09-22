@@ -1,6 +1,4 @@
-// import React from 'react'
 import ReactDOM from "react-dom/client";
-// import TweetsList from './components/TweetsList'
 import Login from "./components/pages/auth/Login.tsx";
 import SignUp from "./components/pages/auth/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";

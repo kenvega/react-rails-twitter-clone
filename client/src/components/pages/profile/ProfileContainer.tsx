@@ -5,6 +5,7 @@ interface Profile {
   id: number;
   email: string;
   display_name: string;
+  bio: string;
   username: string;
   avatar_url: string;
 }
@@ -49,7 +50,7 @@ const ProfileContainer = () => {
           <div>
             <p className="text-xl font-bold">{profile.display_name}</p>
             <p className="text-slate-400">@{profile.username}</p>
-            <p>Bio should be here if user has a Bio set</p>
+            <p>{profile.bio}</p>
             {/* TODO: profile details: location, url, when did they joined, following and followers count */}
           </div>
 
