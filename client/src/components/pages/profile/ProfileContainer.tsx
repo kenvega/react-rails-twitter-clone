@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getProfile } from "../../../services/userService";
 
-interface Profile {
+type Profile = {
   id: number;
   email: string;
   display_name: string;
@@ -10,7 +10,7 @@ interface Profile {
   url: string;
   username: string;
   avatar_url: string;
-}
+};
 
 const ProfileContainer = () => {
   useEffect(() => {
