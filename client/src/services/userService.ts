@@ -6,7 +6,7 @@ export const getProfile = () => {
 };
 
 export const getUser = ({ userId }: { userId: number }) => {
-  return http.get(`${API_URL}/user/${userId}`).then(handleResponse).catch(handleError);
+  return http.get(`${API_URL}/users/${userId}`).then(handleResponse).catch(handleError);
 };
 
 export const getUsers = () => {

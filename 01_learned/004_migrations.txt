@@ -34,3 +34,4 @@ migrations done
 
   bundle exec rails g migration add_url_to_users url:string
 
+  bundle exec rails g migration add_reply_tweets_count_to_tweets reply_tweets:integer

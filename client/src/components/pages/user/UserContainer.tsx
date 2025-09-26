@@ -31,7 +31,6 @@ const UserContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
   const fetchUser = (userId: number) => {
-    // TODO: get number from url
     return getUser({ userId })
       .then((user) => {
         console.log("user: ", user);
@@ -51,7 +50,11 @@ const UserContainer = () => {
       {user && !loadingUser ? (
         <div className="px-2">
           <div className="mb-8 mt-8 flex justify-between">
-            <img className="w-32 h-32 rounded-full" src={user.avatar_url || "/src/assets/user.svg"} alt="user avatar" />
+            <img
+              className="w-32 h-32 rounded-full"
+              src={user.avatar_url || "/src/assets/profile.svg"}
+              alt="user avatar"
+            />
             <button>Follow User</button>
           </div>
           <div>

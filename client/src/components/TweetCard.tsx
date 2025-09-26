@@ -66,7 +66,7 @@ function TweetCard({
           <div>
             <button className="flex cursor-pointer" onClick={() => onNavigateToTweet(tweet.id)}>
               <img src="/src/assets/chat.svg" className="w-4 mr-2" />
-              <span>14</span>
+              <span>{tweet.reply_tweets_count}</span>
             </button>
           </div>
 
