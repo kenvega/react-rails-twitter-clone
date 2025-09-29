@@ -12,3 +12,7 @@ export const getUser = ({ userId }: { userId: number }) => {
 export const getUsers = () => {
   return http.get(`${API_URL}/users`).then(handleResponse).catch(handleError);
 };
+
+export const getUserTweets = ({ userId }: { userId: number }) => {
+  return http.get(`${API_URL}/users/${userId}/tweets`).then(handleResponse).catch(handleError);
+};

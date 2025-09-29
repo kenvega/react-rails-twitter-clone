@@ -4,9 +4,17 @@ class AddReplyTweetsCountToTweets < ActiveRecord::Migration[7.0]
   def up
     add_column :tweets, :reply_tweets_count, :integer, null: false, default: 0
 
-    Tweet.find_each do |tweet|
-      tweet.update!(reply_tweets_count: tweet.reply_tweets.size)
-    end
+    execute <<~SQL
+      UPDATE tweets
+      SET reply_tweets_count = subquery.reply_tweet_counts
+      FROM (
+        SELECT parent_tweet_id, COUNT(*) AS reply_tweet_counts
+        FROM tweets
+        WHERE parent_tweet_id IS NOT NULL
+        GROUP BY parent_tweet_id
+      ) subquery
+      WHERE tweets.id = subquery.parent_tweet_id;
+    SQL
   end
 
   def down

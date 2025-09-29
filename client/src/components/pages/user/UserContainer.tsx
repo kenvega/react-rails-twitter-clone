@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { getUser } from "../../../services/userService";
+import { getUser, getUserTweets } from "../../../services/userService";
 import { useParams } from "react-router-dom";
 
 type User = {
@@ -16,18 +16,23 @@ type User = {
 const UserContainer = () => {
   useEffect(() => {
     if (!userIdParam) return;
-    const id = Number(userIdParam);
-    if (Number.isNaN(id)) {
+    const userId = Number(userIdParam);
+    if (Number.isNaN(userId)) {
       setError("Invalid user id");
       setLoadingUser(false);
       return;
     }
-    fetchUser(id);
+    fetchUser(userId);
+    fetchUserTweets(userId);
   }, []);
 
   const { userIdParam } = useParams<{ userIdParam: string }>();
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState<boolean>(true);
+
+  const [userTweets, setUserTweets] = useState([]);
+  const [loadingUserTweets, setLoadingUserTweets] = useState<boolean>(true);
+
   const [error, setError] = useState<string | null>(null);
 
   const fetchUser = (userId: number) => {
@@ -42,6 +47,21 @@ const UserContainer = () => {
       })
       .finally(() => {
         setLoadingUser(false);
+      });
+  };
+
+  const fetchUserTweets = (userId: number) => {
+    return getUserTweets({ userId })
+      .then((userTweets) => {
+        console.log("userTweets: ", userTweets);
+        setUserTweets(userTweets);
+      })
+      .catch((error) => {
+        setError(`Error occurred: ${error}`);
+        console.error(error);
+      })
+      .finally(() => {
+        setLoadingUserTweets(false);
       });
   };
 
@@ -66,7 +86,7 @@ const UserContainer = () => {
             {/* TODO: user details: when did they joined, following and followers count */}
           </div>
 
-          {/* TODO: tweets from your user */}
+          {/* TODO: tweets from this user */}
         </div>
       ) : (
         <p>Loading...</p>
