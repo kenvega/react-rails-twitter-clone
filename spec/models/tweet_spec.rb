@@ -37,6 +37,8 @@ RSpec.describe Tweet, type: :model do
   it { should have_many(:retweets).dependent(:destroy) }
   it { should have_many(:users_who_retweeted).through(:retweets).source(:user) }
 
+  it { should have_and_belong_to_many(:hashtags) }
+
   it { should validate_presence_of(:body) }
   it { should validate_length_of(:body).is_at_most(280) }
 
