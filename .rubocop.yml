@@ -21,3 +21,8 @@ Style/SymbolArray:
   Exclude:
     - "config/routes.rb"
     - "db/migrate/**/*.rb"
+
+# allow longer blocks for tests
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'

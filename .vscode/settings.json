@@ -4,5 +4,9 @@
   "explorer.confirmDragAndDrop": false,
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  // to remove the run, run in terminal and debug buttons in editor for ruby tests
+  "[ruby]": {
+    "editor.codeLens": false
   }
 }

@@ -49,4 +49,39 @@ RSpec.describe Tweet, type: :model do
   it {
     should have_many(:reply_tweets).with_foreign_key(:parent_tweet_id).class_name('Tweet').inverse_of(:parent_tweet)
   }
+
+  describe 'saving hashtags' do
+    let(:user) { create(:user) }
+
+    context 'when there are no hashtags in the body' do
+      it 'does not create hashtags' do
+        expect do
+          Tweet.create(user: user, body: 'a simple tweet')
+        end.not_to(change { Hashtag.count })
+      end
+    end
+
+    context 'when there are hashtags in the body' do
+      it 'creates hashtags' do
+        expect do
+          Tweet.create(user: user, body: 'a #simple #tweet')
+        end.to change { Hashtag.count }.by(2)
+      end
+
+      it 'creates hashtags assigned to the tweet' do
+        tweet = Tweet.create(user: user, body: 'a #simple #tweet')
+        expect(tweet.hashtags.size).to eq(2)
+      end
+    end
+
+    context 'when there are duplicate hashtags in the body' do
+      it 'does not create extra hashtags' do
+        Hashtag.create(tag: 'little')
+
+        expect do
+          Tweet.create(user: user, body: 'a #little #simple #tweet')
+        end.to change { Hashtag.count }.by(2)
+      end
+    end
+  end
 end
