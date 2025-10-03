@@ -9,6 +9,10 @@
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #
+# Indexes
+#
+#  index_hashtags_on_tag  (tag)
+#
 require 'rails_helper'
 
 RSpec.describe Hashtag, type: :model do

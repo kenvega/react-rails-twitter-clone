@@ -39,3 +39,5 @@ migrations done
   bundle exec rails g model hashtag tag:string
 
   bundle exec rails g migration create_hashtags_tweets_table
+
+  bundle exec rails g migration add_index_to_tag_column_on_hashtags
