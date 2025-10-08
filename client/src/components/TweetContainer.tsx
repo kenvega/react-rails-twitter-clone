@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { getTweet } from "../services/tweetsService";
 import { Tweet } from "../interfaces/Tweet";
 import { useNavigate } from "react-router-dom";
@@ -91,6 +91,20 @@ const TweetContainer = () => {
     return <p>Loading tweet...</p>;
   }
 
+  const tweetBodyWithHashtagsHighlighted = tweet.body.split(" ").reduce<React.ReactNode[]>((nodes, word, index) => {
+    if (index > 0) nodes.push(" ");
+    if (word.startsWith("#")) {
+      nodes.push(
+        <Link key={`tweet-${tweet.id}-tag-${index}`} to={`/tags/${word.slice(1)}`} className="text-blue-400">
+          {word}
+        </Link>
+      );
+    } else {
+      nodes.push(word);
+    }
+    return nodes;
+  }, []);
+
   return (
     <div>
       {/* Go back button and title */}
@@ -124,10 +138,11 @@ const TweetContainer = () => {
           <div>
             <p className="font-bold">{tweet.user.display_name}</p>
             <p className="text-gray-500">@{tweet.user.username} </p>
-            <p className="mb-3 text-3xl">{tweet.body}</p>
+            <p className="mb-3 text-3xl">{tweetBodyWithHashtagsHighlighted}</p>
             <p className="text-gray-500">{formatToTimeMMMddYYYY(tweet.created_at)}</p>
           </div>
 
+          {/* TODO: possibly use the component TweetActionButtons */}
           {/* Tweet action buttons */}
           <div className="flex justify-evenly mt-5">
             {/* replies to tweet button */}
