@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 import {
   likeTweet,
   dislikeTweet,

@@ -35,6 +35,9 @@ Rails.application.routes.draw do
       get 'bookmarks', to: 'bookmarks#index'
 
       resources :users, only: [:index, :show]
+
+      resources :hashtags, only: [:index]
+
       # same as above
       # get 'users', to: 'users#index'
       # get 'users/:id', to: 'users#show'

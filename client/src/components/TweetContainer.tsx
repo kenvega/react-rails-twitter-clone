@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getTweet } from "../services/tweetsService";
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 import { useNavigate } from "react-router-dom";
 import BackIcon from "../assets/back.svg?react";
 import { formatToTimeMMMddYYYY } from "../helpers/dateUtils";
@@ -95,7 +95,11 @@ const TweetContainer = () => {
     if (index > 0) nodes.push(" ");
     if (word.startsWith("#")) {
       nodes.push(
-        <Link key={`tweet-${tweet.id}-tag-${index}`} to={`/tags/${word.slice(1)}`} className="text-blue-400">
+        <Link
+          key={`tweet-${tweet.id}-tag-${index}`}
+          to={`/tags/${word.slice(1)}`}
+          className="text-blue-400 hover:underline"
+        >
           {word}
         </Link>
       );

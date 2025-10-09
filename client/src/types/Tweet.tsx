@@ -1,4 +1,4 @@
-export interface Tweet {
+export type Tweet = {
   id: number;
   body: string;
   created_at: string;
@@ -15,4 +15,4 @@ export interface Tweet {
     username: string;
     avatar_url: string;
   };
-}
+};

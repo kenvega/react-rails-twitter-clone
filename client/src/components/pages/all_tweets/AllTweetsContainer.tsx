@@ -4,7 +4,7 @@ import { getTweets, createTweet } from "../../../services/tweetsService";
 import TweetForm from "../../TweetForm";
 import TweetsList from "../../TweetsList";
 
-import { Tweet } from "../../../interfaces/Tweet";
+import { Tweet } from "../../../types/Tweet";
 
 import { ThemeContext } from "../../../context/ThemeProvider";
 

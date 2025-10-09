@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 import { useState, useEffect } from "react";
 
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 
 import { createReplyTweet, getReplyTweets } from "../services/tweetsService";
 

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 // import ChartIcon from "../assets/chart.svg?react";
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 import { formatToMMMdd } from "../helpers/dateUtils";
 import TweetActionButtons from "./TweetActionButtons";
 
@@ -33,11 +33,16 @@ function TweetCard({
 }: TweetCardProps) {
   const formattedDate = formatToMMMdd(tweet.created_at);
 
+  // TODO: probably needs to create a component
   const tweetBodyWithHashtagsHighlighted = tweet.body.split(" ").reduce<React.ReactNode[]>((nodes, word, index) => {
     if (index > 0) nodes.push(" ");
     if (word.startsWith("#")) {
       nodes.push(
-        <Link key={`tweet-${tweet.id}-tag-${index}`} to={`/tags/${word.slice(1)}`} className="text-blue-400">
+        <Link
+          key={`tweet-${tweet.id}-tag-${index}`}
+          to={`/tags/${word.slice(1)}`}
+          className="text-blue-400 hover:underline"
+        >
           {word}
         </Link>
       );

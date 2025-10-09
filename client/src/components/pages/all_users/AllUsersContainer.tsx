@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getUsers } from "../../../services/userService";
-import { User } from "../../../interfaces/User";
+import { User } from "../../../types/User";
 import { Link } from "react-router-dom";
 
 const AllUsersContainer = () => {

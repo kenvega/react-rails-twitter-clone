@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 import LoadingIcon from "../assets/loading.svg?react";
 
 type TweetActionButtonsProps = {

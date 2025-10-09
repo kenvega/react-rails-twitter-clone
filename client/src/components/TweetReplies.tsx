@@ -1,4 +1,4 @@
-import { Tweet } from "../interfaces/Tweet";
+import { Tweet } from "../types/Tweet";
 
 const TweetReplies = ({ replyTweets }: { replyTweets: Tweet[] }) => {
   console.log("tweetReplies en TweetReplies: ", replyTweets);
