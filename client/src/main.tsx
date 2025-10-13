@@ -8,6 +8,7 @@ import BookmarksPage from "./components/pages/bookmarks/BookmarksPage.tsx";
 import MessagesPage from "./components/pages/messages/MessagesPage.tsx";
 import AllTweetsPage from "./components/pages/all_tweets/AllTweetsPage.tsx";
 import HashtagsPage from "./components/pages/hashtags/HashtagsPage.tsx";
+import HashtagTweetsPage from "./components/pages/hashtags/HashtagTweetsPage.tsx";
 import AllUsersPage from "./components/pages/all_users/AllUsersPage.tsx";
 import NotificationsPage from "./components/pages/notifications/NotificationsPage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
@@ -53,10 +54,18 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "hashtags",
+    path: "explore",
     element: (
       <Theme>
         <HashtagsPage />
+      </Theme>
+    ),
+  },
+  {
+    path: "explore/:hashtagIdParam",
+    element: (
+      <Theme>
+        <HashtagTweetsPage />
       </Theme>
     ),
   },

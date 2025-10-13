@@ -45,8 +45,8 @@ const Sidebar = () => {
       <SidebarButton
         title="Hashtags"
         SVGIcon={Hashtag}
-        onClick={() => navigate("/hashtags")}
-        active={isActive({ to: "/hashtags" })}
+        onClick={() => navigate("/explore")}
+        active={isActive({ to: "/explore" })}
       />
       <SidebarButton
         title="All Tweets"

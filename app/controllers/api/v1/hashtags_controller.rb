@@ -6,7 +6,7 @@ module Api
       before_action :authenticate_user!
 
       def index
-        hashtags = Hashtag.all
+        hashtags = Hashtag.all.includes(:tweets)
         render json: hashtags
       end
 

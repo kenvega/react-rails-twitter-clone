@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getHashtags } from "../../../services/hashtagsService";
 import { Hashtag } from "../../../types/Hashtags";
+import { Link } from "react-router-dom";
 
 const HashtagsContainer = () => {
   useEffect(() => {
@@ -37,7 +38,12 @@ const HashtagsContainer = () => {
   return (
     <div>
       {hashtags.map((hashtag) => {
-        return <div key={hashtag.id}>{hashtag.tag}</div>;
+        return (
+          <Link key={hashtag.id} to={`/explore/${hashtag.id}`} className="mb-4 p-2 block hover:bg-gray-600">
+            <p className="font-bold text-xl">#{hashtag.tag}</p>
+            <p className="text-gray-500 text-lg">{hashtag.tweets_count} Tweets</p>
+          </Link>
+        );
       })}
     </div>
   );
