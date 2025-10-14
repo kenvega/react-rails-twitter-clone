@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { getTweets, createTweet } from "../../../services/tweetsService";
 
 import TweetForm from "../../TweetForm";
@@ -6,20 +6,12 @@ import TweetsList from "../../TweetsList";
 
 import { Tweet } from "../../../types/Tweet";
 
-import { ThemeContext } from "../../../context/ThemeProvider";
-
 const AllTweetsContainer = () => {
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [loadingTweets, setLoadingTweets] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [tweetBody, setTweetBody] = useState("");
-
-  const themeContext = useContext(ThemeContext);
-
-  if (!themeContext) {
-    throw new Error("ThemeContext is undefined");
-  }
 
   const fetchTweets = () => {
     return getTweets()

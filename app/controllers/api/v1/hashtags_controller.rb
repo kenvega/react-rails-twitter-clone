@@ -11,12 +11,9 @@ module Api
       end
 
       def show
-        # TODO: finish this. change it
-        @hashtag = Hashtag.find(params[:id])
+        hashtag = Hashtag.find(params[:id])
 
-        @tweet_presenters = @hashtag.tweets.includes(:user).order(created_at: :desc).map do |tweet|
-          TweetPresenter.new(tweet: tweet, current_user: current_user)
-        end
+        render json: hashtag.tweets.includes(:user).order(created_at: :desc)
       end
     end
   end

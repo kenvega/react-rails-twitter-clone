@@ -38,6 +38,8 @@ Rails.application.routes.draw do
 
       resources :hashtags, only: [:index]
 
+      get 'hashtags/:id/tweets', to: 'hashtags#show'
+
       # same as above
       # get 'users', to: 'users#index'
       # get 'users/:id', to: 'users#show'
