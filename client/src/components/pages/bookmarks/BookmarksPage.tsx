@@ -1,13 +1,11 @@
 import BookmarksContainer from "./BookmarksContainer";
-import ContentTitle from "../../ContentTitle";
-import PageLayout from "../../layout/PageLayout";
+import Page from "../../layout/Page";
 
 const BookmarksPage = () => {
   return (
-    <PageLayout>
-      <ContentTitle title="Bookmarks" />
+    <Page title="Bookmarks">
       <BookmarksContainer />
-    </PageLayout>
+    </Page>
   );
 };
 

@@ -1,14 +1,12 @@
 import AllTweetsContainer from "../all_tweets/AllTweetsContainer";
-import ContentTitle from "../../ContentTitle";
-import PageLayout from "../../layout/PageLayout";
+import Page from "../../layout/Page";
 
 const FeedTweetsPage = () => {
   return (
-    <PageLayout>
-      <ContentTitle title="Home" />
+    <Page title="Home">
       {/* TODO: should change it to FeedContainer later once I create difference between feed for user and all tweets */}
       <AllTweetsContainer />
-    </PageLayout>
+    </Page>
   );
 };
 

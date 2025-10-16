@@ -1,13 +1,11 @@
-import ContentTitle from "../../ContentTitle";
-import PageLayout from "../../layout/PageLayout";
+import Page from "../../layout/Page";
 import UserContainer from "./UserContainer";
 
 const UserPage = () => {
   return (
-    <PageLayout>
-      <ContentTitle title="User Page" />
+    <Page title="User Page">
       <UserContainer />
-    </PageLayout>
+    </Page>
   );
 };
 

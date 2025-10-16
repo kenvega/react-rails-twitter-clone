@@ -1,12 +1,7 @@
-import ContentTitle from "../../ContentTitle";
-import PageLayout from "../../layout/PageLayout";
+import Page from "../../layout/Page";
 
 const MessagesPage = () => {
-  return (
-    <PageLayout>
-      <ContentTitle title="Messages Page" />
-    </PageLayout>
-  );
+  return <Page title="Messages Page" />;
 };
 
 export default MessagesPage;

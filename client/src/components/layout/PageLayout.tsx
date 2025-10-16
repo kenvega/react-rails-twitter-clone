@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import Sidebar from "../Sidebar";
 import HashtagSidebar from "../HashtagSidebar";
 
-type PageLayoutProps = {
+export type PageLayoutProps = {
   children: ReactNode;
   leftSidebar?: ReactNode | null;
   rightSidebar?: ReactNode | null;

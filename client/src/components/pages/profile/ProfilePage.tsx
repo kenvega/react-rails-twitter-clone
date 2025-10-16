@@ -1,13 +1,11 @@
-import ContentTitle from "../../ContentTitle";
 import ProfileContainer from "./ProfileContainer";
-import PageLayout from "../../layout/PageLayout";
+import Page from "../../layout/Page";
 
 const ProfilePage = () => {
   return (
-    <PageLayout>
-      <ContentTitle title="Your Profile" />
+    <Page title="Your Profile">
       <ProfileContainer />
-    </PageLayout>
+    </Page>
   );
 };
 
