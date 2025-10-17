@@ -1,11 +1,11 @@
-import Page from "../../layout/Page";
+import PageLayout from "../../layout/PageLayout";
 import HashtagTweetsContainer from "./HashtagTweetsContainer";
 
 const HashtagTweetsPage = () => {
   return (
-    <Page title="Hashtag Page">
+    <PageLayout>
       <HashtagTweetsContainer />
-    </Page>
+    </PageLayout>
   );
 };
 

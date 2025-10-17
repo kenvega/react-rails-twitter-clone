@@ -1,12 +1,12 @@
 import { ReactNode } from "react";
 
 import ContentTitle from "../ContentTitle";
-import PageLayout, { PageLayoutProps } from "./PageLayout";
+import PageLayout from "./PageLayout";
 
 type PageProps = {
   title?: string;
   children?: ReactNode;
-} & Omit<PageLayoutProps, "children">;
+};
 
 const Page = ({ title, children, ...layoutProps }: PageProps) => (
   <PageLayout {...layoutProps}>
