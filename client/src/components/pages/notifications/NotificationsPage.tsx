@@ -1,7 +1,13 @@
-import Page from "../../layout/Page";
+import PageLayout from "../../layout/PageLayout";
+import ContentTitle from "../../ContentTitle";
 
 const NotificationsPage = () => {
-  return <Page title="Notifications Page" />;
+  return (
+    <PageLayout>
+      <ContentTitle title="Notifications Page" />
+      {/* TODO: needs notifications page here */}
+    </PageLayout>
+  );
 };
 
 export default NotificationsPage;

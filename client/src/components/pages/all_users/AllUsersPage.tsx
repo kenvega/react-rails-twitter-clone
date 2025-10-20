@@ -1,11 +1,13 @@
 import AllUsersContainer from "./AllUsersContainer";
-import Page from "../../layout/Page";
+import PageLayout from "../../layout/PageLayout";
+import ContentTitle from "../../ContentTitle";
 
 const AllUsersPage = () => {
   return (
-    <Page title="All Users">
+    <PageLayout>
+      <ContentTitle title="All Users" />
       <AllUsersContainer />
-    </Page>
+    </PageLayout>
   );
 };
 

@@ -1,7 +1,13 @@
-import Page from "../../layout/Page";
+import PageLayout from "../../layout/PageLayout";
+import ContentTitle from "../../ContentTitle";
 
 const MessagesPage = () => {
-  return <Page title="Messages Page" />;
+  return (
+    <PageLayout>
+      <ContentTitle title="Messages Page" />
+      {/* TODO: needs messages page here */}
+    </PageLayout>
+  );
 };
 
 export default MessagesPage;

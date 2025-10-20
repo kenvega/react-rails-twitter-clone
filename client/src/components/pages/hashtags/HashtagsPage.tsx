@@ -1,11 +1,13 @@
-import Page from "../../layout/Page";
 import HashtagsContainer from "./HashtagsContainer";
+import PageLayout from "../../layout/PageLayout";
+import ContentTitle from "../../ContentTitle";
 
 const HashtagsPage = () => {
   return (
-    <Page title="Hashtags Page">
+    <PageLayout>
+      <ContentTitle title="Hashtags Page" />
       <HashtagsContainer />
-    </Page>
+    </PageLayout>
   );
 };
 

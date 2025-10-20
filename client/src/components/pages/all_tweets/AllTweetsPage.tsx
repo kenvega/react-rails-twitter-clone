@@ -1,12 +1,14 @@
 import AllTweetsContainer from "./AllTweetsContainer";
-import Page from "../../layout/Page";
+import PageLayout from "../../layout/PageLayout";
+import ContentTitle from "../../ContentTitle";
 
 const AllTweetsPage = () => {
   return (
-    <Page title="All tweets">
+    <PageLayout>
+      <ContentTitle title="All Tweets" />
       {/* TODO: should not have the form */}
       <AllTweetsContainer />
-    </Page>
+    </PageLayout>
   );
 };
 
