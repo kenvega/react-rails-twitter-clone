@@ -37,9 +37,7 @@ const router = createBrowserRouter([
     path: "tweets/:tweetIdParam",
     element: (
       <RequireAuth>
-        <Theme>
-          <TweetPage />
-        </Theme>
+        <TweetPage />
       </RequireAuth>
     ),
   },
@@ -47,50 +45,48 @@ const router = createBrowserRouter([
     path: "tweets",
     element: (
       <RequireAuth>
-        <Theme>
-          <FeedTweetsPage />
-        </Theme>
+        <FeedTweetsPage />
       </RequireAuth>
     ),
   },
   {
     path: "explore",
     element: (
-      <Theme>
+      <RequireAuth>
         <HashtagsPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
     path: "explore/:hashtagIdParam",
     element: (
-      <Theme>
+      <RequireAuth>
         <HashtagTweetsPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
     path: "all_tweets",
     element: (
-      <Theme>
+      <RequireAuth>
         <AllTweetsPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
     path: "all_users",
     element: (
-      <Theme>
+      <RequireAuth>
         <AllUsersPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
     path: "notifications",
     element: (
-      <Theme>
+      <RequireAuth>
         <NotificationsPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
 
@@ -98,36 +94,32 @@ const router = createBrowserRouter([
     path: "profile",
     element: (
       <RequireAuth>
-        <Theme>
-          <ProfilePage />
-        </Theme>
+        <ProfilePage />
       </RequireAuth>
     ),
   },
   {
     path: "users/:userIdParam",
     element: (
-      <Theme>
+      <RequireAuth>
         <UserPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
     path: "bookmarks",
     element: (
       <RequireAuth>
-        <Theme>
-          <BookmarksPage />
-        </Theme>
+        <BookmarksPage />
       </RequireAuth>
     ),
   },
   {
     path: "channels",
     element: (
-      <Theme>
+      <RequireAuth>
         <MessagesPage />
-      </Theme>
+      </RequireAuth>
     ),
   },
   {
@@ -139,7 +131,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode> // for now i'm not going to use StrictMode because it is causing doble requests and my effects are not used incorrectly. refs: https://react.dev/learn/synchronizing-with-effects#fetching-data --- https://stackoverflow.com/a/72238236
   <ThemeProvider>
-    <RouterProvider router={router} />
+    <Theme>
+      <RouterProvider router={router} />
+    </Theme>
   </ThemeProvider>
   // </React.StrictMode>,
 );
