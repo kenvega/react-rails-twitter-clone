@@ -15,7 +15,7 @@ const HashtagTweetsContainer = () => {
 
   const { hashtagIdParam } = useParams<{ hashtagIdParam: string }>();
 
-  const fetchHashtagTweets = ({ id }: { id: string }) => {
+  const fetchHashtagTweets = ({ id }: { id: number }) => {
     return getHashtagTweets({ id })
       .then((tweets) => {
         console.log("response tweets: ", tweets);
@@ -32,7 +32,9 @@ const HashtagTweetsContainer = () => {
 
   // TODO: fix typescript here
   useEffect(() => {
-    fetchHashtagTweets({ id: hashtagIdParam });
+    if (hashtagIdParam) {
+      fetchHashtagTweets({ id: Number(hashtagIdParam) });
+    }
   }, [hashtagIdParam]);
 
   return (
@@ -42,10 +44,17 @@ const HashtagTweetsContainer = () => {
           <button onClick={() => navigate(-1)}>
             <BackIcon />
           </button>
+          {/* TODO: should say: tweets from the hashtag <hashtag_name> */}
           <span className="ml-5 font-bold text-xl">Tweets from that hashtag</span>
         </div>
       </div>
-      <TweetsList tweets={tweets} loadingTweets={loadingTweets} error={error} fetchTweets={fetchHashtagTweets} />
+      <TweetsList
+        tweets={tweets}
+        loadingTweets={loadingTweets}
+        error={error}
+        fetchTweets={fetchHashtagTweets}
+        hashtagId={hashtagIdParam}
+      />
     </div>
   );
 };

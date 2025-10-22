@@ -114,7 +114,7 @@ const TweetContainer = () => {
       {/* Go back button and title */}
       <div>
         <div className="flex mb-4">
-          <button onClick={() => navigate("/tweets")}>
+          <button onClick={() => navigate(-1)}>
             <BackIcon />
           </button>
           <span className="ml-5 font-bold text-xl">Tweet</span>
