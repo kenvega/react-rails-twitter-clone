@@ -14,9 +14,9 @@ const HashtagsContainer = () => {
 
   const fetchHashtags = () => {
     return getHashtags()
-      .then((Hashtags) => {
-        console.log("Hashtags: ", Hashtags);
-        setHashtags(Hashtags);
+      .then((hashtags) => {
+        console.log("hashtags: ", hashtags);
+        setHashtags(hashtags);
       })
       .catch((error) => {
         setError(`Error occurred: ${error}`);
