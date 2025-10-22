@@ -4,10 +4,6 @@ import TweetsList from "../../TweetsList";
 import { Tweet } from "../../../types/Tweet";
 
 const BookmarksContainer = () => {
-  useEffect(() => {
-    fetchBookmarks();
-  }, []);
-
   const [bookmarks, setBookmarks] = useState<Tweet[]>([]);
   const [loadingBookmarks, setLoadingBookmarks] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -26,6 +22,10 @@ const BookmarksContainer = () => {
         setLoadingBookmarks(false);
       });
   };
+
+  useEffect(() => {
+    fetchBookmarks();
+  }, []);
 
   return (
     <div>

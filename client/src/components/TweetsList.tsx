@@ -14,15 +14,11 @@ import TweetCard from "./TweetCard";
 
 type ActionType = "like" | "bookmark" | "retweet";
 
-type FetchTweetsWithParam = (params: { id: number }) => Promise<void>;
-type FetchTweetsWithoutParam = () => Promise<void>;
-
 type TweetsListProps = {
   tweets: Tweet[];
   loadingTweets: boolean;
-  fetchTweets: FetchTweetsWithParam | FetchTweetsWithoutParam;
+  fetchTweets: () => Promise<void>;
   error: string | null;
-  hashtagId?: string;
 };
 
 type runActionProps = {
@@ -31,7 +27,7 @@ type runActionProps = {
   actionFn: (args: { tweetId: number }) => Promise<void>;
 };
 
-const TweetsList = ({ tweets, loadingTweets, fetchTweets, error, hashtagId }: TweetsListProps) => {
+const TweetsList = ({ tweets, loadingTweets, fetchTweets, error }: TweetsListProps) => {
   const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
   const [activeAction, setActiveAction] = useState<string>("");
   const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
@@ -51,11 +47,7 @@ const TweetsList = ({ tweets, loadingTweets, fetchTweets, error, hashtagId }: Tw
 
     try {
       await actionFn({ tweetId });
-      if (hashtagId) {
-        await fetchTweets({ id: Number(hashtagId) });
-      } else {
-        await fetchTweets();
-      }
+      await fetchTweets();
     } finally {
       setActiveTweetId(null);
       setIsActionLoading(false);

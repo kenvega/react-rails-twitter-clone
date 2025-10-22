@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import TweetsList from "../../TweetsList";
 import { Tweet } from "../../../types/Tweet";
 import { getHashtagTweets } from "../../../services/hashtagsService";
@@ -15,10 +15,20 @@ const HashtagTweetsContainer = () => {
 
   const { hashtagIdParam } = useParams<{ hashtagIdParam: string }>();
 
-  const fetchHashtagTweets = ({ id }: { id: number }) => {
+  // useCallback is used to have a stable reference for the function fetchHashtagTweets
+  // if we don't use useCallback here, the function reference would change on every render
+  // and that will cause an infinite loop. how?
+  // because fetchHashtagTweets changes the state so it triggers a re-render
+  // when that re-render occurs and no useCallback is used then another reference for the function is created
+  // meaning that the dependency array in useEffect changed
+  // and that causes to run the function again which again will trigger state change and then a re-render (the loop)
+  const fetchHashtagTweets = useCallback(() => {
+    if (!hashtagIdParam) return Promise.resolve();
+
+    const id = Number(hashtagIdParam);
     return getHashtagTweets({ id })
       .then((tweets) => {
-        console.log("response tweets: ", tweets);
+        console.log("hashtag tweets: ", tweets);
         setTweets(tweets);
       })
       .catch((error) => {
@@ -28,14 +38,19 @@ const HashtagTweetsContainer = () => {
       .finally(() => {
         setLoadingTweets(false);
       });
-  };
-
-  // TODO: fix typescript here
-  useEffect(() => {
-    if (hashtagIdParam) {
-      fetchHashtagTweets({ id: Number(hashtagIdParam) });
-    }
   }, [hashtagIdParam]);
+
+  // fetchHashtagTweets is created on every render
+  // if we add it to the dependency array [fetchHashtagTweets]
+  // the effect would re-run on every render because the function reference is new each time
+  // that's why we use useCallback to make it a stable reference across re-renders
+  // unless its dependencies change (like hashtagIdParam)
+  // With the memoized function, this effect runs:
+  // - on mount
+  // - again whenever hashtagIdParam changes (because the memoized function changes)
+  useEffect(() => {
+    fetchHashtagTweets();
+  }, [fetchHashtagTweets]);
 
   return (
     <div>
@@ -44,17 +59,10 @@ const HashtagTweetsContainer = () => {
           <button onClick={() => navigate(-1)}>
             <BackIcon />
           </button>
-          {/* TODO: should say: tweets from the hashtag <hashtag_name> */}
-          <span className="ml-5 font-bold text-xl">Tweets from that hashtag</span>
+          <span className="ml-5 font-bold text-xl">Hashtag Tweets</span>
         </div>
       </div>
-      <TweetsList
-        tweets={tweets}
-        loadingTweets={loadingTweets}
-        error={error}
-        fetchTweets={fetchHashtagTweets}
-        hashtagId={hashtagIdParam}
-      />
+      <TweetsList tweets={tweets} loadingTweets={loadingTweets} error={error} fetchTweets={fetchHashtagTweets} />
     </div>
   );
 };
