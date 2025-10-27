@@ -5,7 +5,7 @@ import ContentTitle from "../../ContentTitle";
 const BookmarksPage = () => {
   return (
     <PageLayout>
-      <ContentTitle title="Bookmarks" />
+      <ContentTitle title="Your Bookmarks" />
       <BookmarksContainer />
     </PageLayout>
   );

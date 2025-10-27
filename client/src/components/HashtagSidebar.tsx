@@ -39,7 +39,7 @@ const HashtagSidebar = () => {
 
   return (
     <div className="px-3">
-      <p className="font-bold text-xl">Hashtags</p>
+      <p className="font-bold text-xl mb-4">Hashtags</p>
       {status === "success" &&
         hashtags &&
         hashtags.map((hashtag) => {

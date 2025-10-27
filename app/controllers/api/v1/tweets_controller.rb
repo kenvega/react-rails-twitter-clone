@@ -26,6 +26,13 @@ module Api
         render json: tweets
       end
 
+      def user
+        user = User.find(params[:id])
+        tweets = user.tweets.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
+
+        render json: tweets
+      end
+
       private
 
       def tweet_params
