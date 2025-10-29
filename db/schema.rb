@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2025_10_03_170040) do
+ActiveRecord::Schema[7.0].define(version: 2025_10_29_161805) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,18 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_03_170040) do
     t.index ["user_id"], name: "index_retweets_on_user_id"
   end
 
+  create_table "tweet_activities", force: :cascade do |t|
+    t.bigint "activity_viewer_id", null: false
+    t.bigint "activity_creator_id", null: false
+    t.bigint "tweet_id", null: false
+    t.string "activity", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_creator_id"], name: "index_tweet_activities_on_activity_creator_id"
+    t.index ["activity_viewer_id"], name: "index_tweet_activities_on_activity_viewer_id"
+    t.index ["tweet_id"], name: "index_tweet_activities_on_tweet_id"
+  end
+
   create_table "tweets", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "body"
@@ -127,6 +139,9 @@ ActiveRecord::Schema[7.0].define(version: 2025_10_03_170040) do
   add_foreign_key "likes", "users"
   add_foreign_key "retweets", "tweets"
   add_foreign_key "retweets", "users"
+  add_foreign_key "tweet_activities", "tweets"
+  add_foreign_key "tweet_activities", "users", column: "activity_creator_id"
+  add_foreign_key "tweet_activities", "users", column: "activity_viewer_id"
   add_foreign_key "tweets", "tweets", column: "parent_tweet_id"
   add_foreign_key "tweets", "users"
 end
