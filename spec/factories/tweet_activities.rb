@@ -24,9 +24,9 @@
 #
 FactoryBot.define do
   factory :tweet_activity do
-    activity_viewer { nil }
-    activity_creator { nil }
-    tweet { nil }
-    activity { "MyString" }
+    activity_viewer { create(:user) }
+    activity_creator { create(:user) }
+    tweet
+    activity { TweetActivity::ACTIVITIES.sample }
   end
 end

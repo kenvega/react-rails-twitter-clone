@@ -41,6 +41,19 @@ RSpec.describe User, type: :model do
 
   it { should validate_uniqueness_of(:username).case_insensitive.allow_blank }
 
+  it {
+    should have_many(:viewable_tweet_activities)
+      .with_foreign_key(:activity_viewer_id)
+      .class_name('TweetActivity')
+      .dependent(:destroy)
+  }
+  it {
+    should have_many(:created_tweet_activities)
+      .with_foreign_key(:activity_creator_id)
+      .class_name('TweetActivity')
+      .dependent(:destroy)
+  }
+
   describe '#set_display_name' do
     context 'when display_name is set' do
       it 'does not change the display_name' do

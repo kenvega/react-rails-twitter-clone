@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: tweet_activities
@@ -25,5 +27,10 @@
 require 'rails_helper'
 
 RSpec.describe TweetActivity, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should belong_to(:activity_viewer).class_name('User') }
+  it { should belong_to(:activity_creator).class_name('User') }
+  it { should belong_to :tweet }
+
+  it { should validate_presence_of(:activity) }
+  it { should validate_inclusion_of(:activity).in_array(TweetActivity::ACTIVITIES) }
 end
