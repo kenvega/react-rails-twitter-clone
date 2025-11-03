@@ -79,6 +79,12 @@ const Sidebar = () => {
         active={isActive({ to: "/bookmarks" })}
       />
       <SidebarButton
+        title="Tweets Table"
+        SVGIcon={Earth}
+        onClick={() => navigate("/table")}
+        active={isActive({ to: "/table" })}
+      />
+      <SidebarButton
         title="Profile"
         SVGIcon={Profile}
         onClick={() => navigate("/profile")}

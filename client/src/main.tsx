@@ -11,6 +11,7 @@ import HashtagsPage from "./components/pages/hashtags/HashtagsPage.tsx";
 import HashtagTweetsPage from "./components/pages/hashtags/HashtagTweetsPage.tsx";
 import AllUsersPage from "./components/pages/all_users/AllUsersPage.tsx";
 import NotificationsPage from "./components/pages/notifications/NotificationsPage.tsx";
+import TweetsTablePage from "./components/pages/tweets_table/TweetsTablePage.tsx";
 import TweetPage from "./components/TweetPage.tsx";
 import UserPage from "./components/pages/user/UserPage.tsx";
 import RequireAuth from "./components/RequireAuth";
@@ -62,6 +63,14 @@ const router = createBrowserRouter([
     element: (
       <RequireAuth>
         <HashtagTweetsPage />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "table",
+    element: (
+      <RequireAuth>
+        <TweetsTablePage />
       </RequireAuth>
     ),
   },
