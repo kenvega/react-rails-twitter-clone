@@ -4,18 +4,8 @@ import Location from "../../../assets/location.svg?react";
 import UrlLink from "../../../assets/link.svg?react";
 import Calendar from "../../../assets/calendar.svg?react";
 import TweetsList from "../../TweetsList";
-
-type Profile = {
-  id: number;
-  email: string;
-  display_name: string;
-  bio: string;
-  location: string;
-  url: string;
-  username: string;
-  avatar_url: string;
-  created_at: string;
-};
+import { useNavigate } from "react-router-dom";
+import { Profile } from "../../../types/Profile";
 
 const formatJoinDate = (isoDate: string) => {
   const date = new Date(isoDate);
@@ -30,6 +20,8 @@ const ProfileContainer = () => {
   console.log("profile: ", profile);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const [userTweets, setUserTweets] = useState([]);
 
@@ -76,14 +68,20 @@ const ProfileContainer = () => {
     <div>
       {profile && !loadingProfile ? (
         <div className="px-2">
-          <div className="mb-8 mt-8 flex justify-between">
+          <div className="mb-8 mt-8 flex justify-between items-center">
             <img
               className="w-32 h-32 rounded-full"
               src={profile.avatar_url || "/src/assets/profile.svg"}
               alt="profile avatar"
             />
-            {/* TODO: the edit profile button should be here */}
-            <button>Edit Profile</button>
+            <div>
+              <button
+                onClick={() => navigate("/profile/edit")}
+                className="border rounded-lg p-3 text-blue-300 hover:bg-slate-300 hover:text-blue-800 "
+              >
+                Edit Profile
+              </button>
+            </div>
           </div>
           <div>
             <p className="text-xl font-bold">{profile.display_name}</p>

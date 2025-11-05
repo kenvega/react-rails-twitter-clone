@@ -4,6 +4,7 @@ import SignUp from "./components/pages/auth/SignUp.tsx";
 import { Theme } from "@radix-ui/themes";
 import FeedTweetsPage from "./components/pages/feed_tweets/FeedTweetsPage.tsx";
 import ProfilePage from "./components/pages/profile/ProfilePage.tsx";
+import ProfileEditPage from "./components/pages/profile/ProfileEditPage.tsx";
 import BookmarksPage from "./components/pages/bookmarks/BookmarksPage.tsx";
 import MessagesPage from "./components/pages/messages/MessagesPage.tsx";
 import AllTweetsPage from "./components/pages/all_tweets/AllTweetsPage.tsx";
@@ -98,12 +99,19 @@ const router = createBrowserRouter([
       </RequireAuth>
     ),
   },
-
   {
     path: "profile",
     element: (
       <RequireAuth>
         <ProfilePage />
+      </RequireAuth>
+    ),
+  },
+  {
+    path: "profile/edit",
+    element: (
+      <RequireAuth>
+        <ProfileEditPage />
       </RequireAuth>
     ),
   },
