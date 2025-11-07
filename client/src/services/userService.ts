@@ -5,6 +5,17 @@ export const getProfile = () => {
   return http.get(`${API_URL}/profile`).then(handleResponse).catch(handleError);
 };
 
+export const updateProfile = (profileData: FormData) => {
+  return http
+    .put(`${API_URL}/profile`, profileData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+    .then(handleResponse)
+    .catch(handleError);
+};
+
 export const getUser = ({ userId }: { userId: number }) => {
   return http.get(`${API_URL}/users/${userId}`).then(handleResponse).catch(handleError);
 };

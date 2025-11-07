@@ -1,23 +1,56 @@
 import { useState, useEffect } from "react";
-import { getProfile } from "../../../services/userService";
-import { useNavigate } from "react-router-dom";
+import { getProfile, updateProfile } from "../../../services/userService";
+// import { useNavigate } from "react-router-dom";
 import { Profile } from "../../../types/Profile";
-// import Location from "../../../assets/location.svg?react";
-// import UrlLink from "../../../assets/link.svg?react";
-// import Calendar from "../../../assets/calendar.svg?react";
+
+type ProfileForm = {
+  username: string;
+  display_name: string;
+  bio: string;
+  location: string;
+  url: string;
+  avatarFile: File | null;
+};
 
 const ProfileEditContainer = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const navigate = useNavigate();
+  const [form, setForm] = useState<ProfileForm>({
+    username: "",
+    display_name: "",
+    bio: "",
+    location: "",
+    url: "",
+    avatarFile: null,
+  });
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0] ? e.target.files[0] : null;
+    setForm((prev) => ({ ...prev, avatarFile: file }));
+  };
+
+  // const navigate = useNavigate();
 
   useEffect(() => {
     getProfile()
       .then((profile) => {
         console.log("profile: ", profile);
         setProfile(profile);
+        setForm({
+          username: profile.username ?? "",
+          display_name: profile.display_name ?? "",
+          bio: profile.bio ?? "",
+          location: profile.location ?? "",
+          url: profile.url ?? "",
+          avatarFile: null,
+        });
       })
       .catch((error) => {
         setError(`Error occurred: ${error}`);
@@ -30,8 +63,29 @@ const ProfileEditContainer = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // TODO: call update profile service
-    navigate("/profile");
+
+    if (!profile) {
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("username", form.username);
+    formData.append("display_name", form.display_name);
+    formData.append("bio", form.bio);
+    formData.append("location", form.location);
+    formData.append("url", form.url);
+    // formData.append("avatar", form.avatar);
+
+    // console.log("formData: ", JSON.stringify(Object.fromEntries(formData)));
+
+    updateProfile(formData)
+      .then(() => {
+        // navigate("/profile");
+      })
+      .catch((error) => {
+        setError(`Error occurred: ${error}`);
+        console.error(error);
+      });
   };
 
   return (
@@ -44,39 +98,49 @@ const ProfileEditContainer = () => {
               type="text"
               id="username"
               name="username"
-              defaultValue={profile.username}
+              placeholder="Place your username here"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              value={form.username}
+              onChange={handleTextChange}
             />
             <label htmlFor="display_name">Display Name:</label>
             <input
               type="text"
               id="display_name"
               name="display_name"
-              defaultValue={profile.display_name}
+              placeholder="Place your display name here"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              value={form.display_name}
+              onChange={handleTextChange}
             />
             <label htmlFor="bio">Bio:</label>
             <textarea
               id="bio"
               name="bio"
-              defaultValue={profile.bio}
+              placeholder="Place your bio here"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              value={form.bio}
+              onChange={handleTextChange}
             />
             <label htmlFor="location">Location:</label>
             <input
               type="text"
               id="location"
               name="location"
-              defaultValue={profile.location}
+              placeholder="Place your location here"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              value={form.location}
+              onChange={handleTextChange}
             />
             <label htmlFor="url">Website:</label>
             <input
               type="text"
               id="url"
               name="url"
-              defaultValue={profile.url}
+              placeholder="Place your website URL here"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              value={form.url}
+              onChange={handleTextChange}
             />
             <label htmlFor="avatar">Avatar:</label>
             <input
@@ -85,32 +149,13 @@ const ProfileEditContainer = () => {
               name="avatar"
               accept="image/*"
               className="block border border-slate-300 rounded-md p-2 mb-4 w-full text-gray-950"
+              onChange={handleFileChange}
             />
             <button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600">
               Save Changes
             </button>
           </form>
-          {/* TODO: borrar. solo de referencia */}
-          {/* <div className="mb-8 mt-8 flex justify-between items-center">
-            <img
-              className="w-32 h-32 rounded-full"
-              src={profile.avatar_url || "/src/assets/profile.svg"}
-              alt="profile avatar"
-            />
-          </div> */}
-          {/* <div>
-            <p className="text-xl font-bold">{profile.display_name}</p>
-            <p className="text-slate-400">@{profile.username}</p>
-            <p className="mb-4">{profile.bio}</p>
-            <div className="flex gap-3">
-              <p className="flex items-center gap-1">
-                <Location className="w-4 h-4" /> <span className="text-slate-400">{profile.location}</span>
-              </p>
-              <p className="flex items-center gap-1">
-                <UrlLink className="w-4 h-4" /> <a href={profile.url}>{profile.url}</a>
-              </p>
-            </div>
-          </div> */}
+          {error && <p className="text-red-600 mt-2">{error}</p>}
         </div>
       ) : (
         <p>Loading...</p>
