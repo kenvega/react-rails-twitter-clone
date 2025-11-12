@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { getProfile, updateProfile } from "../../../services/userService";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Profile } from "../../../types/Profile";
 
 type ProfileForm = {
@@ -16,6 +16,8 @@ const ProfileEditContainer = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loadingProfile, setLoadingProfile] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const [form, setForm] = useState<ProfileForm>({
     username: "",
@@ -36,7 +38,7 @@ const ProfileEditContainer = () => {
     setForm((prev) => ({ ...prev, avatarFile: file }));
   };
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProfile()
@@ -74,17 +76,22 @@ const ProfileEditContainer = () => {
     formData.append("bio", form.bio);
     formData.append("location", form.location);
     formData.append("url", form.url);
-    // formData.append("avatar", form.avatar);
+    formData.append("avatar", form.avatarFile || "");
 
     // console.log("formData: ", JSON.stringify(Object.fromEntries(formData)));
 
+    setLoading(true);
+
     updateProfile(formData)
       .then(() => {
-        // navigate("/profile");
+        navigate("/profile");
       })
       .catch((error) => {
         setError(`Error occurred: ${error}`);
         console.error(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -152,7 +159,7 @@ const ProfileEditContainer = () => {
               onChange={handleFileChange}
             />
             <button type="submit" className="bg-blue-500 text-white rounded-md px-4 py-2 hover:bg-blue-600">
-              Save Changes
+              Save Changes{loading ? "..." : ""}
             </button>
           </form>
           {error && <p className="text-red-600 mt-2">{error}</p>}
