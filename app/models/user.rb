@@ -44,6 +44,27 @@ class User < ApplicationRecord
   has_many :retweets, dependent: :destroy
   has_many :tweets_user_retweeted, through: :retweets, source: :tweet
 
+  has_many :given_follows, foreign_key: :follower_id, class_name: 'Follow'
+  #           It represents all the Follow instances where the user instance is the follower.
+  #           This is a direct relation between User and Follow.
+  #           `class_name: 'Follow'` tells Rails that these given_follows are of the Follow class.
+  #           `foreign_key: :follower_id` tells Rails to look for Follow instances where
+  #                                          the follower_id column matches this user's ID.
+  has_many :followed_users, through: :given_follows, source: :followed
+  #           It represents the users that the user instance is following.
+  #           This is an indirect relationship between User and Follow.
+  #             followed_users are connected to the User through the given_follows relationship
+  #             Rails first finds all the Follow instances where
+  #               this instance user is the follower (using the given_follows relationship)
+  #               and then, for each of those Follow instances, gets the followed user.
+  #           `source: :followed` tell Rails how to get the followed user from each Follow instance.
+  #              this option says that each Follow instance has a `followed` method that returns the followed user
+
+  has_many :received_follows, foreign_key: :followed_id, class_name: 'Follow'
+  #           It represents all the Follow instances where the user is followed.
+  has_many :followers, through: :received_follows, source: :follower
+  #           It represents the users that a user is being followed by
+
   has_many :tweet_activities, dependent: :destroy
 
   has_many :viewable_tweet_activities,
