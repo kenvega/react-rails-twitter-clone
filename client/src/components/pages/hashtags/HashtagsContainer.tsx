@@ -39,7 +39,7 @@ const HashtagsContainer = () => {
     <div>
       {hashtags.map((hashtag) => {
         return (
-          <Link key={hashtag.id} to={`/explore/${hashtag.id}`} className="mb-4 p-2 block hover:bg-gray-600">
+          <Link key={hashtag.id} to={`/tags/${hashtag.id}`} className="mb-4 p-2 block hover:bg-gray-600">
             <p className="font-bold text-xl">#{hashtag.tag}</p>
             <p className="text-gray-500 text-lg">{hashtag.tweets_count} Tweets</p>
           </Link>

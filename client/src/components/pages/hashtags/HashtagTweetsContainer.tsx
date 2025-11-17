@@ -25,8 +25,7 @@ const HashtagTweetsContainer = () => {
   const fetchHashtagTweets = useCallback(() => {
     if (!hashtagIdParam) return Promise.resolve();
 
-    const id = Number(hashtagIdParam);
-    return getHashtagTweets({ id })
+    return getHashtagTweets({ hashtagIdentifier: hashtagIdParam })
       .then((tweets) => {
         console.log("hashtag tweets: ", tweets);
         setTweets(tweets);

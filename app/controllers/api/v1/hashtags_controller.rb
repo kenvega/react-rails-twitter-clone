@@ -11,7 +11,14 @@ module Api
       end
 
       def show
-        hashtag = Hashtag.find(params[:id])
+        hashtag_identifier = params[:hashtag_identifier]
+
+        # if params[:hashtag_identifier] is numeric, find by id, else find by tag
+        hashtag = if hashtag_identifier.to_i.to_s == hashtag_identifier
+                    Hashtag.find(hashtag_identifier)
+                  else
+                    Hashtag.find_by(tag: hashtag_identifier)
+                  end
 
         render json: hashtag.tweets.includes(:user).order(created_at: :desc)
       end
