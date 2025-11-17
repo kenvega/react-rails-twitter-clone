@@ -13,7 +13,7 @@ const HashtagTweetsContainer = () => {
   const [loadingTweets, setLoadingTweets] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const { hashtagIdParam } = useParams<{ hashtagIdParam: string }>();
+  const { hashtagIdentifier } = useParams<{ hashtagIdentifier: string }>();
 
   // useCallback is used to have a stable reference for the function fetchHashtagTweets
   // if we don't use useCallback here, the function reference would change on every render
@@ -23,9 +23,9 @@ const HashtagTweetsContainer = () => {
   // meaning that the dependency array in useEffect changed
   // and that causes to run the function again which again will trigger state change and then a re-render (the loop)
   const fetchHashtagTweets = useCallback(() => {
-    if (!hashtagIdParam) return Promise.resolve();
+    if (!hashtagIdentifier) return Promise.resolve();
 
-    return getHashtagTweets({ hashtagIdentifier: hashtagIdParam })
+    return getHashtagTweets({ hashtagIdentifier })
       .then((tweets) => {
         console.log("hashtag tweets: ", tweets);
         setTweets(tweets);
@@ -37,16 +37,16 @@ const HashtagTweetsContainer = () => {
       .finally(() => {
         setLoadingTweets(false);
       });
-  }, [hashtagIdParam]);
+  }, [hashtagIdentifier]);
 
   // fetchHashtagTweets is created on every render
   // if we add it to the dependency array [fetchHashtagTweets]
   // the effect would re-run on every render because the function reference is new each time
   // that's why we use useCallback to make it a stable reference across re-renders
-  // unless its dependencies change (like hashtagIdParam)
+  // unless its dependencies change (like hashtagIdentifier)
   // With the memoized function, this effect runs:
   // - on mount
-  // - again whenever hashtagIdParam changes (because the memoized function changes)
+  // - again whenever hashtagIdentifier changes (because the memoized function changes)
   useEffect(() => {
     fetchHashtagTweets();
   }, [fetchHashtagTweets]);

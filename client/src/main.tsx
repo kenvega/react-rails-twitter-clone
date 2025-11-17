@@ -60,7 +60,7 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "tags/:hashtagIdParam",
+    path: "tags/:hashtagIdentifier",
     element: (
       <RequireAuth>
         <HashtagTweetsPage />
