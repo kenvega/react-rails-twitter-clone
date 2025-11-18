@@ -39,6 +39,9 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :show]
 
+      post '/users/:follower_id/follows/:followed_id', to: 'follows#create', as: :create_follow
+      delete '/follows/:id', to: 'follows#destroy', as: :delete_follow
+
       resources :hashtags, only: [:index]
 
       get 'hashtags/:hashtag_identifier/tweets', to: 'hashtags#show'

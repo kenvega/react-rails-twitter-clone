@@ -45,3 +45,9 @@ migrations done
   bundle exec rails g model tweet_activity activity_viewer:references activity_creator:references tweet:references activity:string
 
   bundle exec rails g model Follow follower:references followed:references
+
+  bundle exec rails g migration add_followed_users_count_to_users followed_users_count:integer
+
+  bundle exec rails g migration add_follower_count_to_users follower_count:integer
+
+  

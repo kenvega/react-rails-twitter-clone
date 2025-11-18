@@ -9,6 +9,8 @@
 #  display_name           :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
+#  followed_users_count   :integer          default(0), not null
+#  follower_count         :integer          default(0), not null
 #  jti                    :string           not null
 #  location               :string
 #  remember_created_at    :datetime
