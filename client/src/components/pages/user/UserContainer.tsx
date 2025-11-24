@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { getUser, getUserTweets } from "../../../services/userService";
 import { useParams } from "react-router-dom";
+import { followUser } from "../../../services/userService";
+import { getDecodedJwt } from "../../../helpers/jwtHelper";
 
 type User = {
   id: number;
@@ -25,6 +27,13 @@ const UserContainer = () => {
     fetchUser(userId);
     fetchUserTweets(userId);
   }, []);
+
+  let currentUserId: number;
+
+  const decodedJwt = getDecodedJwt();
+  if (decodedJwt) {
+    currentUserId = decodedJwt.user_id;
+  }
 
   const { userIdParam } = useParams<{ userIdParam: string }>();
   const [user, setUser] = useState<User | null>(null);
@@ -75,7 +84,7 @@ const UserContainer = () => {
               src={user.avatar_url || "/src/assets/profile.svg"}
               alt="user avatar"
             />
-            <button>Follow User</button>
+            <button onClick={() => followUser({ followerId: currentUserId, followedId: user.id })}>Follow User</button>
           </div>
           <div>
             <p className="text-xl font-bold">{user.display_name}</p>

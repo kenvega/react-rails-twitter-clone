@@ -27,3 +27,7 @@ export const getUsers = () => {
 export const getUserTweets = ({ userId }: { userId: number }) => {
   return http.get(`${API_URL}/users/${userId}/tweets`).then(handleResponse).catch(handleError);
 };
+
+export const followUser = ({ followerId, followedId }: { followerId: number; followedId: number }) => {
+  return http.post(`${API_URL}/users/${followerId}/follows/${followedId}`).then(handleResponse).catch(handleError);
+};
