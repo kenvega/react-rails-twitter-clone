@@ -39,6 +39,7 @@ Rails.application.routes.draw do
 
       resources :users, only: [:index, :show]
 
+      get '/users/:follower_id/follows/:followed_id', to: 'follows#show', as: :show_follow
       post '/users/:follower_id/follows/:followed_id', to: 'follows#create', as: :create_follow
       delete '/follows/:id', to: 'follows#destroy', as: :delete_follow
 

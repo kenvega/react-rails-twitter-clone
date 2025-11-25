@@ -4,7 +4,12 @@ module Api
   module V1
     class FollowsController < ApplicationController
       before_action :authenticate_user!
-      before_action :set_follower_and_followed, only: %i[create destroy]
+      before_action :set_follower_and_followed, only: %i[show create destroy]
+
+      def show
+        follow = Follow.find_by(follower: @follower, followed: @followed)
+        render json: { following: follow.present?, follow_id: follow&.id }
+      end
 
       def create
         # create the follow

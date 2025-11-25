@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { getUser, getUserTweets } from "../../../services/userService";
 import { useParams } from "react-router-dom";
-import { followUser } from "../../../services/userService";
-import { getDecodedJwt } from "../../../helpers/jwtHelper";
+import { followUser, unfollowUser, isUserFollowing } from "../../../services/followsService";
+import { getCurrentUserId } from "../../../helpers/userHelper";
 
 type User = {
   id: number;
@@ -28,14 +28,26 @@ const UserContainer = () => {
     fetchUserTweets(userId);
   }, []);
 
-  let currentUserId: number;
-
-  const decodedJwt = getDecodedJwt();
-  if (decodedJwt) {
-    currentUserId = decodedJwt.user_id;
-  }
-
+  const currentUserId = getCurrentUserId();
   const { userIdParam } = useParams<{ userIdParam: string }>();
+
+  const [isFollowing, setIsFollowing] = useState<boolean>(false);
+  const [followId, setFollowId] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (currentUserId && userIdParam) {
+      isUserFollowing({ followerId: currentUserId, followedId: Number(userIdParam) })
+        .then((response) => {
+          setIsFollowing(response.following);
+          setFollowId(response.follow_id);
+          console.log("is following response: ", response);
+        })
+        .catch((error) => {
+          console.error("Error checking follow status: ", error);
+        });
+    }
+  }, [currentUserId, userIdParam]);
+
   const [user, setUser] = useState<User | null>(null);
   const [loadingUser, setLoadingUser] = useState<boolean>(true);
 
@@ -84,7 +96,13 @@ const UserContainer = () => {
               src={user.avatar_url || "/src/assets/profile.svg"}
               alt="user avatar"
             />
-            <button onClick={() => followUser({ followerId: currentUserId, followedId: user.id })}>Follow User</button>
+            {isFollowing
+              ? followId && <button onClick={() => unfollowUser({ followId: followId })}>Unfollow User</button>
+              : currentUserId && (
+                  <button onClick={() => followUser({ followerId: currentUserId, followedId: user.id })}>
+                    Follow User
+                  </button>
+                )}
           </div>
           <div>
             <p className="text-xl font-bold">{user.display_name}</p>
