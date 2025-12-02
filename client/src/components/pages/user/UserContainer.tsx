@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { followUser, unfollowUser, isUserFollowing } from "../../../services/followsService";
 import { getCurrentUserId } from "../../../helpers/userHelper";
 import ProfileDetails from "../../ProfileDetails";
+import UserActionButton from "../../UserActionButton";
 import { Profile } from "../../../types/Profile";
 
 const UserContainer = () => {
@@ -105,20 +106,14 @@ const UserContainer = () => {
     <div>
       {user && !loadingUser ? (
         <div className="px-2">
-          {/* TODO: we could create another component that receieves a button here as children and renders that */}
-          {/* for user it would be follow/unfollow and for profile would be the edit button */}
-          <div className="mb-8 mt-8 flex justify-between">
-            <img
-              className="w-32 h-32 rounded-full"
-              src={user.avatar_url || "/src/assets/profile.svg"}
-              alt="user avatar"
-            />
+          <UserActionButton user={user}>
             {isFollowing ? (
               <button onClick={handleUnfollow}>Unfollow User</button>
             ) : (
               <button onClick={handleFollow}>Follow User</button>
             )}
-          </div>
+          </UserActionButton>
+
           <div>
             <ProfileDetails profile={user} />
           </div>

@@ -4,6 +4,7 @@ import TweetsList from "../../TweetsList";
 import { useNavigate } from "react-router-dom";
 import { Profile } from "../../../types/Profile";
 import ProfileDetails from "../../ProfileDetails";
+import UserActionButton from "../../UserActionButton";
 
 const ProfileContainer = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -58,23 +59,15 @@ const ProfileContainer = () => {
     <div>
       {profile && !loadingProfile ? (
         <div className="px-2">
-          {/* TODO: we could create another component that receieves a button here as children and renders that */}
-          {/* for user it would be follow/unfollow and for profile would be the edit button */}
-          <div className="mb-8 mt-8 flex justify-between items-center">
-            <img
-              className="w-32 h-32 rounded-full"
-              src={profile.avatar_url || "/src/assets/profile.svg"}
-              alt="profile avatar"
-            />
-            <div>
-              <button
-                onClick={() => navigate("/profile/edit")}
-                className="border rounded-lg p-3 text-blue-300 hover:bg-slate-300 hover:text-blue-800 "
-              >
-                Edit Profile
-              </button>
-            </div>
-          </div>
+          <UserActionButton user={profile}>
+            <button
+              onClick={() => navigate("/profile/edit")}
+              className="border rounded-lg p-3 text-blue-300 hover:bg-slate-300 hover:text-blue-800 "
+            >
+              Edit Profile
+            </button>
+          </UserActionButton>
+
           <div>
             <ProfileDetails profile={profile} />
           </div>
