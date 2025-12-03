@@ -7,5 +7,7 @@ export type Profile = {
   url: string;
   username: string;
   avatar_url: string;
+  followed_users_count: number;
+  follower_count: number;
   created_at: string;
 };

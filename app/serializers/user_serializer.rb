@@ -28,7 +28,17 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :username, :display_name, :bio, :location, :url, :avatar_url, :created_at
+  attributes :id,
+             :email,
+             :username,
+             :display_name,
+             :bio,
+             :location,
+             :url,
+             :avatar_url,
+             :followed_users_count,
+             :follower_count,
+             :created_at
 
   def avatar_url
     return unless object.avatar.attached?

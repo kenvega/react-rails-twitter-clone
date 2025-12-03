@@ -30,7 +30,10 @@ const ProfileDetails = ({ profile }: { profile: Profile }) => {
         </p>
       </div>
 
-      {/* TODO: profile details: following and followers count */}
+      <div className="flex gap-5 mt-3">
+        <p>{profile.followed_users_count} Following</p>
+        <p>{profile.follower_count} Followers</p>
+      </div>
     </>
   );
 };
