@@ -5,6 +5,7 @@ import { followUser, unfollowUser, isUserFollowing } from "../../../services/fol
 import { getCurrentUserId } from "../../../helpers/userHelper";
 import ProfileDetails from "../../ProfileDetails";
 import UserActionButton from "../../UserActionButton";
+import TweetsList from "../../TweetsList";
 import { Profile } from "../../../types/Profile";
 
 const UserContainer = () => {
@@ -118,7 +119,14 @@ const UserContainer = () => {
             <ProfileDetails profile={user} />
           </div>
 
-          {/* TODO: tweets from this user */}
+          <div className="mt-4 px-2">
+            <TweetsList
+              tweets={userTweets}
+              loadingTweets={loadingUserTweets}
+              error={error}
+              fetchTweets={() => fetchUserTweets(user.id)}
+            />
+          </div>
         </div>
       ) : (
         <p>Loading...</p>
