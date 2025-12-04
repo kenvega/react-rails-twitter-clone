@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import ChartIcon from "../assets/chart.svg?react";
 import { Tweet } from "../types/Tweet";
 import { formatToMMMdd } from "../helpers/dateUtils";
@@ -33,6 +33,8 @@ function TweetCard({
 }: TweetCardProps) {
   const formattedDate = formatToMMMdd(tweet.created_at);
 
+  const navigate = useNavigate();
+
   // TODO: probably needs to create a component
   const tweetBodyWithHashtagsHighlighted = tweet.body.split(" ").reduce<React.ReactNode[]>((nodes, word, index) => {
     if (index > 0) nodes.push(" ");
@@ -63,7 +65,7 @@ function TweetCard({
       </div>
 
       <div className="ml-4 grow">
-        <p>
+        <p className="cursor-pointer" onClick={() => navigate(`/users/${tweet.user.id}`)}>
           <span className="font-bold">{tweet.user.display_name}</span>{" "}
           <span className="text-gray-500">
             @{tweet.user.username} · {formattedDate}

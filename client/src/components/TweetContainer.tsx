@@ -124,7 +124,7 @@ const TweetContainer = () => {
       {/* Main Content */}
       <div className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
         {/* Avatar */}
-        <div>
+        <div className="cursor-pointer" onClick={() => navigate(`/users/${tweet.user.id}`)}>
           {tweet.user.avatar_url ? (
             <img
               src={tweet.user.avatar_url}
@@ -140,8 +140,12 @@ const TweetContainer = () => {
         <div className="ml-4 grow">
           {/* Tweet content */}
           <div>
-            <p className="font-bold">{tweet.user.display_name}</p>
-            <p className="text-gray-500">@{tweet.user.username} </p>
+            <p className="font-bold cursor-pointer" onClick={() => navigate(`/users/${tweet.user.id}`)}>
+              {tweet.user.display_name}
+            </p>
+            <p className="text-gray-500 cursor-pointer" onClick={() => navigate(`/users/${tweet.user.id}`)}>
+              @{tweet.user.username}
+            </p>
             <p className="mb-3 text-3xl">{tweetBodyWithHashtagsHighlighted}</p>
             <p className="text-gray-500">{formatToTimeMMMddYYYY(tweet.created_at)}</p>
           </div>

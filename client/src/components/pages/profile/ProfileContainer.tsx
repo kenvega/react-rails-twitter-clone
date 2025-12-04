@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Profile } from "../../../types/Profile";
 import ProfileDetails from "../../ProfileDetails";
 import UserActionButton from "../../UserActionButton";
+import ActionButton from "../../ActionButton";
 
 const ProfileContainer = () => {
   const [profile, setProfile] = useState<Profile | null>(null);
@@ -60,12 +61,7 @@ const ProfileContainer = () => {
       {profile && !loadingProfile ? (
         <div className="px-2">
           <UserActionButton user={profile}>
-            <button
-              onClick={() => navigate("/profile/edit")}
-              className="border rounded-lg p-3 text-blue-300 hover:bg-slate-300 hover:text-blue-800 "
-            >
-              Edit Profile
-            </button>
+            <ActionButton onClick={() => navigate("/profile/edit")}>Edit Profile</ActionButton>
           </UserActionButton>
 
           <div>

@@ -7,6 +7,7 @@ import ProfileDetails from "../../ProfileDetails";
 import UserActionButton from "../../UserActionButton";
 import TweetsList from "../../TweetsList";
 import { Profile } from "../../../types/Profile";
+import ActionButton from "../../ActionButton";
 
 const UserContainer = () => {
   useEffect(() => {
@@ -108,11 +109,13 @@ const UserContainer = () => {
       {user && !loadingUser ? (
         <div className="px-2">
           <UserActionButton user={user}>
-            {isFollowing ? (
-              <button onClick={handleUnfollow}>Unfollow User</button>
-            ) : (
-              <button onClick={handleFollow}>Follow User</button>
-            )}
+            <ActionButton
+              onClick={() => {
+                isFollowing ? handleUnfollow() : handleFollow();
+              }}
+            >
+              {isFollowing ? "Unfollow User" : "Follow User"}
+            </ActionButton>
           </UserActionButton>
 
           <div>
