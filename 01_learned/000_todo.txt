@@ -1,6 +1,5 @@
 TODO:
 
-
 - add views in tweet
   - add a new route/page for viewing a single tweet and later its replies
   - add route for single show of tweet
@@ -24,6 +23,9 @@ TODO:
           username = decodedJwt.username;
         }
 
+- show in the feed the tweet activities instead of all tweets
+
+
 DONE:
 
 - when creating a user make sure display name is set
@@ -41,4 +43,10 @@ DONE:
 - setup overcommit gem for githooks and setup rubocop fix before every commit
 - use the retweet count in the app
 - add pre-commit to update lines added
-
+- add follower and followed counts
+- show tweets in user profile
+- make hashtags clickable and redirect to hashtag specific page
+- make profile pictures clickable and redirect to users specific page
+- added tweet activities to the backend
+- show hashtags in sidebar
+- add a toggle to change the theme (light/dark theme)

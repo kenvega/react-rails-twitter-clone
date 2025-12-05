@@ -8,22 +8,32 @@ import UserActionButton from "../../UserActionButton";
 import TweetsList from "../../TweetsList";
 import { Profile } from "../../../types/Profile";
 import ActionButton from "../../ActionButton";
+import { useNavigate } from "react-router-dom";
 
 const UserContainer = () => {
   useEffect(() => {
     if (!userIdParam) return;
+
     const userId = Number(userIdParam);
+
     if (Number.isNaN(userId)) {
       setError("Invalid user id");
       setLoadingUser(false);
       return;
     }
+
     fetchUser(userId);
     fetchUserTweets(userId);
   }, []);
 
   const currentUserId = getCurrentUserId();
   const { userIdParam } = useParams<{ userIdParam: string }>();
+
+  const navigate = useNavigate();
+
+  if (userIdParam && currentUserId && Number(userIdParam) === currentUserId) {
+    navigate("/profile");
+  }
 
   const [isFollowing, setIsFollowing] = useState<boolean>(false);
   const [followId, setFollowId] = useState<number | null>(null);
