@@ -64,6 +64,7 @@ function SignUp() {
                 onChange={(e) => setPassword(e.target.value)}
               />
               <p className="mt-2 dark:text-gray-300">Avatar</p>
+              {/* TODO: avatar upload */}
 
               {error && <div style={{ color: "red" }}>{error}</div>}
               <button type="submit" className="btn-twitter mt-6">

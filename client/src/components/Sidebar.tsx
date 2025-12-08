@@ -1,4 +1,6 @@
 import SidebarButton from "./SidebarButton";
+import SidebarProfile from "./SidebarProfile";
+
 import Logout from "./Logout";
 
 import Twitter from "../assets/twitter.svg";
@@ -35,7 +37,6 @@ const Sidebar = () => {
       <div className="px-6 py-2 flex align-middle gap-5 mb-4 rounded-full">
         <img src={Twitter} alt="Your SVG" width={32} />
       </div>
-
       <SidebarButton
         title="Home"
         SVGIcon={Home}
@@ -90,6 +91,8 @@ const Sidebar = () => {
         onClick={() => navigate("/profile")}
         active={isActive({ to: "/profile", exactMatch: false })}
       />
+
+      <SidebarProfile />
 
       <Logout />
     </div>
