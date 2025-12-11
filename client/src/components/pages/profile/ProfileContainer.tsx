@@ -45,7 +45,10 @@ const ProfileContainer = () => {
   const navigate = useNavigate();
 
   const fetchUserTweets = () => {
-    if (!profile) return Promise.resolve();
+    if (!profile) {
+      return Promise.resolve();
+    }
+
     return getUserTweets({ userId: profile.id })
       .then(setUserTweets)
       .catch((err) => console.error("Tweet error: ", err));
@@ -75,7 +78,7 @@ const ProfileContainer = () => {
             <ActionButton onClick={() => navigate("/profile/edit")}>Edit Profile</ActionButton>
           </UserActionButton>
 
-          <ProfileDetails profile={profile} />
+          {!error ? <ProfileDetails profile={profile} /> : <p>{error}</p>}
 
           <div className="mt-4 px-2">
             <TweetsList tweets={userTweets} loadingTweets={loading} error={error} fetchTweets={fetchUserTweets} />

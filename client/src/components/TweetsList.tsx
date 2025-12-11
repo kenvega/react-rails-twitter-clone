@@ -34,10 +34,6 @@ const TweetsList = ({ tweets, loadingTweets, fetchTweets, error }: TweetsListPro
 
   const navigate = useNavigate();
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
   const runAction = async ({ tweetId, actionType, actionFn }: runActionProps) => {
     if (isActionLoading) return;
 
@@ -72,6 +68,10 @@ const TweetsList = ({ tweets, loadingTweets, fetchTweets, error }: TweetsListPro
 
   const handleUnRetweetClick = ({ tweetId }: { tweetId: number }) =>
     runAction({ tweetId, actionType: "retweet", actionFn: clearRetweetTweet });
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
     <div>

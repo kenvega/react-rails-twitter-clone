@@ -1,8 +1,9 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import ChartIcon from "../assets/chart.svg?react";
 import { Tweet } from "../types/Tweet";
 import { formatToMMMdd } from "../helpers/dateUtils";
 import TweetActionButtons from "./TweetActionButtons";
+import TweetBody from "./TweetBody";
 
 type TweetCardProps = {
   tweet: Tweet;
@@ -35,25 +36,6 @@ function TweetCard({
 
   const navigate = useNavigate();
 
-  // TODO: probably needs to create a component
-  const tweetBodyWithHashtagsHighlighted = tweet.body.split(" ").reduce<React.ReactNode[]>((nodes, word, index) => {
-    if (index > 0) nodes.push(" ");
-    if (word.startsWith("#")) {
-      nodes.push(
-        <Link
-          key={`tweet-${tweet.id}-tag-${index}`}
-          to={`/tags/${word.slice(1)}`}
-          className="text-blue-400 hover:underline"
-        >
-          {word}
-        </Link>
-      );
-    } else {
-      nodes.push(word);
-    }
-    return nodes;
-  }, []);
-
   return (
     <div className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
       <div>
@@ -72,7 +54,7 @@ function TweetCard({
           </span>
         </p>
 
-        <p className="mb-4">{tweetBodyWithHashtagsHighlighted}</p>
+        <TweetBody tweet={tweet} />
 
         <TweetActionButtons
           tweet={tweet}
