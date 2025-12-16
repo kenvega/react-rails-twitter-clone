@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Tweet } from "../types/Tweet";
+import { TweetActionType } from "../types/TweetActionType";
+
 import {
   likeTweet,
   dislikeTweet,
@@ -12,8 +14,6 @@ import {
 import { useNavigate } from "react-router-dom";
 import TweetCard from "./TweetCard";
 
-type ActionType = "like" | "bookmark" | "retweet";
-
 type TweetsListProps = {
   tweets: Tweet[];
   loadingTweets: boolean;
@@ -23,13 +23,13 @@ type TweetsListProps = {
 
 type runActionProps = {
   tweetId: number;
-  actionType: ActionType;
+  actionType: TweetActionType;
   actionFn: (args: { tweetId: number }) => Promise<void>;
 };
 
 const TweetsList = ({ tweets, loadingTweets, fetchTweets, error }: TweetsListProps) => {
   const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
-  const [activeAction, setActiveAction] = useState<string>("");
+  const [activeAction, setActiveAction] = useState<TweetActionType | "">("");
   const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
 
   const navigate = useNavigate();

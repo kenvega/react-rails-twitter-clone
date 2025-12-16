@@ -6,31 +6,25 @@ type TweetBodyProps = {
   tweet: Tweet;
 };
 
-const TweetBody = ({ tweet }: TweetBodyProps) => {
-  const words = tweet.body.split(" ");
+const renderWord = (word: string) => {
+  return word.startsWith("#") ? (
+    <Link to={`/tags/${word.slice(1)}`} className="text-blue-400 hover:underline">
+      {word}
+    </Link>
+  ) : (
+    word
+  );
+};
 
+const TweetBody = ({ tweet }: TweetBodyProps) => {
   return (
     <p className="mb-4">
-      {words.map((word, index) => {
-        const separator = index < words.length - 1 ? " " : null;
-
-        return (
-          <React.Fragment key={`tweet-${tweet.id}-word-${word}`}>
-            {word.startsWith("#") ? (
-              <Link
-                key={`tweet-${tweet.id}-tag-${word}`}
-                to={`/tags/${word.slice(1)}`}
-                className="text-blue-400 hover:underline"
-              >
-                {word}
-              </Link>
-            ) : (
-              word
-            )}
-            {separator}
-          </React.Fragment>
-        );
-      })}
+      {tweet.body.split(" ").map((word, index, allWords) => (
+        <React.Fragment key={`${tweet.id}-word-${index}`}>
+          {renderWord(word)}
+          {index < allWords.length - 1 ? " " : null}
+        </React.Fragment>
+      ))}
     </p>
   );
 };

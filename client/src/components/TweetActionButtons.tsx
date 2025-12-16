@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { Tweet } from "../types/Tweet";
 import LoadingIcon from "../assets/loading.svg?react";
+import { TweetActionType } from "../types/TweetActionType";
 
 type TweetActionButtonsProps = {
   tweet: Tweet;
   isActionLoading: boolean;
-  activeAction: string;
+  activeAction: TweetActionType | "";
   activeTweetId: number | null;
   onLike: (tweetId: number) => void;
   onDislike: (tweetId: number) => void;

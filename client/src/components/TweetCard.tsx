@@ -4,11 +4,12 @@ import { Tweet } from "../types/Tweet";
 import { formatToMMMdd } from "../helpers/dateUtils";
 import TweetActionButtons from "./TweetActionButtons";
 import TweetBody from "./TweetBody";
+import { TweetActionType } from "../types/TweetActionType";
 
 type TweetCardProps = {
   tweet: Tweet;
   isActionLoading: boolean;
-  activeAction: string;
+  activeAction: TweetActionType | "";
   activeTweetId: number | null;
   onLike: (tweetId: number) => void;
   onDislike: (tweetId: number) => void;
