@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import { Tweet } from "../types/Tweet";
-import LoadingIcon from "../assets/loading.svg?react";
 import { TweetActionType } from "../types/TweetActionType";
+import TweetActionButton from "./TweetActionButton";
 
 type TweetActionButtonsProps = {
   tweet: Tweet;
   isActionLoading: boolean;
-  activeAction: TweetActionType | "";
+  activeAction: TweetActionType;
   activeTweetId: number | null;
   onLike: (tweetId: number) => void;
   onDislike: (tweetId: number) => void;
@@ -49,80 +49,36 @@ const TweetActionButtons = ({
       </div>
 
       {/* retweet/unretweet button */}
-      <div className="flex items-center">
-        <button
-          disabled={isActionLoading}
-          className="flex cursor-pointer"
-          onClick={() => (tweet.tweet_retweeted_by_current_user ? onUnRetweet(tweet.id) : onRetweet(tweet.id))}
-        >
-          <img
-            src={
-              tweet.tweet_retweeted_by_current_user
-                ? "/src/assets/retweet-filled.svg"
-                : "/src/assets/retweet-unfilled.svg"
-            }
-            className={`w-4 mr-2 ${
-              isActionLoading && activeTweetId === tweet.id && activeAction === "retweet" ? "opacity-50" : ""
-            }`}
-            alt="retweet icon"
-          />
-          <span>{tweet.retweets_count}</span>
-        </button>
-        {isActionLoading && activeTweetId === tweet.id && activeAction === "retweet" ? (
-          <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
-        ) : (
-          <div className="w-3 h-3 ml-3" />
-        )}
-      </div>
+      <TweetActionButton
+        active={tweet.tweet_retweeted_by_current_user}
+        loading={isActionLoading && activeTweetId === tweet.id && activeAction === "retweet"}
+        count={tweet.retweets_count}
+        activeIcon="/src/assets/retweet-filled.svg"
+        inactiveIcon="/src/assets/retweet-unfilled.svg"
+        alt="retweet icon"
+        onClick={() => (tweet.tweet_retweeted_by_current_user ? onUnRetweet(tweet.id) : onRetweet(tweet.id))}
+      />
 
       {/* like/dislike button */}
-      <div className="flex items-center">
-        <button
-          disabled={isActionLoading}
-          className="flex cursor-pointer"
-          onClick={() => (tweet.tweet_liked_by_current_user ? onDislike(tweet.id) : onLike(tweet.id))}
-        >
-          <img
-            src={tweet.tweet_liked_by_current_user ? "/src/assets/heart-filled.svg" : "/src/assets/heart-unfilled.svg"}
-            className={`w-4 mr-2 ${
-              isActionLoading && activeTweetId === tweet.id && activeAction === "like" ? "opacity-50" : ""
-            }`}
-            alt="like icon"
-          />
-          <span>{tweet.likes_count}</span>
-        </button>
-        {isActionLoading && activeTweetId === tweet.id && activeAction === "like" ? (
-          <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
-        ) : (
-          <div className="w-3 h-3 ml-3" />
-        )}
-      </div>
+      <TweetActionButton
+        active={tweet.tweet_liked_by_current_user}
+        loading={isActionLoading && activeTweetId === tweet.id && activeAction === "like"}
+        count={tweet.likes_count}
+        activeIcon="/src/assets/heart-filled.svg"
+        inactiveIcon="/src/assets/heart-unfilled.svg"
+        alt="like icon"
+        onClick={() => (tweet.tweet_liked_by_current_user ? onDislike(tweet.id) : onLike(tweet.id))}
+      />
 
       {/* bookmark/unbookmark button */}
-      <div className="flex items-center">
-        <button
-          disabled={isActionLoading}
-          className="flex cursor-pointer"
-          onClick={() => (tweet.tweet_bookmarked_by_current_user ? onClearBookmark(tweet.id) : onBookmark(tweet.id))}
-        >
-          <img
-            src={
-              tweet.tweet_bookmarked_by_current_user
-                ? "/src/assets/bookmark-filled.svg"
-                : "/src/assets/bookmark-unfilled.svg"
-            }
-            className={`w-4 mr-2 ${
-              isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark" ? "opacity-50" : ""
-            }`}
-            alt="bookmark icon"
-          />
-        </button>
-        {isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark" ? (
-          <LoadingIcon className="animate-spin w-3 h-3 ml-3" />
-        ) : (
-          <div className="w-3 h-3 ml-3" />
-        )}
-      </div>
+      <TweetActionButton
+        active={tweet.tweet_bookmarked_by_current_user}
+        loading={isActionLoading && activeTweetId === tweet.id && activeAction === "bookmark"}
+        activeIcon="/src/assets/bookmark-filled.svg"
+        inactiveIcon="/src/assets/bookmark-unfilled.svg"
+        alt="bookmark icon"
+        onClick={() => (tweet.tweet_bookmarked_by_current_user ? onClearBookmark(tweet.id) : onBookmark(tweet.id))}
+      />
     </div>
   );
 };

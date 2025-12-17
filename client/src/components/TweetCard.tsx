@@ -9,7 +9,7 @@ import { TweetActionType } from "../types/TweetActionType";
 type TweetCardProps = {
   tweet: Tweet;
   isActionLoading: boolean;
-  activeAction: TweetActionType | "";
+  activeAction: TweetActionType;
   activeTweetId: number | null;
   onLike: (tweetId: number) => void;
   onDislike: (tweetId: number) => void;

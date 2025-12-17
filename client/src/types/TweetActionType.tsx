@@ -1,1 +1,1 @@
-export type TweetActionType = "like" | "bookmark" | "retweet";
+export type TweetActionType = "like" | "bookmark" | "retweet" | "";

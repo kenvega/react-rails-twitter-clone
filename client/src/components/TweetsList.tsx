@@ -29,7 +29,7 @@ type runActionProps = {
 
 const TweetsList = ({ tweets, loadingTweets, fetchTweets, error }: TweetsListProps) => {
   const [isActionLoading, setIsActionLoading] = useState<boolean>(false);
-  const [activeAction, setActiveAction] = useState<TweetActionType | "">("");
+  const [activeAction, setActiveAction] = useState<TweetActionType>("");
   const [activeTweetId, setActiveTweetId] = useState<number | null>(null);
 
   const navigate = useNavigate();
