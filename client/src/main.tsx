@@ -16,7 +16,7 @@ import TweetsTablePage from "./components/pages/tweets_table/TweetsTablePage.tsx
 import TweetPage from "./components/TweetPage.tsx";
 import UserPage from "./components/pages/user/UserPage.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
 
 // import ErrorPage from "./error-page";
@@ -36,113 +36,33 @@ const router = createBrowserRouter([
     // errorElement: <ErrorPage />,
   },
   {
-    path: "tweets/:tweetIdParam",
     element: (
       <RequireAuth>
-        <TweetPage />
+        <Outlet />
       </RequireAuth>
     ),
-  },
-  {
-    path: "tweets",
-    element: (
-      <RequireAuth>
-        <FeedTweetsPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "tags",
-    element: (
-      <RequireAuth>
-        <HashtagsPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "tags/:hashtagIdentifier",
-    element: (
-      <RequireAuth>
-        <HashtagTweetsPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "table",
-    element: (
-      <RequireAuth>
-        <TweetsTablePage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "all_tweets",
-    element: (
-      <RequireAuth>
-        <AllTweetsPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "all_users",
-    element: (
-      <RequireAuth>
-        <AllUsersPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "notifications",
-    element: (
-      <RequireAuth>
-        <NotificationsPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "profile",
-    element: (
-      <RequireAuth>
-        <ProfilePage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "profile/edit",
-    element: (
-      <RequireAuth>
-        <ProfileEditPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "users/:userIdParam",
-    element: (
-      <RequireAuth>
-        <UserPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "bookmarks",
-    element: (
-      <RequireAuth>
-        <BookmarksPage />
-      </RequireAuth>
-    ),
-  },
-  {
-    path: "channels",
-    element: (
-      <RequireAuth>
-        <MessagesPage />
-      </RequireAuth>
-    ),
+    children: [
+      { path: "tweets/:tweetIdParam", element: <TweetPage /> },
+      { path: "tweets", element: <FeedTweetsPage /> },
+      { path: "tags", element: <HashtagsPage /> },
+      { path: "tags/:hashtagIdentifier", element: <HashtagTweetsPage /> },
+      { path: "table", element: <TweetsTablePage /> },
+      { path: "all_tweets", element: <AllTweetsPage /> },
+      { path: "all_users", element: <AllUsersPage /> },
+      { path: "notifications", element: <NotificationsPage /> },
+      { path: "profile", element: <ProfilePage /> },
+      { path: "profile/edit", element: <ProfileEditPage /> },
+      { path: "users/:userIdParam", element: <UserPage /> },
+      { path: "bookmarks", element: <BookmarksPage /> },
+      { path: "channels", element: <MessagesPage /> },
+    ],
+    // errorElement: <ErrorPage />,
   },
   {
     path: "test_hello",
     element: <p>hello: you can put jsx directly here as well</p>,
   },
+  // { path: "*", element: <ErrorPage /> }, // catch-all for everything else
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
