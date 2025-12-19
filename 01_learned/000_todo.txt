@@ -1,5 +1,10 @@
 TODO:
 
+- see if there is a better alternative to fetching all tweets again after an action (like liking a tweet in the tweet list)
+  - currently after an action all tweets are refetched
+  - should we update an state in the frontend and work with that? should we use redux here or maybe another tool?
+  - when we should refetch the whole tweets then? 
+
 - add views in tweet
   - add a new route/page for viewing a single tweet and later its replies
   - add route for single show of tweet
