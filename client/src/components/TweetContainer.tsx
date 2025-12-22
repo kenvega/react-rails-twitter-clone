@@ -15,6 +15,7 @@ import {
 } from "../services/tweetsService";
 
 import LoadingIcon from "../assets/loading.svg?react";
+import Avatar from "./Avatar";
 
 type ActionType = "like" | "bookmark" | "retweet";
 
@@ -123,18 +124,7 @@ const TweetContainer = () => {
 
       {/* Main Content */}
       <div className="flex border-b mb-6 pt-4 pl-4 pr-4 pb-7">
-        {/* Avatar */}
-        <div className="cursor-pointer" onClick={() => navigate(`/users/${tweet.user.id}`)}>
-          {tweet.user.avatar_url ? (
-            <img
-              src={tweet.user.avatar_url}
-              className="w-16 rounded-full aspect-square overflow-hidden"
-              alt="user avatar"
-            />
-          ) : (
-            <img src="/src/assets/profile.svg" className="w-16 rounded-full" />
-          )}
-        </div>
+        <Avatar user={tweet.user} />
 
         {/* Tweet text content and tweet action buttons */}
         <div className="ml-4 grow">

@@ -58,8 +58,22 @@ const SidebarProfile = () => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <div className="rounded-full px-6 py-2 flex items-center gap-5 mb-4">
-      {profile ? <span>User ID: {profile.id}</span> : <span>Loading...</span>}
+    <div className="rounded-full pl-8 py-2 flex items-center gap-5 mb-4">
+      {profile ? (
+        <div className="flex">
+          <img
+            className="w-12 h-12 rounded-full mr-3"
+            src={profile.avatar_url || "/src/assets/profile.svg"}
+            alt="profile avatar"
+          />
+          <div>
+            <p className="font-bold text-lg">{profile.display_name}</p>
+            <p>@{profile.username}</p>
+          </div>
+        </div>
+      ) : (
+        <span>Loading...</span>
+      )}
     </div>
   );
 };
