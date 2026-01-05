@@ -1,7 +1,6 @@
 import TweetContainer from "./TweetContainer";
 import TweetReplyForm from "./TweetReplyForm";
 import TweetReplies from "./TweetReplies";
-import PageLayout from "./layout/PageLayout";
 
 import { useParams } from "react-router-dom";
 
@@ -47,11 +46,11 @@ const TweetPage = () => {
   };
 
   return (
-    <PageLayout>
+    <>
       <TweetContainer />
       <TweetReplyForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
       <TweetReplies replyTweets={replyTweets} />
-    </PageLayout>
+    </>
   );
 };
 

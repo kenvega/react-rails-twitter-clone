@@ -16,7 +16,8 @@ import TweetsTablePage from "./components/pages/tweets_table/TweetsTablePage.tsx
 import TweetPage from "./components/TweetPage.tsx";
 import UserPage from "./components/pages/user/UserPage.tsx";
 import RequireAuth from "./components/RequireAuth";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import PageLayout from "./components/layout/PageLayout";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "./context/ThemeProvider";
 
 // import ErrorPage from "./error-page";
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
   {
     element: (
       <RequireAuth>
-        <Outlet />
+        <PageLayout />
       </RequireAuth>
     ),
     children: [

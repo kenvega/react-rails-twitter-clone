@@ -1,9 +1,10 @@
 import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 import Sidebar from "../Sidebar";
 import HashtagSidebar from "../HashtagSidebar";
 
 export type PageLayoutProps = {
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 const PageLayout = ({ children }: PageLayoutProps) => (
@@ -12,7 +13,7 @@ const PageLayout = ({ children }: PageLayoutProps) => (
       <div className="basis-1/5">
         <Sidebar />
       </div>
-      <div className="basis-3/5">{children}</div>
+      <div className="basis-3/5">{children ?? <Outlet />}</div>
       <div className="basis-1/5">
         <HashtagSidebar />
       </div>
