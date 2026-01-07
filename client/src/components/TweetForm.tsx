@@ -1,15 +1,14 @@
 import { ChangeEvent, FormEvent, MouseEvent } from "react";
 import { Button } from "@radix-ui/themes";
 
-const TweetForm = ({
-  tweetBody,
-  setTweetBody,
-  onSubmit,
-}: {
+type TweetFormProps = {
   tweetBody: string;
   setTweetBody: (value: string) => void;
   onSubmit: () => void;
-}) => {
+  newTweetLoading: boolean;
+};
+
+const TweetForm = ({ tweetBody, setTweetBody, onSubmit, newTweetLoading }: TweetFormProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTweetBody(event.target.value);
   };
@@ -22,7 +21,6 @@ const TweetForm = ({
   return (
     <div className="p-4 rounded-md hover:bg-slate-200 dark:hover:bg-cyan-900/40">
       <form onSubmit={handleSubmit}>
-        {/* TODO: when submitting it should block the button (?) */}
         <input
           className="w-full rounded-sm px-2 py-2 mb-3 dark:text-stone-600"
           type="text"
@@ -32,7 +30,9 @@ const TweetForm = ({
         />
 
         <div className="flex justify-end">
-          <Button type="submit">Tweet</Button>
+          <Button type="submit" disabled={newTweetLoading}>
+            {newTweetLoading ? "Posting..." : "Tweet"}
+          </Button>
         </div>
       </form>
     </div>

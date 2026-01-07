@@ -12,6 +12,7 @@ const AllTweetsContainer = () => {
   const [error, setError] = useState<string | null>(null);
 
   const [tweetBody, setTweetBody] = useState("");
+  const [newTweetLoading, setNewTweetLoading] = useState<boolean>(false);
 
   const fetchTweets = () => {
     return getTweets()
@@ -33,17 +34,27 @@ const AllTweetsContainer = () => {
   }, []);
 
   const handleFormSubmit = () => {
-    createTweet({ tweetBody }).then(() => {
-      fetchTweets();
-      setTweetBody("");
-    });
+    setNewTweetLoading(true);
+    createTweet({ tweetBody })
+      .then(() => {
+        fetchTweets();
+        setTweetBody("");
+      })
+      .finally(() => {
+        setNewTweetLoading(false);
+      });
   };
 
   // TODO: agregar un loading para cuando se esta creando el tweet supongo
   //        seria bueno que sea dentro del input al que le diste enter
   return (
     <div>
-      <TweetForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
+      <TweetForm
+        tweetBody={tweetBody}
+        setTweetBody={setTweetBody}
+        onSubmit={handleFormSubmit}
+        newTweetLoading={newTweetLoading}
+      />
       <TweetsList tweets={tweets} loadingTweets={loadingTweets} error={error} fetchTweets={fetchTweets} />
     </div>
   );

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { getHashtags } from "../services/hashtagsService";
 import { Hashtag } from "../types/Hashtags";
 import { Link } from "react-router-dom";
@@ -10,9 +11,11 @@ type HashtagStateProps = {
 };
 
 const HashtagSidebar = () => {
+  const { pathname } = useLocation();
+
   useEffect(() => {
     fetchHashtags();
-  }, []);
+  }, [pathname]); // refetch hashtags on initial mount and when the route changes
 
   const [state, setState] = useState<HashtagStateProps>({
     status: "idle",

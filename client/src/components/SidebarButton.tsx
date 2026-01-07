@@ -11,7 +11,7 @@ const SidebarButton = ({
 }) => {
   return (
     <div
-      className={`rounded-full px-6 py-2 flex items-center gap-5 mb-4 ${
+      className={`rounded-full cursor-pointer px-6 py-2 flex items-center gap-5 mb-4 ${
         active ? "bg-neutral-200 dark:bg-gray-500" : ""
       }`}
       onClick={onClick}

@@ -58,7 +58,7 @@ const SidebarProfile = () => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <div className="rounded-full pl-8 py-2 flex items-center gap-5 mb-4">
+    <div className="rounded-full pl-8 py-2 flex items-center cursor-pointer gap-5 mb-4">
       {profile ? (
         <div className="flex">
           <img
