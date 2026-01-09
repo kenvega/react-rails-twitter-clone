@@ -6,8 +6,7 @@ module Api
       before_action :authenticate_user!
 
       def index
-        users = User.all
-
+        users = User.includes({ avatar_attachment: :blob }).all
         render json: users
       end
 

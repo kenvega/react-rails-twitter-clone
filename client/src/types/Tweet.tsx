@@ -1,3 +1,5 @@
+import { User } from "./User";
+
 export type Tweet = {
   id: number;
   body: string;
@@ -8,11 +10,5 @@ export type Tweet = {
   tweet_liked_by_current_user: boolean;
   tweet_bookmarked_by_current_user: boolean;
   tweet_retweeted_by_current_user: boolean;
-  user: {
-    id: number;
-    email: string;
-    display_name: string;
-    username: string;
-    avatar_url: string;
-  };
+  user: User;
 };

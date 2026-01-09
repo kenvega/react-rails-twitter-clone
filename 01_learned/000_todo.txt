@@ -55,3 +55,4 @@ DONE:
 - added tweet activities to the backend
 - show hashtags in sidebar
 - add a toggle to change the theme (light/dark theme)
+- show logged user data in left sidebar

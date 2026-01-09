@@ -17,7 +17,7 @@ module Api
       end
 
       def index
-        # these two are the same:
+        # the 2 following lines are the same:
         #   .includes(user: :avatar_attachment)
         #   .includes(user: { avatar_attachment: :blob })
         # but second one is more explicit
@@ -28,7 +28,7 @@ module Api
 
       def user
         user = User.find(params[:id])
-        tweets = user.tweets.includes(user: { avatar_attachment: :blob }).order(created_at: :desc)
+        tweets = user.tweets.order(created_at: :desc)
 
         render json: tweets
       end
