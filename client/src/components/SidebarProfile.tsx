@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from "react";
 import { getProfile } from "../services/userService";
 import { Profile } from "../types/Profile";
+import { useNavigate } from "react-router-dom";
 
 type State = {
   profile: Profile | null;
@@ -36,6 +37,8 @@ const SidebarProfile = () => {
   const [state, dispatch] = useReducer(profileReducer, initialState);
   const { profile, loading, error } = state;
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch({ type: "LOAD_START" });
 
@@ -58,7 +61,10 @@ const SidebarProfile = () => {
   return loading ? (
     <div>Loading...</div>
   ) : (
-    <div className="rounded-full pl-8 py-2 flex items-center cursor-pointer gap-5 mb-4">
+    <div
+      className="rounded-full pl-8 py-2 flex items-center cursor-pointer gap-5 mb-4"
+      onClick={() => navigate("/profile")}
+    >
       {profile ? (
         <div className="flex">
           <img
