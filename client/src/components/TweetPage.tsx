@@ -13,23 +13,23 @@ import { createReplyTweet, getReplyTweets } from "../services/tweetsService";
 const TweetPage = () => {
   const [tweetBody, setTweetBody] = useState("");
   const [replyTweets, setReplyTweets] = useState<Tweet[]>([]);
-  const [loadingReplyTweets, setLoadingReplyTweets] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const { tweetIdParam } = useParams();
 
   const fetchReplyTweets = () => {
+    setLoading(true);
     return getReplyTweets({ tweetId: Number(tweetIdParam) })
       .then((replyTweets) => {
-        console.log("response replyTweets: ", replyTweets);
         setReplyTweets(replyTweets);
       })
       .catch((error) => {
-        setError(`Error occurred: ${error}`);
         console.error(error);
+        setError(`Error occurred: ${error}`);
       })
       .finally(() => {
-        setLoadingReplyTweets(false);
+        setLoading(false);
       });
   };
 
@@ -39,6 +39,7 @@ const TweetPage = () => {
   }, []);
 
   const handleFormSubmit = () => {
+    setError(null);
     createReplyTweet({ tweetId: Number(tweetIdParam), tweetBody: tweetBody }).then(() => {
       fetchReplyTweets();
       setTweetBody("");
@@ -48,7 +49,13 @@ const TweetPage = () => {
   return (
     <>
       <TweetContainer />
-      <TweetReplyForm tweetBody={tweetBody} setTweetBody={setTweetBody} onSubmit={handleFormSubmit} />
+      <TweetReplyForm
+        tweetBody={tweetBody}
+        setTweetBody={setTweetBody}
+        onSubmit={handleFormSubmit}
+        loading={loading}
+        error={error}
+      />
       <TweetReplies replyTweets={replyTweets} />
     </>
   );
