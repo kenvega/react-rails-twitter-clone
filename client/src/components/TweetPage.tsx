@@ -36,6 +36,7 @@ const TweetPage = () => {
   useEffect(() => {
     console.log("hello from useEFfect on tweetPage");
     fetchReplyTweets();
+    // TODO: fix the dependency array
   }, []);
 
   const handleFormSubmit = () => {
