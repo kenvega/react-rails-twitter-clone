@@ -57,7 +57,7 @@ const TweetPage = () => {
         loading={loading}
         error={error}
       />
-      <TweetReplies replyTweets={replyTweets} />
+      <TweetReplies replyTweets={replyTweets} loading={loading} />
     </>
   );
 };
