@@ -1,24 +1,23 @@
-# README
+# Twitter Clone (made with Ruby on Rails and React)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## To install the project
 
-Things you may want to cover:
+For the backend in root folder of the project run these commands:
 
-* Ruby version
+- bundle install
+- rails db:setup
 
-* System dependencies
+For the frontend (in folder ./client) you will need to:
 
-* Configuration
+- create a 'client/.env.development' file and fill it ENV variables needed
+- run the command 'npm install' inside the 'client' folder
 
-* Database creation
+## To start the project
 
-* Database initialization
+For the backend run this command:
 
-* How to run the test suite
+- rails server
 
-* Services (job queues, cache servers, search engines, etc.)
+For the frontend run this command:
 
-* Deployment instructions
-
-* ...
+- npm dev run
