@@ -21,3 +21,7 @@ For the backend run this command:
 For the frontend run this command:
 
 - npm dev run
+
+## How the project currently looks
+
+![alt text](image.png)
